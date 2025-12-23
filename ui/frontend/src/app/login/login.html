@@ -1,7 +1,8 @@
-<body>
+<!-- <body style="border: solid 2px black;"> -->
 
     
-<div id="login">
+<div id="login" style="box-shadow: 2px 2px 10px 3px rgb(55, 255, 145);">
+<h2 style="text-align: center;color: aliceblue;">Login</h2>    
 <p-floatlabel variant="on">
     <input pInputText id="userName"  autocomplete="off" />
     <label for="userName">User Name</label>
@@ -15,7 +16,9 @@
 <br>
 <div id="button">
 <p-button label="Login" [raised]="true" severity="success" />
+
+<p>Not a user?</p>
 <p-button label="Register" [raised]="true" severity="success" (click)="register()"/>
 </div>
 </div>   
-</body>
+<!-- </body> -->

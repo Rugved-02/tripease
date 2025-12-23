@@ -6,7 +6,6 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-
 @Component({
   selector: 'app-register',
   imports: [InputTextModule,InputNumberModule,FloatLabelModule,InputMaskModule,PasswordModule,ButtonModule],

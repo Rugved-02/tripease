@@ -1,4 +1,3 @@
-
 @import "primeicons/primeicons.css";
 /* Page base */
 :host {
@@ -69,5 +68,11 @@
 .app-header p-button:hover {
   transform: translateY(-1px);
   transition: transform 120ms ease;
+}
+
+nav{
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 

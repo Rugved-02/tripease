@@ -2,15 +2,21 @@
 /* Page layout: top-left alignment */
 .page {
   min-height: calc(100vh - 72px); /* subtract header height */
-  display: block;
-  padding: 20px;                  /* space from edges */
+
+  padding: 20px; 
+  display: flex;
+  
+            /* space from edges */
 }
 
 /* Button group: row near top-left */
 .button-group {
   display: flex;
   gap: 12px;
-  align-items: center;
+  align-items: start;
+  justify-content: right;   
+ 
+
 }
 
 /* Keep default PrimeNG button size (no flex growth) */
