@@ -1,8 +1,10 @@
 
 <header class="app-header">
-<div class="header-left">
+<nav >
+<!-- <div class="header-left"> -->
 <p-button label="Home" [raised]="true" severity="success" (click)="home()"/>
-<span class="divider">|</span>
+&nbsp;
+&nbsp;
 @if(dark){
     <i class="pi pi-sun" label="Toggle Dark Mode" (click)="toggleLight()"></i>
 }
@@ -10,13 +12,15 @@
     <i class="pi pi-moon" label="Toggle Dark Mode" (click)="toggleDark()"></i>
 }
 
-<br>
-<hr>
-</div>
+
+</nav> 
+<div class="header-right"><router-outlet></router-outlet></div>
+   
+
+
 </header>
 
 
-<main class="app-main">
+<!-- <main class="app-main">
 <router-outlet></router-outlet>
-</main>
-
+</main> -->

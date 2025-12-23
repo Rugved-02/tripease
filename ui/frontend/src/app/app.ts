@@ -20,6 +20,7 @@ export class App {
      toggleDark(){
       document.body.classList.toggle('dark');
       this.dark=true;
+     
      }
      toggleLight(){
       document.body.classList.toggle('dark');
