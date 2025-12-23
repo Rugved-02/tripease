@@ -4,10 +4,12 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { Router } from '@angular/router';
+import { MenubarComponent } from '../menubar-component/menubar-component';
+
 
 @Component({
   selector: 'app-login',
-  imports: [InputTextModule,ButtonModule,FloatLabelModule,PasswordModule],
+  imports: [InputTextModule,ButtonModule,FloatLabelModule,PasswordModule, MenubarComponent],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

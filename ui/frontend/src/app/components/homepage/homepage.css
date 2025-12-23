@@ -1,0 +1,65 @@
+
+.welcomeTitle{
+    text-align: center;
+    background: linear-gradient(to right,rgb(231, 150, 150), beige);
+    height: 500px;
+    padding-top: 10%;
+    justify-content: center;
+}
+.welcomeTitle h1{
+    color: blue;
+    font-size: 5rem;
+}
+.welcomeTitle h2{
+    font-size: 4rem;
+}
+
+
+
+/* imagw with text css */
+/* 1. The Container */
+.banner-container {
+  position: relative; /* Essential: This contains the absolute text */
+  width: fit-content;
+  margin: 20px auto;
+  border-radius: 15px;
+  overflow: hidden; /* Clips the image corners to the border-radius */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+/* 2. The Image */
+.banner-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  /* Optional: slightly darken the image so text pops more */
+  filter: brightness(70%); 
+}
+
+/* 3. The Static Text Overlay */
+.banner-text {
+  position: absolute;
+  /* Position it in the exact center */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  /* Styling the text */
+  color: white;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+}
+
+.banner-text h1 {
+  margin: 0;
+  font-size: 3rem;
+  letter-spacing: 5px;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.banner-text p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  opacity: 0.9;
+}

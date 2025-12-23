@@ -6,9 +6,10 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { MenubarComponent } from '../menubar-component/menubar-component';
 @Component({
   selector: 'app-register',
-  imports: [InputTextModule,InputNumberModule,FloatLabelModule,InputMaskModule,PasswordModule,ButtonModule],
+  imports: [MenubarComponent,InputTextModule,InputNumberModule,FloatLabelModule,InputMaskModule,PasswordModule,ButtonModule],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })

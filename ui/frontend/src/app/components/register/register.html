@@ -1,4 +1,5 @@
 <!-- <div id="bo" style="border: solid 2px black;"> -->
+    <app-menubar-component></app-menubar-component>
 
 <div id="register" style="box-shadow: 2px 2px 10px 3px rgb(55, 255, 145);">
 <h2 style="text-align: center; color: aliceblue;">Register</h2>      
@@ -8,7 +9,7 @@
 </p-floatlabel>
 <br>
 <p-floatlabel variant="on">
-    <p-inputnumber  inputId="number"  />
+    <p-inputnumber  inputId="number" [useGrouping]="false" />
     <label for="number"> Number</label>
 </p-floatlabel>
 <br>

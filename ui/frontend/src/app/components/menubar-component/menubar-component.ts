@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 import { CardModule } from 'primeng/card';
@@ -6,30 +6,34 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { FloatLabel } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 
 
 
 @Component({
-  selector: 'app-menubar-component',
-  imports: [Menubar, CardModule, FormsModule, InputTextModule, FloatLabel, ButtonModule],
-  templateUrl: './menubar-component.html',
-  styleUrl: './menubar-component.css',
+    selector: 'app-menubar-component',
+    imports: [Menubar, CardModule, FormsModule, InputTextModule, FloatLabel, ButtonModule, RouterLink],
+    templateUrl: './menubar-component.html',
+    styleUrl: './menubar-component.css',
 })
-export class MenubarComponent implements OnInit{
-  items: MenuItem[] | undefined;
+export class MenubarComponent implements OnInit {
+    items: MenuItem[] | undefined;
 
-  value1: string | undefined;
+    value1: string | undefined;
 
     value2: string | undefined;
 
     value3: string | undefined;
+
+    router = inject(Router);
+    dark: boolean = false;
 
     ngOnInit() {
         this.items = [
             {
                 label: 'Home',
                 icon: 'pi pi-home',
-                url: 'https://github.com/'
+                routerLink: ['/homepage']
             },
             {
                 label: 'Features',
@@ -73,6 +77,23 @@ export class MenubarComponent implements OnInit{
                 icon: 'pi pi-envelope'
             }
         ]
+    }
+    directLogin() {
+        this.router.navigate(['/login']);
+    }
+
+    directRegister() {
+        this.router.navigate(['/register']);
+    }
+
+    toggleDark() {
+        document.body.classList.toggle('dark');
+        this.dark = true;
+
+    }
+    toggleLight() {
+        document.body.classList.toggle('dark');
+        this.dark = false;
     }
 
 }
