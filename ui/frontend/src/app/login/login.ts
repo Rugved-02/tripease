@@ -16,4 +16,7 @@ export class Login {
       register(){
       this.router.navigate(['/register'])
      }
+     toggleDark(){
+      document.body.classList.toggle('dark');
+     }
 }

@@ -2,7 +2,13 @@
 <div class="header-left">
 <p-button label="Home" [raised]="true" severity="success" (click)="home()"/>
 <span class="divider">|</span>
-<p-button label="Toggle Dark Mode" (onClick)="toggleDark()"></p-button>
+@if(dark){
+    <i class="pi pi-sun" label="Toggle Dark Mode" (click)="toggleLight()"></i>
+}
+@else{
+    <i class="pi pi-moon" label="Toggle Dark Mode" (click)="toggleDark()"></i>
+}
+
 <br>
 <hr>
 </div>
