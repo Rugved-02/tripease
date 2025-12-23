@@ -1,0 +1,36 @@
+<body>
+
+<div id="register">
+<p-floatlabel variant="on">
+    <input pInputText id="username"  autocomplete="off" />
+    <label for="username">User Name</label>
+</p-floatlabel>
+<br>
+<p-floatlabel variant="on">
+    <p-inputnumber  inputId="number"  />
+    <label for="number"> Number</label>
+</p-floatlabel>
+<br>
+<p-floatlabel variant="on">
+    <input pInputText id="email"  autocomplete="off" />
+    <label for="emial">Email</label>
+</p-floatlabel>
+<br>
+<p-floatlabel variant="on">
+    <p-password  [toggleMask]="true" />
+    <label for="pass">Password</label>
+</p-floatlabel>
+<br>
+<p-floatlabel variant="on">
+    <p-password  [toggleMask]="true" />
+    <label for="pass">Confirm Password</label>
+</p-floatlabel>
+<br>
+<div id="button">
+<p-button label="Login" [raised]="true" severity="success" (click)="login()" />
+<p-button label="Register" [raised]="true" severity="success" />
+</div>
+
+</div>
+
+</body>

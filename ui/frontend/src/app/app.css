@@ -1,0 +1,73 @@
+
+@import "primeicons/primeicons.css";
+/* Page base */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--app-bg, #f5f7fb);
+  color: var(--app-fg, #111827);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Sticky header bar */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--header-bg, #ffffff);
+  border-bottom: 1px solid var(--header-border, rgba(0,0,0,0.08));
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+/* Divider styling */
+.divider {
+  color: var(--divider-color, #9ca3af);
+  user-select: none;
+}
+
+/* PrimeNG buttons in header get consistent sizing */
+.app-header p-button {
+  --p-button-padding: 0.6rem 1rem;   /* PrimeNG CSS var */
+  --p-button-radius: 8px;
+  --p-button-bg: #10b981;            /* default to green (success) */
+  --p-button-color: #fff;
+  --p-button-hover-bg: #059669;
+}
+
+/* Make "Toggle Dark Mode" blue to differentiate */
+.app-header p-button:nth-of-type(2) {
+  --p-button-bg: #3b82f6;
+  --p-button-hover-bg: #2563eb;
+}
+
+/* Main content area to give breathing space */
+.app-main {
+  padding: 20px;
+}
+
+/* DARK MODE: when you toggle, add .dark to <body> or <app-root> */
+:host-context(.dark) {
+  --app-bg: #0f172a;
+  --app-fg: #e5e7eb;
+  --header-bg: #0b1220;
+  --header-border: #1f2937;
+  --divider-color: #64748b;
+}
+
+:host-context(.dark) .app-header {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+/* Optional hover micro-interaction */
+.app-header p-button:hover {
+  transform: translateY(-1px);
+  transition: transform 120ms ease;
+}
+
