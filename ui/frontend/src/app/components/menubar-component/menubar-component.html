@@ -1,0 +1,39 @@
+<p>menubar-component works!</p>
+<div class="card">
+    <p-menubar [model]="items">
+        <ng-template #end>
+            <div class="card flex flex-col items-center gap-4">
+                <div class="flex flex-wrap gap-4 justify-center">
+                    
+                    <p-button label="LogIn" icon="pi-sign-in" />&nbsp;&nbsp;
+                    <p-button label="Register" icon="pi-user-plus" />
+                </div>
+                
+            </div>
+        </ng-template>
+    </p-menubar>
+</div>
+<!-- 
+<div class="mb-4 p-8">
+    <p-card header="Login">
+        <div class="card flex flex-wrap justify-center items-end gap-4">
+            <p-floatlabel variant="in">
+                <input pInputText id="in_label" [(ngModel)]="value2" autocomplete="off" />
+                <label for="in_label">User Name</label>
+            </p-floatlabel>
+
+        </div><br>
+        <div class="card flex flex-wrap justify-center items-end gap-4">
+            <p-floatlabel variant="in">
+                <input pInputText id="in_label" [(ngModel)]="value2" autocomplete="off" />
+                <label for="in_label">Password</label>
+            </p-floatlabel>
+
+        </div>
+        <br>
+        <div class="card flex justify-center">
+            <p-button label="Submit" />
+        </div>
+    </p-card>
+
+</div> -->
