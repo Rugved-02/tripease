@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
-import { Landing } from './components/landing/landing';
-import { Register } from './components/register/register';
-import { Login } from './components/login/login';
-import { MenubarComponent } from './components/menubar-component/menubar-component';
-import { Homepage } from './components/homepage/homepage';
+import { Register } from './components/register.component/register.component';
+import { Login } from './components/login.component/login.component';
+import { MenubarComponent } from './components/menubar.component/menubar.component';
+import { Homepage } from './components/homepage.component/homepage.component';
 
 export const routes: Routes = [
     // {path:'',component:Landing},

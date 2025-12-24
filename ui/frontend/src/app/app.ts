@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Landing } from './components/landing/landing';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 

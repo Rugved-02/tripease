@@ -13,8 +13,8 @@ import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 @Component({
     selector: 'app-menubar-component',
     imports: [Menubar, CardModule, FormsModule, InputTextModule, FloatLabel, ButtonModule, RouterLink],
-    templateUrl: './menubar-component.html',
-    styleUrl: './menubar-component.css',
+    templateUrl: './menubar.component.html',
+    styleUrl: './menubar.component.css',
 })
 export class MenubarComponent implements OnInit {
     items: MenuItem[] | undefined;
