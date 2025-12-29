@@ -5,6 +5,99 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/Aura';
+import { definePreset } from '@primeuix/themes';
+
+
+
+ 
+ 
+const MyBluePreset = definePreset(Aura, {
+    semantic: {
+        // 1. PRIMARY: The "Sea Blue" Identity
+        // We use 'cyan' here for that bright, tropical water feel. 
+        // Alternatively, use 'sky' for a deeper ocean look or 'teal' for a greener lagoon look.
+        primary: {
+            50: '{cyan.50}', 100: '{cyan.100}', 200: '{cyan.200}', 300: '{cyan.300}',
+            400: '{cyan.400}', 500: '{cyan.500}', 600: '{cyan.600}', 700: '{cyan.700}',
+            800: '{cyan.800}', 900: '{cyan.900}', 950: '{cyan.950}'
+        },
+
+        // 2. SURFACE: The "Sand & Stone" 
+        // Kept 'slate' as it provides a cool, crisp background that contrasts well with blue.
+        surface: {
+            0: '#ffffff', 50: '{slate.50}', 100: '{slate.100}', 200: '{slate.200}',
+            300: '{slate.300}', 400: '{slate.400}', 500: '{slate.500}', 600: '{slate.600}',
+            700: '{slate.700}', 800: '{slate.800}', 900: '{slate.900}', 950: '{slate.950}'
+        },
+
+        colorScheme: {
+            light: {
+                // Primary Action Styles (Book Now buttons, etc.)
+                primary: {
+                    color: '{primary.500}', // Slightly brighter (500) than purple for a vibrant travel feel
+                    contrastColor: '#ffffff',
+                    hoverColor: '{primary.600}',
+                    activeColor: '{primary.700}'
+                },
+                // ACCENT/HIGHLIGHT (Date pickers, active list items)
+                highlight: {
+                    background: '{primary.50}',  // Very light wash (like foam)
+                    focusBackground: '{primary.100}',
+                    color: '{primary.700}',      // Deep ocean text
+                    focusColor: '{primary.800}'
+                },
+                // SECONDARY
+                secondary: {
+                    background: '{surface.100}', // Lighter than purple preset for an "airy" feel
+                    color: '{surface.700}',
+                    hoverBackground: '{surface.200}'
+                }
+            },
+            dark: {
+                primary: {
+                    color: '{primary.400}',
+                    contrastColor: '{surface.950}',
+                    hoverColor: '{primary.300}',
+                    activeColor: '{primary.200}'
+                },
+                highlight: {
+                    // UPDATED RGB: This corresponds to Cyan-500 (6, 182, 212)
+                    // The previous code had hardcoded Purple RGB values here.
+                    background: 'rgba(6, 182, 212, 0.16)',
+                    focusBackground: 'rgba(6, 182, 212, 0.24)',
+                    color: 'rgba(255,255,255,.87)',
+                    focusColor: 'rgba(255,255,255,.87)'
+                }
+            }
+        },
+
+        // 3. COMMON COMPONENT SEMANTICS
+        formField: {
+            paddingX: '1rem', // Slightly wider padding for ease of use
+            paddingY: '0.75rem',
+            borderRadius: '12px', // Increased radius: Rounder = Friendlier/Relaxed vibe
+            focusRing: {
+                width: '3px', // Thicker focus ring for clear accessibility
+                style: 'solid',
+                color: '{primary.400}', // Lighter ring color
+                offset: '2px'
+            }
+        },
+        
+        overlay: {
+            borderRadius: '16px', // Very rounded cards/modals
+            shadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)' // Softer, deeper shadow (floating effect)
+        },
+
+        navigation: {
+            item: {
+                borderRadius: '12px'
+            }
+        }
+    }
+});
+
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -12,10 +105,10 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       
       theme: {
-                preset: Aura,
+                preset: MyBluePreset,
                 options: {
                     prefix: 'p',
-                    darkModeSelector: false,
+                    darkModeSelector: '.dark',
                     cssLayer: false
                 }
             }

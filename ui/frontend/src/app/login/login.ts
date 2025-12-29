@@ -1,22 +1,95 @@
-import { Component } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
+import { Component,OnInit } from '@angular/core';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { MessageModule } from 'primeng/message';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { ToastModule } from 'primeng/toast';
+import { AuthService } from '../auth-service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
-  imports: [InputTextModule,ButtonModule,FloatLabelModule,PasswordModule],
+  imports: [InputTextModule,
+            ButtonModule,
+            FloatLabelModule,
+            PasswordModule,
+            ReactiveFormsModule,
+            CardModule,
+            MessageModule,
+            ToastModule,
+            
+          ],
+  providers:[MessageService],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
-      constructor(private router:Router){}
-      register(){
+export class Login implements OnInit {
+      loginForm!: FormGroup;
+      constructor(private router:Router,
+        private fb:FormBuilder,
+        private messageService: MessageService,
+        private authService : AuthService){}
+
+
+      ngOnInit(): void {
+    // Initialize the form with validation rules
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+     isInvalid(controlName: string): boolean {
+    const control = this.loginForm.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+    }
+
+    onSubmit(): void {
+    if (this.loginForm.valid) {
+      console.log('Form Submitted!', this.loginForm.value);
+      // Process your login or data here
+
+      const { username, password } = this.loginForm.value;
+
+      const isAuthenticated = this.authService.checkAuth(username, password);
+      if(isAuthenticated){
+          this.messageService.add({ 
+          severity: 'success', 
+          summary: 'Success', 
+          detail: 'Login Successful!',
+          life: 4000 // Duration in milliseconds
+           });
+      }
+      else{
+        this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Failed', 
+          detail: 'Login Unsuccessful!',
+          //life: 3000// milliseconds
+          sticky:true
+
+           });
+      }
+
+    } 
+    else {
+      // Mark all fields as touched to trigger validation messages
+      this.loginForm.markAllAsTouched();
+       }
+    }
+
+    register(){
       this.router.navigate(['/register'])
      }
-     toggleDark(){
-      document.body.classList.toggle('dark');
+    toggleDark(){
+      const element = document.querySelector('html');
+      element?.classList.toggle('dark');
+     }
+    onForgotPassword(){
+       this.router.navigate(['/forgotPassword'])
      }
 }
