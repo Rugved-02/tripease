@@ -57,12 +57,17 @@ export class Login implements OnInit {
 
       const isAuthenticated = this.authService.checkAuth(username, password);
       if(isAuthenticated){
+          
           this.messageService.add({ 
           severity: 'success', 
           summary: 'Success', 
           detail: 'Login Successful!',
           life: 4000 // Duration in milliseconds
            });
+          
+          setTimeout(()=>{
+            this.router.navigate(['/dashboard']);
+          },2000);
       }
       else{
         this.messageService.add({ 
@@ -74,6 +79,7 @@ export class Login implements OnInit {
 
            });
       }
+      
 
     } 
     else {

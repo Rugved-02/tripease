@@ -16,18 +16,15 @@
 
 }
 
-::ng-deep .dark .p-floatlabel :has(input:focus) ~ label,
-::ng-deep .dark .p-floatlabel[variant="on"] input:focus ~ label
+::ng-deep .dark .p-floatlabel[variant="on"] :has(input:focus) ~ label,
+::ng-deep .dark .p-floatlabel[variant="on"] input:focus ~ label,
+::ng-deep .dark .p-floatlabel[variant="on"] :has(.p-filled) ~ label,
+::ng-deep .dark .p-floatlabel[variant="on"] .p-filled ~ label
 {
     background: rgba(30, 41, 59, 0.9) !important;  
     color: #00aaff;
 }
 
-/* ::ng-deep .dark .p-floatlabel :has(input:p-filled) ~ label,
-::ng-deep .dark .p-floatlabel input:p-filled ~ label{
-    background: rgba(30, 41, 59, 0.9) !important;  
-    color: #00aaff;
-} */
 
 
 
