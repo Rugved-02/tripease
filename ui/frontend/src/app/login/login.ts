@@ -10,6 +10,7 @@ import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { AuthService } from '../auth-service';
 import { MessageService } from 'primeng/api';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ import { MessageService } from 'primeng/api';
             CardModule,
             MessageModule,
             ToastModule,
-            
+            CheckboxModule 
           ],
   providers:[MessageService],
   templateUrl: './login.html',
@@ -38,7 +39,7 @@ export class Login implements OnInit {
       ngOnInit(): void {
     // Initialize the form with validation rules
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
+      email: ['', [Validators.required,Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -53,9 +54,9 @@ export class Login implements OnInit {
       console.log('Form Submitted!', this.loginForm.value);
       // Process your login or data here
 
-      const { username, password } = this.loginForm.value;
+      const { email, password } = this.loginForm.value;
 
-      const isAuthenticated = this.authService.checkAuth(username, password);
+      const isAuthenticated = this.authService.checkAuth(email, password);
       if(isAuthenticated){
           
           this.messageService.add({ 

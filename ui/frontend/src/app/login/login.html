@@ -1,4 +1,4 @@
-
+<!-- 
 
 <p-toast position="top-right" />
 <div class="login-container">
@@ -55,6 +55,77 @@
                 </p-button>
             </div>
 
+        </form>
+    </p-card>
+</div> -->
+
+
+<p-toast position="top-right" />
+
+<div class="login-container">
+    <p-card class="login-card">
+        <div class="brand-header">
+            <div class="logo-box">
+                <i class="pi pi-send"></i> 
+               
+                
+            </div>
+            <h1 class="brand-name">TripEase</h1>
+             <!-- <img src="https://leaves-chip-92837273.figma.site/" alt=""> -->
+
+        </div>
+
+        <div class="welcome-section">
+            <h2 class="welcome-title">Welcome Back</h2>
+            <p class="text-muted">Sign in to continue your journey</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+            <div class="form-field">
+                <label class="field-label">&nbsp;&nbsp;<i class="pi pi-envelope"></i> Email Address</label>
+                <input pInputText type="text" formControlName="email" placeholder="you@example.com" class="w-full custom-input" />
+                <div class="error-message-wrapper">
+                    @if (isInvalid('email')) {
+                        <small class="p-error">&nbsp;&nbsp;Email is required.</small>
+                    }
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">&nbsp;&nbsp;<i class="pi pi-lock"></i> Password</label>
+                <p-password formControlName="password" [feedback]="false" [toggleMask]="true"
+                    placeholder="Enter your password" styleClass="w-full" inputStyleClass="custom-input">
+                </p-password>
+                <div class="error-message-wrapper">
+                    @if (isInvalid('password')) {
+                        <small class="p-error">&nbsp;&nbsp;Password is required.</small>
+                    }
+                </div>
+            </div>
+
+            <div class="options-row">
+                <div class="flex align-items-center gap-2">
+                    <p-checkbox inputId="remember"></p-checkbox>
+                    <label for="remember" class="text-sm">Remember me</label>
+                </div>
+                <p-button label="Forgot password?" [link]="true" (click)="onForgotPassword()" styleClass="forgot-password-btn"></p-button>
+            </div>
+
+            <p-button type="submit" label="Sign In" styleClass="signin-btn w-full" />
+
+            <div class="separator">
+                <span>Or continue with</span>
+            </div>
+
+            <div class="social-grid">
+                <p-button styleClass="social-btn" icon="pi pi-google" label="Google"></p-button>
+                <p-button styleClass="social-btn" icon="pi pi-github" label="GitHub"></p-button>
+            </div>
+
+            <div class="signup-footer">
+                <span class="text-muted">Don't have an account?</span>
+                <p-button label="Sign up for free" [link]="true" (click)="register()" styleClass="signup-link-btn"></p-button>
+            </div>
         </form>
     </p-card>
 </div>
