@@ -1,0 +1,54 @@
+.p-tabs{
+    margin: 20px;
+}
+.p-tab{
+    /* background-color: lightblue; */
+    /* display: flex; */
+    /* flex-grow: 1; */
+    border-radius: 20px;
+    margin: 20px 10px 10px;
+    /* padding: 0px; */
+    width: 48.2%;
+    padding: 10px;
+    text-align: center;
+    background: var(--p-primary-300);
+    color: var(--p-primary-900);
+}
+
+.p-tab-active {
+    background: var(--p-primary-700);
+    color: var(--p-surface-100);
+}
+
+/* Container for the 3 inputs */
+.input-row {
+  display: flex;
+  flex-direction: row; /* Side by side */
+  flex-wrap: wrap;     /* Wrap to next line if screen is narrow */
+  gap: 1.5rem;         /* Space between the inputs */
+  width: 100%;
+}
+
+/* Individual field logic */
+.input-field {
+  flex: 1 1 250px;     /* Grow/Shrink, with a 250px base width */
+  min-width: 0;        /* Prevents flex items from overflowing */
+}
+
+/* Ensure the button stays full width and below */
+button[pButton] {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Responsive: If the screen is very small, stack them tightly */
+@media (max-width: 640px) {
+  .input-row {
+    gap: 1rem;
+  }
+  .input-field {
+    flex: 1 1 100%; /* Forces fields to take full width on mobile */
+  }
+}

@@ -1,0 +1,43 @@
+/* Footer */
+.p-card {
+  background: var(--p-primary-950);
+  color: var(--p-surface-100);
+  padding: 50px 10% 0px;
+  border-radius: 0px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
+.footer-col h3, .footer-col h4 {
+  color: var(--p-primary-400);
+  margin-bottom: 25px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col li {
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.footer-col li:hover {
+  color: #3b82f6;
+}
+
+.footer-bottom {
+  border-top: 1.5px solid var(--p-primary-200);
+  padding-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.footer-bottom p{
+    color: var(--p-surface-0);
+}

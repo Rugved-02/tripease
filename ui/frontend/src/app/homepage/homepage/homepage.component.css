@@ -1,94 +1,57 @@
 
-.welcomeTitle{
-    text-align: center;
-    background: linear-gradient(to right,rgb(231, 150, 150), beige);
-    height: 500px;
-    padding-top: 10%;
-    justify-content: center;
-}
-.welcomeTitle h1{
-    color: blue;
-    font-size: 5rem;
-}
-.welcomeTitle h2{
-    font-size: 4rem;
+ /* Container styling */
+.hero-content {
+  text-align: center;
+  padding: 2rem 1rem;
 }
 
-/* new homepage code */
-
-:host {
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  display: block;
-}
-
-/* Hero Section */
-.hero-section {
-  position: relative;
-  height: 80vh;
-  color: white;
-}
-
-.hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(45%);
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
-  max-width: 700px;
-}
-
-.badge {
-  background: #007bff;
-  padding: 6px 15px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.hero-overlay h1 {
-  font-size: 4.5rem;
-  margin: 20px 0;
+/* Heading Styling: Large, Bold, and Gradient */
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive size */
   font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--p-surface-400);
+  background: linear-gradient(90deg, var(--p-indigo-800), var(--p-indigo-500)); /*Deep blue to light blue */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
 }
 
-.hero-overlay p {
-  font-size: 1.4rem;
+/* Subtitle Styling: Muted and readable */
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.20rem);
+  color: var(--p-zinc-900); /* Slate gray */
+  max-width: 600px;
+  margin: 0 auto;
   line-height: 1.6;
-  margin-bottom: 30px;
-  opacity: 0.9;
 }
 
-.hero-buttons {
-  display: flex;
-  gap: 20px;
+/* --- Animations --- */
+
+.animate-fade-up {
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
-.btn-primary {
-  background: #007bff;
-  color: white;
-  padding: 15px 35px;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
+.animate-fade-up-delay {
+  opacity: 0; /* Start hidden */
+  animation: fadeInUp 0.8s ease-out 0.3s forwards; /* 0.3s delay */
 }
 
-.btn-outline {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-  padding: 15px 35px;
-  font-weight: 600;
-  cursor: pointer;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+.p-card{
+  border-radius: 0px;
+}
+
 
 /* Stats Section */
 .stats-bar {
@@ -102,7 +65,7 @@
 
 .stat-item h3 {
   font-size: 2.5rem;
-  color: #007bff;
+  color: var(--p-primary-700);
   margin: 0;
 }
 
@@ -110,7 +73,7 @@
   font-weight: 500;
   color: #64748b;
   margin-top: 5px;
-}
+} 
 
 /* Module Cards */
 .services {

@@ -1,2 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+
+/* .main-html-tag{
+  background-color: var(--p-surface-0);
+} */
+ body{
+  margin: 0px;
+ }

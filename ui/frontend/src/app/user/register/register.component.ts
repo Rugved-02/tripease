@@ -6,7 +6,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { MenubarComponent } from '../menubar.component/menubar.component';
+import { MenubarComponent } from '../../shared/components/menubar/menubar.component';
 @Component({
   selector: 'app-register',
   imports: [MenubarComponent,InputTextModule,InputNumberModule,FloatLabelModule,InputMaskModule,PasswordModule,ButtonModule],
@@ -19,7 +19,7 @@ export class Register {
      login(){
       this.router.navigate(['/login'])
      }
-     toggleDark(){
-      document.body.classList.toggle('dark');
-     }
+    //  toggleDark(){
+    //   document.body.classList.toggle('dark');
+    //  }
 }

@@ -1,0 +1,6 @@
+.error-spacer {
+  height: 24px;      /* Reserve exact space for one line of error */
+  display: flex;     /* Align message vertically */
+  align-items: center;
+  margin-top: 2px;
+}
