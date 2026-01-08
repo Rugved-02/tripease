@@ -1,162 +1,201 @@
-/* 
+/* 1. Main Layout Wrapper - Alignment Kept Exactly as Original */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f172a 0%, #1e40af 40%, #0891b2 100%);
-    padding: 1rem;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    transition: 0.5s ease;
-}
-::ng-deep .p-floatlabel :has(input:focus) ~ label,
-::ng-deep .p-floatlabel input:focus ~ label{
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 249, 255, 0.9) 100%) !important;
-  color: #00aaff;
-
+    /* Pulls your 135deg Blue-to-Purple gradient from the preset */
+    background: var(--p-button-primary-background); 
+    padding: 2rem;
+    font-family: 'Inter', sans-serif;
 }
 
-::ng-deep .dark .p-floatlabel[variant="on"] :has(input:focus) ~ label,
-::ng-deep .dark .p-floatlabel[variant="on"] input:focus ~ label,
-::ng-deep .dark .p-floatlabel[variant="on"] :has(.p-filled) ~ label,
-::ng-deep .dark .p-floatlabel[variant="on"] .p-filled ~ label
-{
-    background: rgba(30, 41, 59, 0.9) !important;  
-    color: #00aaff;
-}
-
-
-
-
+/* 2. Login Card & PrimeNG Card Override */
 .login-card {
     width: 100%;
-    max-width: 420px;
-    border: none;
-    border-radius: 16px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    max-width: 450px; 
+    border-radius: 15px;
+    overflow: hidden;
     transition: all 0.3s ease;
 }
 
-
-::ng-deep .p-card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 249, 255, 0.9) 100%) !important;
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
+::ng-deep .login-card .p-card {
+    background: var(--p-surface-0) !important; /* White in light mode */
+    border-radius: 24px !important;
+    padding: 2.5rem 3rem !important; /* Preserved original heavy padding */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2) !important;
+    border: none !important;
 }
 
-::ng-deep .dark .p-card {
-    background: rgba(30, 41, 59, 0.9) !important; 
-    color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+/* 3. Header & Brand Styling */
+.brand-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
 }
 
-::ng-deep .dark .p-card-title {
-    color: #60a5fa !important; 
+.logo-box {
+    background: var(--p-primary-600); /* Preset primary blue/purple */
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.2rem;
 }
 
-::ng-deep .dark .text-muted {
-    color: #94a3b8 !important;
-}
-
-
-::ng-deep .dark .p-inputtext {
-    background: rgba(15, 23, 42, 0.6) !important;
-    color: white !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-
-::ng-deep .p-card .p-card-header {
-    padding-top: 1.5rem;
-    text-align: center;
-}
-
-::ng-deep .p-card .p-card-title {
+.brand-name {
     font-size: 1.75rem;
     font-weight: 800;
-    color: #1e3a8a;
-    letter-spacing: -0.025em;
+    color: var(--p-primary-600);
+    margin: 0;
 }
 
-.login-form {
+.welcome-section {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    
+}
+
+.welcome-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--p-surface-900);
+    margin-bottom: 0.5rem;
+}
+
+/* 4. Form Field Alignment */
+.form-field {
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
 }
 
-
-.error-message-wrapper {
-    min-height: 28px;
-    margin-top: 4px;
-    display: flex;
-    align-items: center;
+.field-label {
+    display: block;
+    font-weight: 600;
+    color: var(--p-surface-950);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
 }
 
-.forgot-password-container {
-    display: flex;
-    justify-content: flex-end;
-    height: 24px;
-    margin-top: 4px;
+::ng-deep .custom-input {
+    background: var(--p-surface-50) !important;
+    border: 1px solid var(--p-surface-200) !important;
+    border-radius: 10px !important;
+    padding: 0.75rem 1rem !important;
+    width: 100%;
 }
 
-.forgot-password-btn {
-    padding: 0 !important;
-    font-size: 0.85rem !important;
-    font-weight: 500 !important;
-    color: #0284c7 !important;
-}
-
-::ng-deep .p-floatlabel,
-::ng-deep .p-inputtext,
-::ng-deep .p-password,
+::ng-deep .custom-input, 
+::ng-deep .p-password, 
 ::ng-deep .p-password input {
     width: 100% !important;
 }
 
-
-
-::ng-deep .p-button.w-full {
-    width: 100%;
-    margin-top: 1rem;
-    background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
-    border: none;
-    padding: 0.75rem !important;
-    font-weight: 600;
-    border-radius: 8px;
-}
-
-
-.signup-footer {
+/* 5. Error Message Wrapper Alignment */
+.error-message-wrapper {
+    height: 20px;      
+    margin-top: 4px;    
+    margin-bottom: 8px; 
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
-    gap: 0.25rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding-top: 1rem;
 }
 
-::ng-deep .signup-btn.p-button {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    min-width: auto;
+.p-error, 
+small.p-error {
+    color: var(--p-red-500);
+    font-size: 1.0rem;
+    line-height: 1;
+    margin: 0;
+    display: block;
 }
 
-.text-muted {
-    color: #64748b;
-    font-size: 0.9rem;
+/* 6. Action Row Alignment */
+.options-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--p-surface-950);
+    align-items: center;
+    margin: 1rem 0;
 }
 
-.signup-btn {
+::ng-deep .forgot-password-btn.p-button {
+    font-size: 0.85rem !important;
     padding: 0 !important;
+    color: var(--p-primary-500) !important;
+}
+
+/* 7. Primary Sign-In Button */
+::ng-deep .signin-btn.p-button {
+    margin-top: 10px;
+    background: var(--p-button-primary-background) !important;
+    border: none !important;
+    width: 100%;
+    height: 35px;
+    border-radius: 10px !important;
+    padding: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+}
+
+/* 8. Separator & Social Grid Alignment */
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+    color: var(--p-surface-400);
+    font-size: 0.85rem;
+}
+
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--p-surface-200);
+}
+
+.separator span {
+    padding: 0 10px;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 3rem; /* Original specific alignment kept */
+}
+
+::ng-deep .social-btn.p-button {
+    background: var(--p-surface-0) !important;
+    color: var(--p-surface-700) !important;
+    border: 1px solid var(--p-surface-200) !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+}
+
+/* 9. Footer Alignment */
+.signup-footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--p-surface-600);
+}
+
+::ng-deep .signup-link-btn.p-button {
     font-weight: 700 !important;
-    color: #1e40af !important;
-} */
+    color: var(--p-primary-600) !important;
+    padding: 0 4px !important;
+}
 
 
 
-/* Container Background Gradient */
+/* 
 .login-container {
     display: flex;
     justify-content: center;
@@ -369,4 +408,4 @@ small.p-error {
     font-weight: 700 !important;
     color: #3b82f6 !important;
     padding: 0 4px !important;
-}
+} */

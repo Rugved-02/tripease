@@ -1,185 +1,17 @@
-/* 
+/* 1. Main Layout Wrapper - Synchronized with Preset Primary 900-500 */
 .register-layout {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f172a 0%, #1e40af 40%, #0891b2 100%);
-    padding: 2rem;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    transition: background 0.5s ease;
-}
-
-
-::ng-deep .custom-card.p-card {
-    width: 100%;
-    max-width: 550px; 
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 249, 255, 0.9) 100%) !important;
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-
-.card-header-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 2rem 0.5rem 2rem;
-}
-
-.card-header-flex h2 {
-    color: #1e3a8a !important; 
-    font-weight: 800;
-    font-size: 1.8rem;
-}
-
-.field-container {
-    margin-bottom: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    min-height: 68px;
-}
-
-.error-text {
-    color: #ef4444; 
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin-top: 0.2rem;
-    padding-left: 0.2rem;
-}
-
-
-::ng-deep .field-container .p-floatlabel,
-::ng-deep .field-container .p-inputtext,
-::ng-deep .field-container .p-password,
-::ng-deep .field-container .p-password input {
-    width: 100% !important;
-}
-
-
-::ng-deep .ng-invalid.ng-dirty {
-    border-color: #ef4444 !important;
-}
-
-
-::ng-deep .p-floatlabel :has(input:focus) ~ label,
-::ng-deep .p-floatlabel input:focus ~ label {
-    color: #0ea5e9 !important; 
-    font-weight: 600;
-}
-
-
-.button-row {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.05); 
-}
-
-
-::ng-deep .button-row p-button[label="Register"] {
-    width: 100%;
-}
-
-::ng-deep .button-row p-button[label="Register"] .p-button {
-    width: 100%;
-    padding: 0.85rem !important;
-    background: linear-gradient(90deg, #10b981 0%, #059669 100%) !important;
-    border: none !important;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-::ng-deep .button-row p-button[label="Register"] .p-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
-}
-
-
-.button-row span {
-    color: #64748b; 
-    font-size: 0.95rem;
-    margin-bottom: -0.5rem; 
-}
-
-
-::ng-deep .button-row p-button[label="Login"] .p-button {
-    background: transparent !important;
-    color: #2563eb !important; 
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0.25rem 0.5rem !important;
-    font-weight: 700;
-    font-size: 0.95rem;
-}
-
-::ng-deep .button-row p-button[label="Login"] .p-button:hover {
-    text-decoration: underline;
-    background: rgba(37, 99, 235, 0.05) !important;
-}
-
-
-::ng-deep .dark .button-row {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-::ng-deep .dark .button-row span {
-    color: #94a3b8; 
-}
-
-::ng-deep .dark .button-row p-button[label="Login"] .p-button {
-    color: #60a5fa !important; 
-}
-
-
-
-::ng-deep .dark .custom-card.p-card {
-    background: rgba(15, 23, 42, 0.9) !important; 
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-::ng-deep .dark .card-header-flex h2 {
-    color: #60a5fa !important; 
-}
-
-::ng-deep .dark .p-inputtext {
-    background: rgba(30, 41, 59, 0.7) !important;
-    color: #f8fafc !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-::ng-deep .dark .p-floatlabel label {
-    color: #94a3b8 !important;
-}
-
-::ng-deep .dark .p-floatlabel :has(input:focus) ~ label,
-::ng-deep .dark .p-floatlabel input:focus ~ label {
-    background: #1e293b !important; 
-    color: #38bdf8 !important;
-} */
-
-
-/* 1. Main Layout Wrapper - Synchronized with .login-container */
-.register-layout {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0f172a 0%, #1e40af 40%, #0891b2 100%);
+    /* Uses shades from your preset for the deep background */
+    background: linear-gradient(135deg, var(--p-primary-950) 0%, var(--p-primary-900) 40%, var(--p-primary-800) 100%);
     padding: 2rem;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     transition: 0.5s ease;
 }
 
-/* 2. Custom Card Styling - Updated to match .p-card and .login-card */
+/* 2. Custom Card Styling */
 ::ng-deep .custom-card.p-card {
     width: 100%;
     max-width: 550px; 
@@ -190,7 +22,7 @@
     border: none;
 }
 
-/* Header Flexbox: Title and Dark Mode Toggle */
+/* Alignment: Kept Header Flexbox exactly as before */
 .card-header-flex {
     display: flex;
     justify-content: space-between;
@@ -199,13 +31,13 @@
 }
 
 .card-header-flex h2 {
-    color: #1e3a8a !important; /* Deep blue from login title */
+    color: var(--p-primary-700) !important; /* Deep Blue/Purple from preset */
     font-weight: 800;
     font-size: 1.75rem;
     letter-spacing: -0.025em;
 }
 
-/* 3. Field and Error Styling */
+/* 3. Field Alignment */
 .field-container {
     margin-bottom: 1.25rem;
     display: flex;
@@ -214,14 +46,14 @@
 }
 
 .error-text {
-    color: #ef4444; 
+    color: var(--p-red-500); /* Use PrimeNG semantic red */
     font-size: 0.85rem;
     font-weight: 500;
     margin-top: 0.2rem;
     padding-left: 0.2rem;
 }
 
-/* 4. PrimeNG Input Overrides */
+/* 4. PrimeNG Input Overrides - Kept Full Width Alignment */
 ::ng-deep .field-container .p-floatlabel,
 ::ng-deep .field-container .p-inputtext,
 ::ng-deep .field-container .p-password,
@@ -229,20 +61,19 @@
     width: 100% !important;
 }
 
-/* Input error state highlighting */
 ::ng-deep .ng-invalid.ng-dirty {
-    border-color: #ef4444 !important;
+    border-color: var(--p-red-500) !important;
 }
 
-/* Floatlabel focus color - Updated to match Login CSS #00aaff */
+/* Floatlabel focus color - Matched to Preset Primary */
 ::ng-deep .p-floatlabel :has(input:focus) ~ label,
 ::ng-deep .p-floatlabel input:focus ~ label {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 249, 255, 0.9) 100%) !important;
-    color: #00aaff !important;
+    background: white !important;
+    color: var(--p-primary-500) !important;
     font-weight: 600;
 }
 
-/* 5. Button Row Styling */
+/* 5. Button Row Alignment - Kept Flex Column */
 .button-row {
     display: flex;
     flex-direction: column;
@@ -253,7 +84,7 @@
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Register Button - Changed from Green to Login's Blue Gradient */
+/* Register Button - Now uses the MyGradientPreset Gradient */
 ::ng-deep .button-row p-button[label="Register"] {
     width: 100%;
 }
@@ -261,32 +92,33 @@
 ::ng-deep .button-row p-button[label="Register"] .p-button {
     width: 100%;
     padding: 0.75rem !important;
-    /* background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%) !important; */
-    background: #06b6d4 !important;
+    /* PULLED FROM PRESET: linear-gradient(135deg, rgb(33, 33, 214) 50%, rgb(132, 37, 221) 100%) */
+    background: var(--p-button-primary-background) !important;
     border: none !important;
     border-radius: 8px;
     font-weight: 600;
     font-size: 1.1rem;
-    box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.3);
+    box-shadow: 0 4px 14px 0 color-mix(in srgb, var(--p-primary-500), transparent 70%);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 ::ng-deep .button-row p-button[label="Register"] .p-button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    background: var(--p-button-primary-hover-background) !important;
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--p-primary-500), transparent 60%);
 }
 
-/* "Already a user" text - Matched to .text-muted */
+/* "Already a user" text alignment */
 .button-row span {
-    color: #64748b; 
+    color: var(--p-surface-500); 
     font-size: 0.9rem;
     margin-bottom: -0.5rem;
 }
 
-/* Login Button - Styled as a Link button to match .signup-btn */
+/* Login Button - Kept Link Alignment */
 ::ng-deep .button-row p-button[label="Login"] .p-button {
     background: transparent !important;
-    color: #06b6d4 !important; 
+    color: var(--p-primary-600) !important; 
     border: none !important;
     box-shadow: none !important;
     padding: 0.25rem 0.5rem !important;
@@ -296,47 +128,31 @@
 
 ::ng-deep .button-row p-button[label="Login"] .p-button:hover {
     text-decoration: underline;
-    background: rgba(30, 64, 175, 0.05) !important;
+    background: var(--p-primary-50) !important;
 }
 
 /* ---------------------------------------------------
-    DARK MODE SUPPORT (Synchronized with Login)
+    DARK MODE SUPPORT - Kept Alignment
 ------------------------------------------------------ */
 
 ::ng-deep .dark .custom-card.p-card {
-    background: rgba(30, 41, 59, 0.9) !important; /* Dark Slate Blue from login */
+    background: var(--p-surface-900) !important; 
     color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid var(--p-surface-700) !important;
 }
 
 ::ng-deep .dark .card-header-flex h2 {
-    color: #60a5fa !important; /* Brighter blue for visibility */
+    color: var(--p-primary-400) !important; 
 }
 
 ::ng-deep .dark .p-inputtext {
-    background: rgba(15, 23, 42, 0.6) !important;
+    background: var(--p-surface-950) !important;
     color: white !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid var(--p-surface-700) !important;
 }
 
-::ng-deep .dark .button-row {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-::ng-deep .dark .button-row span {
-    color: #94a3b8; /* text-muted in dark mode */
-}
-
-::ng-deep .dark .button-row p-button[label="Login"] .p-button {
-    color: #60a5fa !important; 
-}
-
-/* Dark Mode Floatlabel - Correcting background and text color */
 ::ng-deep .dark .p-floatlabel :has(input:focus) ~ label,
-::ng-deep .dark .p-floatlabel input:focus ~ label,
-::ng-deep .dark .p-floatlabel :has(.p-filled) ~ label,
-::ng-deep .dark .p-floatlabel .p-filled ~ label {
-    background: rgba(30, 41, 59, 0.9) !important; 
-    color: #00aaff !important;
+::ng-deep .dark .p-floatlabel input:focus ~ label {
+    background: var(--p-surface-900) !important; 
+    color: var(--p-primary-400) !important;
 }
