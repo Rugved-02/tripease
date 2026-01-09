@@ -4,225 +4,198 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: linear-gradient(to right, #2b6cff,#a02bff);
+  /* Updated to match your preset gradient exactly */
+  background: linear-gradient(135deg, rgb(33, 33, 214) 0%, rgb(132, 37, 221) 100%);
 }
- 
+
 .register-card {
-  background:whitesmoke;
+  background: #ffffff; /* Brighter than whitesmoke for better contrast with the gradient */
   width: 430px;
   padding: 30px;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
   margin: 20px 0;
 }
- 
+
 .logo {
   font-weight: bold;
-  color: #2563eb;
+  /* Using your primary 500 color from app.config.ts */
+  color: rgb(33, 33, 214);
   font-size: 30px;
   margin-bottom: 10px;
   text-align: center;
 }
- 
-h2 {
-  margin: 0;
-  text-align: center;
-}
- 
+
 .subtitle {
-  color: #525b5b;
+  color: #6b7280;
   margin-bottom: 20px;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
 }
- 
- 
+h2{
+    margin-left: 60px;
+}
+
 label {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   color: #374151;
   display: block;
 }
- 
+
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
   width: 100%;
 }
- 
+
+/* Input Styles */
 .p-inputtext,
 :host ::ng-deep .p-password input {
   width: 100% !important;
-  padding: 10px 14px !important;
-  margin-bottom: 4px !important;
+  padding: 12px 14px !important;
   border: 1px solid #d1d5db !important;
   border-radius: 8px !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
- 
- 
-:host ::ng-deep .p-inputtext::placeholder {
-  color: #7c7d81 !important;
+
+.p-inputtext:focus,
+:host ::ng-deep .p-password input:focus {
+  border-color: rgb(33, 33, 214) !important;
+  outline: none;
 }
- 
+
+/* Password Reveal Icon Fix */
 :host ::ng-deep .p-password {
-  position: relative !important;
-  display: inline-block !important; 
   width: 100% !important;
 }
- 
-:host ::ng-deep .p-password input {
-  width: 100% !important;
-  padding: 10px 40px 10px 14px !important; 
-  margin: 0 !important;
-  border: 1px solid #d1d5db !important;
-  border-radius: 8px !important;
-  box-sizing: border-box;
-}
+
 :host ::ng-deep .p-password-reveal-icon,
 :host ::ng-deep .p-password-hide-icon {
   position: absolute !important;
   top: 50% !important;
-  right: 12px !important; 
-  left: auto !important;  
+  right: 14px !important;
   transform: translateY(-50%) !important;
-  cursor: pointer;
-  color: #9ca3af;
   z-index: 10;
 }
- 
- 
+
+/* Error Handling */
 .error-container {
-  min-height: 18px;
-  margin-top:2px;
-  margin-left: 12px;
+  min-height: 20px;
+  margin-top: 2px;
+  padding-left: 4px;
 }
- 
+
 .error {
   color: #dc2626;
-  font-size: 15px;
-  display: block;
-}
-
-:host ::ng-deep .p-password {
-  margin-bottom: 0 !important;
-}
- 
- 
-
-.terms-container .flex-row {
-  display: flex !important;
-  align-items: flex-start !important; 
-  gap: 10px;
-  margin-top: 15px;
-}
-
-
-.terms-label {
-  font-size: 0.9rem;
-  color: #4b5563;
-  cursor: pointer;
-  line-height: 1.4;
-}
-
-
-.link {
-  color: #3b82f6;
-  text-decoration: none;
+  font-size: 13px;
   font-weight: 500;
 }
 
-.link:hover {
-  text-decoration: underline;
-}
-:host ::ng-deep .p-checkbox .p-checkbox-box {
-  border-radius: 4px !important;
-  border: 1px solid #d1d5db !important;
-  width: 20px !important;
-  height: 20px !important;
-}
-:host ::ng-deep .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
-  background: #3b82f6 !important;
-  border-color: #3b82f6 !important;
-}
-:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
-  background: #3b82f6 !important;
-  border-color: #3b82f6 !important;
-}
+/* Primary Submit Button - Matching MyGradientPreset */
 .p-button.submit-btn {
   width: 100%;
   padding: 12px;
-  background: #020901;
-  color: #fff;
+  border: none;
+  /* Using your preset gradient */
+  background: linear-gradient(135deg, rgb(33, 33, 214) 50%, rgb(132, 37, 221) 100%) !important;
+  color: #ffffff;
   border-radius: 10px;
   font-size: 16px;
   font-weight: bold;
   justify-content: center;
+  transition: opacity 0.3s;
 }
+
 .p-button.submit-btn:hover {
-  background: #2563eb;
+  background: linear-gradient(135deg, rgb(43, 43, 224) 50%, rgb(142, 47, 231) 100%) !important;
+  box-shadow: 0 4px 12px rgba(33, 33, 214, 0.3);
 }
-::ng-deep .p-divider.p-divider-horizontal:before {
-    
-    display: block;
-    margin-top: 4px;
-    color:  rgb(164, 155, 155);
-   
+
+/* Social Buttons */
+.social .p-button {
+  width: 100%;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 10px;
+  margin-top: 10px;
+  background: #ffffff;
+  color: #374151;
 }
-::ng-deep .p-divider .p-divider-content {
-    background-color: #ffffff; 
-    padding: 2px 8px; 
-    margin-top: 12px;
-    color: rgb(164, 155, 155);
-          
+
+.social .p-button:hover {
+  background: #f9fafb !important;
+  border-color: #d1d5db !important;
 }
-.auth-link {
-  text-decoration: none;
-  flex: 1; 
+
+/* Checkbox Alignment */
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+  background: rgb(33, 33, 214) !important;
+  border-color: rgb(33, 33, 214) !important;
+}
+
+.flex-row {
+  display: flex !important;
+  align-items: center !important; /* This keeps the box and text vertically centered */
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.terms-label {
+  font-size: 14px;
+  line-height: 1; /* Helps with centering alongside the box */
+  margin: 0;      /* Remove default label margins */
+  cursor: pointer;
+}
+
+:host ::ng-deep .p-divider {
+    /* Updates line color, text color, and spacing in one go */
+    --p-divider-border-color: #d1d5db;
+    --p-divider-content-color: #6b7280;
+    --p-divider-content-background: #ffffff;
+    margin: 15px 0 !important;
 }
 .social {
   display: flex;
-  gap: 15px;
+  gap: 12px;
+  
 }
+
+.auth-link { flex: 1; text-decoration: none; }
+
 .social .p-button {
-  width: 100%; 
-  display: flex;
+  width: 100% !important;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
   border-radius: 10px;
-  font-weight: bold;
-  transition: 0.3s;
-  padding: 7px;
-  margin-top: 10px;
- 
+  background: #fff !important;
+  color: #374151 !important;
+  border: 1px solid #d1d5db !important;
+  margin-top: 0px;
+  
 }
-.social .p-button.google {
-  background-color: #fff;
-  color: #090909;
- 
-}
-.social .p-button.github {
-  background-color: #feffff;
-  color: #060606;
- 
-}
-.pi {
-  font-size: 15px;
-  margin-right: 5px;
+
+/* Hover: Syncs with 'primary.500' from app.config.ts */
+.social .p-button:hover {
+  border-color: rgb(33, 33, 214) !important;
+  color: rgb(33, 33, 214) !important;
+  background: #f9fafb !important;
 }
 .signin {
   text-align: center;
-  margin-top: 16px;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #6b7280;
 }
- 
+
 .signin a {
-  color: #2563eb;
+  color: rgb(33, 33, 214);
   text-decoration: none;
   font-weight: 600;
 }
-label[for="email"] {
-  margin-top: 5px;
-  display: flex; 
+
+.signin a:hover {
+  text-decoration: underline;
 }
