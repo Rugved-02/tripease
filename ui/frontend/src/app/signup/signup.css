@@ -1,0 +1,228 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(to right, #2b6cff,#a02bff);
+}
+ 
+.register-card {
+  background:whitesmoke;
+  width: 430px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  margin: 20px 0;
+}
+ 
+.logo {
+  font-weight: bold;
+  color: #2563eb;
+  font-size: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+ 
+h2 {
+  margin: 0;
+  text-align: center;
+}
+ 
+.subtitle {
+  color: #525b5b;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+ 
+ 
+label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #374151;
+  display: block;
+}
+ 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+  width: 100%;
+}
+ 
+.p-inputtext,
+:host ::ng-deep .p-password input {
+  width: 100% !important;
+  padding: 10px 14px !important;
+  margin-bottom: 4px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+}
+ 
+ 
+:host ::ng-deep .p-inputtext::placeholder {
+  color: #7c7d81 !important;
+}
+ 
+:host ::ng-deep .p-password {
+  position: relative !important;
+  display: inline-block !important; 
+  width: 100% !important;
+}
+ 
+:host ::ng-deep .p-password input {
+  width: 100% !important;
+  padding: 10px 40px 10px 14px !important; 
+  margin: 0 !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  box-sizing: border-box;
+}
+:host ::ng-deep .p-password-reveal-icon,
+:host ::ng-deep .p-password-hide-icon {
+  position: absolute !important;
+  top: 50% !important;
+  right: 12px !important; 
+  left: auto !important;  
+  transform: translateY(-50%) !important;
+  cursor: pointer;
+  color: #9ca3af;
+  z-index: 10;
+}
+ 
+ 
+.error-container {
+  min-height: 18px;
+  margin-top:2px;
+  margin-left: 12px;
+}
+ 
+.error {
+  color: #dc2626;
+  font-size: 15px;
+  display: block;
+}
+
+:host ::ng-deep .p-password {
+  margin-bottom: 0 !important;
+}
+ 
+ 
+
+.terms-container .flex-row {
+  display: flex !important;
+  align-items: flex-start !important; 
+  gap: 10px;
+  margin-top: 15px;
+}
+
+
+.terms-label {
+  font-size: 0.9rem;
+  color: #4b5563;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+
+.link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+:host ::ng-deep .p-checkbox .p-checkbox-box {
+  border-radius: 4px !important;
+  border: 1px solid #d1d5db !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+:host ::ng-deep .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  background: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+  background: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+.p-button.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #020901;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  justify-content: center;
+}
+.p-button.submit-btn:hover {
+  background: #2563eb;
+}
+::ng-deep .p-divider.p-divider-horizontal:before {
+    
+    display: block;
+    margin-top: 4px;
+    color:  rgb(164, 155, 155);
+   
+}
+::ng-deep .p-divider .p-divider-content {
+    background-color: #ffffff; 
+    padding: 2px 8px; 
+    margin-top: 12px;
+    color: rgb(164, 155, 155);
+          
+}
+.auth-link {
+  text-decoration: none;
+  flex: 1; 
+}
+.social {
+  display: flex;
+  gap: 15px;
+}
+.social .p-button {
+  width: 100%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+  padding: 7px;
+  margin-top: 10px;
+ 
+}
+.social .p-button.google {
+  background-color: #fff;
+  color: #090909;
+ 
+}
+.social .p-button.github {
+  background-color: #feffff;
+  color: #060606;
+ 
+}
+.pi {
+  font-size: 15px;
+  margin-right: 5px;
+}
+.signin {
+  text-align: center;
+  margin-top: 16px;
+}
+ 
+.signin a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+label[for="email"] {
+  margin-top: 5px;
+  display: flex; 
+}

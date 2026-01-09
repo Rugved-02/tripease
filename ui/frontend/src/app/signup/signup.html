@@ -1,0 +1,178 @@
+<p-toast></p-toast>
+<div class="page">
+  <p-card class="register-card">
+    <div class="logo">✈ TripEase</div>
+    <h2>Create Your Account</h2>
+    <p class="subtitle">Start your journey with us today</p>
+
+    <form [formGroup]="signupForm" (ngSubmit)="submit()">
+    <div class="form-group">
+  <label for="fullName" class="label-with-icon">
+    <i class="pi pi-user small-icon"></i>
+    <span>Full Name</span>
+  </label>
+
+  <input 
+    id="fullName" 
+    type="text" 
+    pInputText 
+    placeholder="John Doe" 
+    formControlName="fullName" 
+    class="custom-input" />
+
+  <div class="error-container" >
+    <small class="error" *ngIf="f['fullName'].touched && f['fullName'].hasError('required')">Full name is required.</small>
+    <small class="error" *ngIf="f['fullName'].touched && f['fullName'].hasError('minlength')">Full name must be at least 3 characters long.</small>
+    
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="email" class="label-with-icon">
+    <i class="pi pi-envelope small-icon"></i>
+    <span id="email1">Email Address</span>
+  </label>
+  
+  <input 
+    id="email" 
+    type="email" 
+    pInputText 
+    placeholder="you@example.com" 
+    formControlName="email" 
+    class="custom-input" />
+
+  <div class="error-container">
+    <small class="error" *ngIf="f['email'].touched && f['email'].hasError('required')">Email is required.</small>
+    <small class="error" *ngIf="f['email'].touched && f['email'].hasError('email')">Enter a valid email address.</small>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="phone" class="label-with-icon">
+    <i class="pi pi-phone small-icon"></i>
+    <span>Phone Number</span>
+  </label>
+  
+  <input 
+    id="phone" 
+    type="tel" 
+    pInputText 
+    placeholder="+1 (555) 000-0000" 
+    formControlName="phone" 
+    class="custom-input" />
+
+  <div class="error-container">
+    <small class="error" *ngIf="f['phone'].touched && f['phone'].hasError('required')">
+      Phone number is required.
+    </small>
+    <small class="error" *ngIf="f['phone'].touched && f['phone'].hasError('pattern')">
+      Enter a valid 10‑digit phone number.
+    </small>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="password" class="label-with-icon">
+    <i class="pi pi-lock small-icon"></i>
+    <span>Password</span>
+  </label>
+
+  <p-password 
+    id="password" 
+    formControlName="password" 
+    placeholder="Create a strong password"
+    [toggleMask]="true" 
+    [feedback]="false" 
+    appendTo="body"
+    styleClass="w-full"
+    [style]="{'width': '100%'}" 
+    [inputStyle]="{'width': '100%'}">
+  </p-password>
+
+  <div class="error-container">
+    <small class="error" *ngIf="f['password'].touched && f['password'].hasError('required')">
+      Password is required.
+    </small>
+    <small class="error" *ngIf="f['password'].touched && f['password'].hasError('pattern')">
+      Min 8 letters and Password must be Strong
+    </small>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="confirmPassword" class="label-with-icon">
+    <i class="pi pi-check-circle small-icon"></i>
+    <span>Confirm Password</span>
+  </label>
+
+  <p-password 
+    id="confirmPassword" 
+    formControlName="confirmPassword" 
+    placeholder="Confirm your password"
+    [toggleMask]="true" 
+    [feedback]="false" 
+    styleClass="w-full"
+    [style]="{'width': '100%'}" 
+    [inputStyle]="{'width': '100%'}">
+  </p-password>
+
+  <div class="error-container">
+    <small class="error" *ngIf="signupForm.hasError('passwordMismatch') && f['confirmPassword'].touched">
+      Passwords must match.
+    </small>
+  </div>
+</div>
+<div class="form-group terms-container">
+  <div class="flex-row">
+    <p-checkbox 
+      formControlName="terms" 
+      [binary]="true" 
+      inputId="terms">
+    </p-checkbox>
+    
+    <label for="terms" class="terms-label">
+      I agree to the
+      <a href="assets/sample-terms.pdf" target="_blank" class="link">Terms of Service</a> and
+  <a href="assets/sample-privacy.pdf" target="_blank" class="link">Privacy Policy</a>
+    </label>
+  </div>
+
+  <div class="error-container">
+    <small class="error" *ngIf="f['terms'].touched && f['terms'].hasError('required')">
+      You must accept the terms.
+    </small>
+  </div>
+</div>
+
+      
+      <button pButton type="submit" label="Create Account" class="submit-btn"></button>
+    </form>
+
+    <p-divider align="center"><b>Or continue with</b></p-divider>
+
+    
+    <div class="social">
+  <a href="https://accounts.google.com/signup" target="_blank" class="auth-link">
+    <button pButton type="button" class="p-button-outlined google">
+      <i class="pi pi-google"></i>
+      <span>Google</span>
+    </button>
+  </a>
+
+  <a href="https://github.com/signup" target="_blank" class="auth-link">
+    <button pButton type="button" class="p-button-outlined github">
+      <i class="pi pi-github"></i>
+      <span>GitHub</span>
+    </button>
+  </a>
+</div>
+    <p class="signin">
+      Already have an account?
+      <a routerLink="/login">Sign in here</a>
+    </p>
+  </p-card>
+</div> 
+
+
+
+
