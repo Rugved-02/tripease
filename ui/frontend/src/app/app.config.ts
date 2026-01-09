@@ -150,7 +150,7 @@ export const MyGradientPreset = definePreset(Aura, {
                 },
                 dark: {
                     primary: {
-                        background: 'linear-gradient(135deg, rgb(33, 33, 214) 0%, rgb(132, 37, 221) 100%)',
+                        background: 'linear-gradient(135deg, rgba(16, 16, 101, 1) 0%, rgba(54, 14, 92, 1) 100%)',
                         color: '#ffffff'
                     }
                 }
