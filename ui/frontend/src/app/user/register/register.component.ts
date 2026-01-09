@@ -6,7 +6,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { MenubarComponent } from '../menubar-component/menubar-component';
+import { MenubarComponent } from '../../shared/components/menubar/menubar.component';
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
@@ -30,8 +30,8 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule
   ],
   providers: [MessageService],
-  templateUrl: './register.html',
-  styleUrl: './register.css',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css',
 })
 export class Register {
   registerForm: FormGroup;

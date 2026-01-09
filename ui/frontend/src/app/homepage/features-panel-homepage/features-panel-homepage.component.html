@@ -1,0 +1,38 @@
+
+<p-panel header="">
+    <h2 class="panel-title">Everything You Need</h2>
+    <p class="panel-title-description">All-in-one platform for seamless travel planning</p>
+  <div class="card-container">
+    @for (item of dataFeaturesPanel(); track $index) {
+      <p-card>
+      <div class="card-icon">{{item.icon}}</div>
+      <h3>{{item.title}}</h3>
+      <p>{{item.description}}</p>
+    </p-card>
+    }
+  </div>
+</p-panel>
+
+
+
+<!-- <section  class="services">
+  <h2 class="section-title">Integrated Solutions</h2>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-icon">🏨</div>
+      <h3>Smart Booking</h3>
+      <p>Dynamic pricing for flights and hotels based on demand.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🕒</div>
+      <h3>Live Itinerary</h3>
+      <p>Automatic alerts for schedule changes and reminders.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💳</div>
+      <h3>Secure Payments</h3>
+      <p>PCI DSS compliant payment and automated refund logic.</p>
+    </div>
+  </div>
+</section>
+ -->

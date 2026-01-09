@@ -6,6 +6,7 @@ import { Homepage } from './homepage/homepage/homepage.component';
 import { AboutUs } from './shared/components/about-us/about-us';
 import { SearchFlightHotelsHomepageComponent } from './homepage/search-flight-hotels-homepage/search-flight-hotels-homepage.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { FeaturesPanelHomepageComponent } from './homepage/features-panel-homepage/features-panel-homepage.component';
 
 export const routes: Routes = [
     { path:'', redirectTo:"homepage", pathMatch:'full'},
@@ -15,6 +16,7 @@ export const routes: Routes = [
     { path:"menubar", component:MenubarComponent},
     { path:"aboutUs", component:AboutUs},
     { path:"searchFlightHomepage", component:SearchFlightHotelsHomepageComponent},
-    { path:"footer", component:FooterComponent}
+    { path:"footer", component:FooterComponent},
+    { path:"featuresPanelHomepage", component:FeaturesPanelHomepageComponent}
     
     ];
