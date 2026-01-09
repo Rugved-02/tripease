@@ -1,0 +1,15 @@
+
+<p-panel header="">
+    <h2 class="panel-title">Welcome Back!</h2>
+    <p class="panel-title-description">Here's an overview of your travel activities</p>
+  <div class="card-container">
+    @for (item of dataFeaturesPanel(); track $index) {
+      <p-card>
+      <div class="card-icon" [style.background-color]="item.dynamicColor"><i [class]="item.icon" style="font-size: 1.5rem;color: var(--p-surface-0)"></i></div>
+      
+      <h3>{{item.title}}</h3>
+      <p>{{item.description}}</p>
+    </p-card>
+    }
+  </div>
+</p-panel>
