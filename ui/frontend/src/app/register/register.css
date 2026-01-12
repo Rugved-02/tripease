@@ -1,93 +1,158 @@
-
-/* Full-page center layout */
-html, body {
-  height: 100%;
-  margin: 0;
+/* 1. Main Layout Wrapper - Synchronized with Preset Primary 900-500 */
+.register-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Uses shades from your preset for the deep background */
+    background: linear-gradient(135deg, var(--p-primary-950) 0%, var(--p-primary-900) 40%, var(--p-primary-800) 100%);
+    padding: 2rem;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    transition: 0.5s ease;
 }
 
-#bo {
-  display: flex;
-  align-items: center;         /* Vertical center */
-  justify-content: center;     /* Horizontal center */
-  background: #f5f7fb;         /* Light, subtle background */
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
-  width: 450px;
-  margin-left: 30%;
+/* 2. Custom Card Styling */
+::ng-deep .custom-card.p-card {
+    width: 100%;
+    max-width: 550px; 
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 249, 255, 0.9) 100%) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    border: none;
 }
 
-/* Card container */
-#register {
-  margin-top: 10px;
-  margin-left: 30%;
-  padding-left: 400px;
-  width: 100%;
-  max-width: 420px;            /* Card max width */
-  background: #fff;
-  border-radius: 14px;
-  padding: 24px 22px;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.08),
-    0 2px 8px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0,0,0,0.06);
+/* Alignment: Kept Header Flexbox exactly as before */
+.card-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem 0.5rem 2rem;
 }
 
-/* Space between fields */
-#register p-floatlabel {
-  display: block;
-  margin-bottom: 18px;
+.card-header-flex h2 {
+    color: var(--p-primary-700) !important; /* Deep Blue/Purple from preset */
+    font-weight: 800;
+    font-size: 1.75rem;
+    letter-spacing: -0.025em;
 }
 
-/* PrimeNG inputs full width inside the card */
-#register input[pInputText],
-#register p-inputnumber,
-#register p-password {
-  width: 100%;
+/* 3. Field Alignment */
+.field-container {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 68px; 
 }
 
-/* Button row */
-#button {
-  display: flex;
-  gap: 12px;
-  margin-top: 8px;
+.error-text {
+    color: var(--p-red-500); /* Use PrimeNG semantic red */
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 0.2rem;
+    padding-left: 0.2rem;
 }
 
-#button p-button:first-child {
-  flex: 1;                      /* Make both buttons same width */
+/* 4. PrimeNG Input Overrides - Kept Full Width Alignment */
+::ng-deep .field-container .p-floatlabel,
+::ng-deep .field-container .p-inputtext,
+::ng-deep .field-container .p-password,
+::ng-deep .field-container .p-password input {
+    width: 100% !important;
 }
 
-#button p-button:last-child {
-  flex: 1;
+::ng-deep .ng-invalid.ng-dirty {
+    border-color: var(--p-red-500) !important;
 }
 
-/* Optional: improve label appearance inside float label */
-p-floatlabel label {
-  color: #6b7280;               /* Neutral gray */
-  font-weight: 500;
+/* Floatlabel focus color - Matched to Preset Primary */
+::ng-deep .p-floatlabel :has(input:focus) ~ label,
+::ng-deep .p-floatlabel input:focus ~ label {
+    background: white !important;
+    color: var(--p-primary-500) !important;
+    font-weight: 600;
 }
 
-/* Optional: subtle hover effect on the card */
-#register:hover {
-  box-shadow:
-    0 14px 36px rgba(0,0,0,0.10),
-    0 4px 12px rgba(0,0,0,0.08);
-  transition: box-shadow 160ms ease;
+/* 5. Button Row Alignment - Kept Flex Column */
+.button-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Dark mode (optional) */
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #0f172a;
-    color: #e5e7eb;
-  }
-  #register {
-    background: #111827;
-    border: 1px solid #1f2937;
-    box-shadow:
-      0 10px 30px rgba(0,0,0,0.35),
-      0 2px 8px rgba(0,0,0,0.25);
-  }
-  p-floatlabel label {
-    color: #9ca3af;
-  }
+/* Register Button - Now uses the MyGradientPreset Gradient */
+::ng-deep .button-row p-button[label="Register"] {
+    width: 100%;
 }
 
+::ng-deep .button-row p-button[label="Register"] .p-button {
+    width: 100%;
+    padding: 0.75rem !important;
+    /* PULLED FROM PRESET: linear-gradient(135deg, rgb(33, 33, 214) 50%, rgb(132, 37, 221) 100%) */
+    background: var(--p-button-primary-background) !important;
+    border: none !important;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 14px 0 color-mix(in srgb, var(--p-primary-500), transparent 70%);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+::ng-deep .button-row p-button[label="Register"] .p-button:hover {
+    transform: translateY(-1px);
+    background: var(--p-button-primary-hover-background) !important;
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--p-primary-500), transparent 60%);
+}
+
+/* "Already a user" text alignment */
+.button-row span {
+    color: var(--p-surface-500); 
+    font-size: 0.9rem;
+    margin-bottom: -0.5rem;
+}
+
+/* Login Button - Kept Link Alignment */
+::ng-deep .button-row p-button[label="Login"] .p-button {
+    background: transparent !important;
+    color: var(--p-primary-600) !important; 
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0.25rem 0.5rem !important;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+::ng-deep .button-row p-button[label="Login"] .p-button:hover {
+    text-decoration: underline;
+    background: var(--p-primary-50) !important;
+}
+
+/* ---------------------------------------------------
+    DARK MODE SUPPORT - Kept Alignment
+------------------------------------------------------ */
+
+::ng-deep .dark .custom-card.p-card {
+    background: var(--p-surface-900) !important; 
+    color: #ffffff !important;
+    border: 1px solid var(--p-surface-700) !important;
+}
+
+::ng-deep .dark .card-header-flex h2 {
+    color: var(--p-primary-400) !important; 
+}
+
+::ng-deep .dark .p-inputtext {
+    background: var(--p-surface-950) !important;
+    color: white !important;
+    border: 1px solid var(--p-surface-700) !important;
+}
+
+::ng-deep .dark .p-floatlabel :has(input:focus) ~ label,
+::ng-deep .dark .p-floatlabel input:focus ~ label {
+    background: var(--p-surface-900) !important; 
+    color: var(--p-primary-400) !important;
+}

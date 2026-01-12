@@ -1,24 +1,131 @@
-<!-- <body style="border: solid 2px black;"> -->
+<!-- 
 
-    
-<div id="login" style="box-shadow: 2px 2px 10px 3px rgb(55, 255, 145);">
-<h2 style="text-align: center;color: aliceblue;">Login</h2>    
-<p-floatlabel variant="on">
-    <input pInputText id="userName"  autocomplete="off" />
-    <label for="userName">User Name</label>
-</p-floatlabel>
-<br>
+<p-toast position="top-right" />
+<div class="login-container">
+    <p-card header="Login" class="login-card">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
 
-<p-floatlabel variant="on">
-    <p-password  [toggleMask]="true" />
-    <label for="pass">Password</label>
-</p-floatlabel>
-<br>
-<div id="button">
-<p-button label="Login" [raised]="true" severity="success" />
+            <div class="form-field">
+                <p-floatlabel variant="on">
+                     <input pInputText type="text" formControlName="username" [invalid]="isInvalid('username')" />
+                     <label for="username">Username</label>
+                </p-floatlabel>
 
-<p>Not a user?</p>
-<p-button label="Register" [raised]="true" severity="success" (click)="register()"/>
+                <div class="error-message-wrapper">
+                  @if (isInvalid('username')) {
+                  <p-message severity="error" size="small" variant="simple">
+                   Username is required.
+                 </p-message>
+                 }
+                </div>
+            </div>
+
+            <div class="form-field">
+                  <p-floatlabel variant="on">
+                     <p-password formControlName="password" [feedback]="false" [toggleMask]="true"
+                       [invalid]="isInvalid('password')" styleClass="w-full">
+                     </p-password>
+                     <label for="password">Password</label>
+                    </p-floatlabel>
+
+             <div class="error-message-wrapper">
+                 @if (isInvalid('password')) {
+                     @if (loginForm.get('password')?.errors?.['required']) {
+                        <p-message severity="error" size="small" variant="simple">Password is required.</p-message>
+                     }
+                 @if (loginForm.get('password')?.errors?.['minlength']) {
+                       <p-message severity="error" size="small" variant="simple">Password is too short.</p-message>
+                      }
+                  }
+            </div>
+            <div class="forgot-password-container">
+                   <p-button label="Forgot password?" [link]="true" (click)="onForgotPassword()"
+                     styleClass="forgot-password-btn" size="small">
+                  </p-button>
+             </div>
+        </div>
+
+            
+            <p-button type="submit" pRipple label="Login" class="w-full" />
+
+
+            <div class="signup-footer">
+                <span class="text-muted">Not a user?</span>
+                <p-button class="signup-link" label="Sign up" [link]="true" (click)="register()" styleClass="signup-btn">
+                </p-button>
+            </div>
+
+        </form>
+    </p-card>
+</div> -->
+
+
+<p-toast position="top-right" />
+
+<div class="login-container">
+    <p-card class="login-card">
+        <div class="brand-header">
+            <div class="logo-box">
+                <i class="pi pi-send"></i> 
+               
+                
+            </div>
+            <h1 class="brand-name">TripEase</h1>
+             <!-- <img src="https://leaves-chip-92837273.figma.site/" alt=""> -->
+
+        </div>
+
+        <div class="welcome-section">
+            <h2 class="welcome-title">Welcome Back</h2>
+            <p class="text-muted">Sign in to continue your journey</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+            <div class="form-field">
+                <label class="field-label">&nbsp;&nbsp;<i class="pi pi-envelope"></i> Email Address</label>
+                <input pInputText type="text" formControlName="email" placeholder="you@example.com" class="w-full custom-input" />
+                <div class="error-message-wrapper">
+                    @if (isInvalid('email')) {
+                        <small class="p-error">&nbsp;&nbsp;Email is required.</small>
+                    }
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label class="field-label">&nbsp;&nbsp;<i class="pi pi-lock"></i> Password</label>
+                <p-password formControlName="password" [feedback]="false" [toggleMask]="true"
+                    placeholder="Enter your password" styleClass="w-full" inputStyleClass="custom-input">
+                </p-password>
+                <div class="error-message-wrapper">
+                    @if (isInvalid('password')) {
+                        <small class="p-error">&nbsp;&nbsp;Password is required.</small>
+                    }
+                </div>
+            </div>
+
+            <div class="options-row">
+                <div class="flex align-items-center gap-2">
+                    <p-checkbox inputId="remember" binary="true"></p-checkbox>
+                    <label for="remember" class="text-sm">Remember me</label>
+                </div>
+                <p-button label="Forgot password?" [link]="true" (click)="onForgotPassword()" styleClass="forgot-password-btn"></p-button>
+            </div>
+
+            <p-button type="submit" label="Sign In" styleClass="signin-btn w-full" />
+
+            <div class="separator">
+                <span>Or continue with</span>
+            </div>
+
+            <div class="social-grid">
+                <p-button styleClass="social-btn" icon="pi pi-google" label="Google"></p-button>
+                <p-button styleClass="social-btn" icon="pi pi-github" label="GitHub"></p-button>
+            </div>
+
+            <div class="signup-footer">
+                <span class="text-muted">Don't have an account?</span>
+                <p-button label="Sign up for free" [link]="true" (click)="register()" styleClass="signup-link-btn"></p-button>
+            </div>
+        </form>
+    </p-card>
 </div>
-</div>   
-<!-- </body> -->
