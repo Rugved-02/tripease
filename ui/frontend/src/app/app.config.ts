@@ -15,38 +15,13 @@ import { routes } from './app.routes';
 export const MyGradientPreset = definePreset(Aura, {
     semantic: {
         primary: {
-            50: '{blue.50}', 100: '{blue.100}', 200: '{blue.200}', 300: '{blue.300}',
+            50: '{black.950}', 100: '{blue.100}', 200: '{blue.200}', 300: '{blue.300}',
             400: '{blue.400}', 500: 'rgb(33, 33, 214)', 600: 'rgb(80, 35, 217)',
             700: 'rgb(132, 37, 221)', 800: '{indigo.800}', 900: '{indigo.900}', 950: '{indigo.950}'
         }
     },
     components: {
-        button: {
-            colorScheme: {
-                light: {
-                    root: {
-                        primary: {
-                            background: 'linear-gradient(135deg, rgb(33, 33, 214) 50%, rgb(132, 37, 221) 100%)',
-                            hoverBackground: 'linear-gradient(135deg, rgb(43, 43, 224) 50%, rgb(142, 47, 231) 100%)',
-                            activeBackground: 'linear-gradient(135deg, rgb(23, 23, 204) 50%, rgb(122, 27, 211) 100%)',
-                            color: '#ffffff',
-                            borderColor: 'transparent'
-                        }
-                    }
-                },
-                dark: {
-                    root: {
-                        primary: {
-                            background: 'linear-gradient(135deg, rgb(33, 33, 214) 50%, rgb(132, 37, 221) 100%)',
-                            hoverBackground: 'linear-gradient(135deg, rgb(43, 43, 224) 50%, rgb(142, 47, 231) 100%)',
-                            activeBackground: 'linear-gradient(135deg, rgb(23, 23, 204) 50%, rgb(122, 27, 211) 100%)',
-                            color: '#ffffff',
-                            borderColor: 'transparent'
-                        }
-                    }
-                }
-            }
-        },
+       
         tag: {
             root: {
                 borderRadius: '12px',
@@ -75,7 +50,7 @@ export const appConfig: ApplicationConfig = {
     providers: [
         provideBrowserGlobalErrorListeners(),
         provideRouter(routes),
-        provideClientHydration(withEventReplay()),
+        
         provideAnimationsAsync(), // Required for PrimeNG animations (Toast, etc.)
         MessageService,           // Required for Toast messages
         providePrimeNG({
