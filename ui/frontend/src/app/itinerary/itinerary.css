@@ -1,0 +1,363 @@
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+ 
+.inside-container {
+  width: 85%;
+  margin: auto;
+  max-width: 1200px;
+}
+ 
+ 
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+ 
+.page-header h1 {
+  color: #3b82f6 !important; /* Bright Blue to match the screenshot */
+    font-size: 2rem !important;
+    font-weight: 800 !important; /* Extra Bold */
+    margin: 0 0 0.5rem 0 !important; /* Small gap below the title */
+    letter-spacing: -0.02rem;
+}
+ 
+.page-header p {
+  color: #64748b !important; /* Muted Grey color */
+    font-size: 1rem !important;
+    margin: 0 !important;
+    font-weight: 400 !important;
+}
+ 
+/* =========================================
+   2. BUTTONS & BADGES
+   ========================================= */
+ 
+/* BLACK BUTTONS (Sign Up, Create New, Download PDF) */
+.create-btn,
+.black-button {
+    background-color: #0f172a !important; /* Dark Black/Blue */
+    color: #ffffff !important;
+    border: 1px solid #0f172a !important;
+    border-radius: 6px !important;
+    padding: 0.8rem 1.2rem !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    cursor: pointer !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+ 
+.create-btn:hover,
+.black-button:hover {
+    background-color: #1e293b !important;
+}
+ 
+/* ACTIVITY BADGE (e.g., "3 Activities") */
+.activity-badge {
+    background-color: #dbeafe; /* Light Blue BG */
+    color: #2563eb;           /* Dark Blue Text */
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;     /* Pill shape */
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+ 
+/* =========================================
+   3. ITINERARY CARD
+   ========================================= */
+.itinerary-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  border: 1px solid #e2e8f0;
+}
+ 
+/* Header inside the white card */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+ 
+.card-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #0f172a;
+  font-weight: 700;
+}
+ 
+.date-range {
+  color: #64748b;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+ 
+/* =========================================
+   4. TIMELINE STRUCTURE (FIXED)
+   ========================================= */
+ 
+/* 1. HIDE the empty left-side column */
+::ng-deep .p-timeline-left .p-timeline-event-opposite {
+  flex: 0 !important;
+  padding: 0 !important;
+  display: none !important;
+}
+ 
+/* 2. FORCE the content (cards) to take FULL width */
+::ng-deep .p-timeline-left .p-timeline-event-content {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  padding-bottom: 1.5rem; /* Space between rows */
+}
+ 
+/* 3. ADD the Vertical Connecting Line */
+::ng-deep .p-timeline-event-connector {
+    background-color: #e2e8f0 !important; /* Light grey line */
+    width: 2px !important;
+}
+ 
+/* 4. ADJUST the spacing for the separator */
+::ng-deep .p-timeline-event-separator {
+    flex: 0 0 auto !important;
+    margin-right: 1.5rem !important; /* Gap between line and card */
+}
+ 
+/* 5. CUSTOM MARKER (The Circle Icon) */
+.custom-marker {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 10;
+  position: relative;
+  /* Adds a white ring around the circle so it stands out from the line */
+  box-shadow: 0 0 0 4px #ffffff;
+}
+ 
+/* =========================================
+   5. EVENT BOX & CLOCK STYLING
+   ========================================= */
+ 
+/* The White Box containing Flight/Hotel details */
+.event-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.8rem 2rem !important;
+  background: white;
+  width: 100%;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+ 
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+ 
+/* --- CLOCK ICON STYLING --- */
+/* Matches the screenshot of the clock you uploaded */
+.event-time {
+  color: #94a3b8; /* Light Grey Text */
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;      
+  align-items: center;
+  gap: 0.5rem;         /* Space between Icon and Text */
+  margin-bottom: 0.25rem;
+}
+ 
+/* Ensure the clock icon is the right size and color */
+.event-time i {
+    font-size: 0.95rem;
+    color: #94a3b8;
+}
+ 
+/* Event Title (e.g., Flight Departure) */
+.event-details h3 {
+  margin: 5px 0;
+  font-size: 1.35rem !important; /* Increased from 1.1rem */
+  color: #0f172a;
+  font-weight: 800 !important;    /* Extra Bold */
+  letter-spacing: -0.02em;        /* Slight tightening for modern look */
+}
+ 
+/* Event Subtitle (e.g., Departure from JFK) */
+.event-time {
+  color: #64748b;
+  font-size: 0.95rem !important; /* Increased from 0.85rem */
+  font-weight: 500;
+  display: flex;      
+  align-items: center;
+  gap: 0.5rem;        
+  margin-bottom: 0.5rem;
+}
+ 
+/* Edit Button */
+::ng-deep .p-button.p-button-text.edit-btn {
+    color: #0f172a !important;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+}
+ 
+/* =========================================
+   6. CARD FOOTER
+   ========================================= */
+/* --- FOOTER BUTTONS FIX --- */
+ 
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 2rem !important;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 1.5rem;
+}
+ 
+/* Common style for ALL buttons (Height & Width) */
+.card-footer button {
+    flex: 1; /* Makes all 3 buttons equal width */
+    padding: 1rem 0 !important; /* Increases HEIGHT */
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    cursor: pointer;
+    transition: background-color 0.2s; /* Smooth transition */
+    
+}
+ 
+/* 1. "View Details" - White with Border */
+.card-footer button:nth-child(1) {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+}
+ 
+/* HOVER EFFECT for Button 1 (Light Gray) */
+.card-footer button:nth-child(1):hover {
+    background-color: #f1f5f9 !important; /* Changes to Light Gray on hover */
+}
+ 
+ 
+/* 2. "Share Itinerary" - White with Border (Same as above) */
+.card-footer button:nth-child(2) {
+    background-color: #ffffff !important; /* changed to WHITE */
+    border: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+}
+ 
+/* HOVER EFFECT for Button 2 (Light Gray) */
+.card-footer button:nth-child(2):hover {
+    background-color: #f1f5f9 !important; /* Changes to Light Gray on hover */
+}
+ 
+/* 3. "Download PDF" - Black (Solid) */
+.card-footer button:nth-child(3) {
+    background-color: #0f172a !important;
+    border: 1px solid #0f172a !important;
+    color: #ffffff !important;
+}
+ 
+/* HOVER EFFECT for Button 3 (Stays Dark) */
+.card-footer button:nth-child(3):hover {
+    background-color: #1e293b !important; /* Slightly lighter black/blue */
+}
+ 
+ 
+/* =========================================
+   7. NAVBAR (From previous request)
+   ========================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background-color: white;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+ 
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #4338ca;
+}
+ 
+.logo-icon {
+  background-color: #4338ca;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+ 
+.nav-center {
+  display: flex;
+  gap: 2rem;
+}
+ 
+.nav-link {
+  text-decoration: none;
+  color: #64748b;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s;
+}
+ 
+.nav-link:hover, .nav-link.active {
+  color: #2563eb;
+}
+ 
+.nav-link.active {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+ 
+.nav-link.active i {
+  color: white;
+}
+ 
+.login-btn {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+ 
+.small-btn {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.85rem !important;
+}
