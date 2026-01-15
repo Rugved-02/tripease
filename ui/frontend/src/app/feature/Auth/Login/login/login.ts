@@ -8,9 +8,10 @@ import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
-import { AuthService } from '../auth-service';
+import { AuthService } from '../../auth-service';
 import { MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ import { CheckboxModule } from 'primeng/checkbox';
             CardModule,
             MessageModule,
             ToastModule,
-            CheckboxModule 
+            CheckboxModule ,
+            RouterLink
           ],
   providers:[MessageService],
   templateUrl: './login.html',
