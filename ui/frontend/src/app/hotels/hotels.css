@@ -5,9 +5,8 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* Titles */
 h1 { 
-  color: #093fed; /* Deeper Blue */
+  color: #093fed; 
   margin: 0 0 8px 100px; 
   font-weight: 800; 
   font-size: 2.5rem;

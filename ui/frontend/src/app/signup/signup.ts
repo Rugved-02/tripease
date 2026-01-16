@@ -8,7 +8,7 @@ import {
   AbstractControl, 
   ValidationErrors 
 } from '@angular/forms';
-import { Auth } from '../services/auth'; 
+import { Auth ,User} from '../services/auth'; 
 import { Router, RouterLink } from '@angular/router'; // 1. Added RouterLink here
 
 // PrimeNG Modules
@@ -88,9 +88,11 @@ export class Signup {
         detail: 'Please fill in all required fields correctly.',
         life: 3000
       });
-    } else {
-      const formData = this.signupForm.value;
-      this.authService.register(formData);
+    } 
+    else {
+      const formData:User = this.signupForm.value as User ;
+      this.authService.addUser(formData);
+     
 
       this.messageService.add({
         severity: 'success', 
