@@ -8,11 +8,11 @@
     <div class="grid-inputs">
       <div class="field">
         <label><i class="pi pi-map-marker"></i>  From</label>
-        <input type="text" class="custom-input" placeholder="New York (JFK)">
+        <input type="text" #fromInput class="custom-input" placeholder="New York (JFK)">
       </div>
       <div class="field">
         <label><i class="pi pi-map-marker"></i>  To</label>
-        <input type="text" class="custom-input" placeholder="Los Angeles (LAX)">
+        <input type="text" #toInput class="custom-input" placeholder="Los Angeles (LAX)">
       </div>
       <div class="field">
         <label><i class="pi pi-calendar"></i>  Departure Date</label>
@@ -29,7 +29,7 @@
         </p-select>
       </div> 
     </div>
-    <button class="search-btn"><i class="pi pi-search"></i> Search Flights</button>
+    <button class="search-btn" (click)="onSearch(fromInput.value, toInput.value)"><i class="pi pi-search"></i> Search Flights</button>
   </div>
 
   <div class="filter-row">
@@ -43,7 +43,7 @@
 <div class="card" *ngFor="let flight of filteredFlights">
     <div class="card-left">
       <div class="airline-header">
-        <div class="blue-icon">✈️</div>
+        <div class="blue-icon" [innerHTML]="getSafeIcon()"></div>
         <div class="name-box">
           <h3>{{flight.airline}}</h3>
           <small>{{flight.flightNo}}</small>

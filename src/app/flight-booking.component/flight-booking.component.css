@@ -29,7 +29,7 @@
 
 .grid-inputs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
   margin-bottom: 20px;
 }
@@ -147,7 +147,20 @@
 
 /* Left Elements */
 .airline-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
-.blue-icon { background: #e0e7ff;height: 65px;width: 65px; color: #2b63e8; padding: 10px; border-radius: 8px; }
+.blue-icon { 
+  background:linear-gradient(135deg, #4e79ff, #6b46ff);
+  /* height: 60px; */
+  /* display: flex; */
+  text-align: center;
+  border-radius: 10px;
+  width: fit-content; color: #2b63e8; 
+  padding: 13px
+ }
+  .blue-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 .name-box h3 { margin: 0; font-size: 20px; }
 .class-pill { background: #0f172a; color: white; font-size: 10px; padding: 5px 10px; border-radius: 6px; margin-left: 1px; }
 .seats-left { font-size: 12px; color: #64748b; margin-top: 15px; }
@@ -167,3 +180,65 @@
 .price-big { font-size: 28px; font-weight: 800; color: #2b63e8; margin: 0; }
 .per-person { font-size: 12px; color: #64748b; margin: 0 0 10px 0; }
 .book-now-btn { background: #000000; color: #ffffff; padding: 10px 24px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+
+/* --- RESPONSIVE ADDITIONS START HERE --- */
+
+/* For Tablets (Screens smaller than 1024px) */
+@media screen and (max-width: 1024px) {
+  .page-wrapper {
+    padding: 0 20px; /* Reduces side spacing */
+  }
+}
+
+/* For Mobile Phones (Screens smaller than 768px) */
+@media screen and (max-width: 768px) {
+  .main-title {
+    font-size: 28px; /* Shrinks title so it doesn't wrap weirdly */
+  }
+
+  .filter-row {
+    flex-wrap: wrap; /* Allows filter buttons to wrap to a second line */
+    justify-content: flex-start;
+  }
+
+  .card {
+    flex-direction: column; /* Stacks the Flight Card vertically */
+    align-items: stretch;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .card-left, .card-center, .card-right {
+    flex: none;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .airline-header {
+    justify-content: center;
+  }
+
+  .details-right {
+    padding-left: 0;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .booking-box {
+    text-align: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+  }
+
+  .arrow-line {
+    font-size: 10px; /* Makes the ASCII arrow smaller for mobile */
+  }
+  
+  .card-right {
+    flex-direction: column; /* Stacks Arrival info and Price button */
+  }
+}
+
+/* --- RESPONSIVE ADDITIONS END HERE --- */
