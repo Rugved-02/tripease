@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 import { CardModule } from 'primeng/card';
 import { DatePickerModule } from 'primeng/datepicker';
 import { ButtonModule } from 'primeng/button';
@@ -23,8 +22,6 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export class Hotels {
   hotelForm!: FormGroup;
-
-  // Added 3 more cards to show 4 total hotels
   availableHotels = [
     { 
       name: 'Grand Plaza Hotel', 
@@ -78,3 +75,85 @@ export class Hotels {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { HotelService } from './hotel.service';
+import { MessageService } from 'primeng/api';
+
+@Component({
+  selector: 'app-hotels',
+  templateUrl: './hotels.html',
+  styleUrls: ['./hotels.css'],
+  providers: [MessageService]
+})
+export class Hotels {
+  hotelForm: FormGroup;
+  availableHotels: any[] = [];
+  loading: boolean = false;
+  submitted: boolean = false;
+
+  constructor(private fb: FormBuilder, private hotelService: HotelService) {
+    this.hotelForm = this.fb.group({
+      destination: ['', [Validators.required, Validators.minLength(3)]],
+      checkin: [null, Validators.required],
+      checkout: [null, Validators.required]
+    }, { validators: this.dateLessThan('checkin', 'checkout') });
+  }
+
+  // Custom Validator for Date Range
+  dateLessThan(from: string, to: string) {
+    return (group: AbstractControl): ValidationErrors | null => {
+      const start = group.get(from)?.value;
+      const end = group.get(to)?.value;
+      return start && end && start >= end ? { dateRange: true } : null;
+    };
+  }
+
+  searchHotels() {
+    this.submitted = true;
+    if (this.hotelForm.invalid) return;
+
+    this.loading = true;
+    const { destination } = this.hotelForm.value;
+
+    this.hotelService.searchHotels(destination).subscribe({
+      next: (data) => {
+        this.availableHotels = data;
+        this.loading = false;
+      },
+      error: () => this.loading = false
+    });
+  }
+}*/
+
+//Hotel.service
+
+// import { Injectable } from '@angular/core';
+// import { HttpClient, HttpParams } from '@angular/common/http';
+// import { Observable, delay } from 'rxjs';
+
+// @Injectable({ providedIn: 'root' })
+// export class HotelService {
+//   private apiUrl = 'http://localhost:3000/hotels';
+
+//   constructor(private http: HttpClient) {}
+
+//   searchHotels(location: string): Observable<any[]> {
+//     // JSON Server allows filtering using query params (e.g., ?location=Dubai)
+//     const params = new HttpParams().set('location_like', location); 
+//     return this.http.get<any[]>(this.apiUrl, { params }).pipe(delay(800)); // Added delay to simulate network
+//   }
+// }

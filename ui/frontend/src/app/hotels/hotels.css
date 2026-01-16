@@ -5,12 +5,12 @@
 }
 
 h1 { 
-  color: #1e40af;
+  color: #0a42f8;
    margin-left: 100px; 
    font-weight: 800; 
   }
 h4 { 
-  color: #64748b;
+  color: #424a56;
    margin-left: 100px;
     margin-bottom: 2rem; 
   }
@@ -126,29 +126,27 @@ h4 {
 }
 :host ::ng-deep button[pbutton].p-button {
     width: 100% !important;
-    margin-top: 2rem !important; /* Adjust this value for more/less space */
+    margin-top: 2rem !important; 
     background-color: #000 !important;
     border: none !important;
-    display: flex !important;   /* Ensures width 100% is respected */
-    justify-content: center;    /* Keeps the "Search" text centered */
+    display: flex !important;   
+    justify-content: center;   
 }
  
-/* Optional: Targets the icon and label inside to ensure they look right */
+
 :host ::ng-deep button[pbutton].p-button .p-button-label {
     flex: none !important;
 }
 
-/* Targets the background of the datepicker input fields */
+
 :host ::ng-deep .p-datepicker .p-inputtext {
-  background-color: #f1f5f9 !important; /* This matches your Destination input color */
+  background-color: #f1f5f9 !important; 
   border: none !important;
-  color: #334155 !important; /* Dark text for readability */
-  padding: 0.75rem !important; /* Adjust padding to match other inputs */
+  color: #334155 !important; 
+  padding: 0.75rem !important; 
   border-radius: 6px !important;
   width: 100%;
 }
-
-/* Optional: Change background on focus/click */
 :host ::ng-deep .p-datepicker .p-inputtext:focus {
   background-color: #e2e8f0 !important;
   outline: none;

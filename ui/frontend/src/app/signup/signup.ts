@@ -8,6 +8,8 @@ import {
   AbstractControl, 
   ValidationErrors 
 } from '@angular/forms';
+import { Auth } from '../services/auth'; 
+import { Router, RouterLink } from '@angular/router'; // 1. Added RouterLink here
 
 // PrimeNG Modules
 import { InputTextModule } from 'primeng/inputtext';
@@ -31,7 +33,8 @@ import { DividerModule } from 'primeng/divider';
     CheckboxModule, 
     ToastModule,
     CardModule,
-    DividerModule
+    DividerModule,
+    RouterLink // 2. Added RouterLink here
   ],
   providers: [MessageService],
   templateUrl: './signup.html',
@@ -40,67 +43,65 @@ import { DividerModule } from 'primeng/divider';
 export class Signup {
   signupForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService) {
+  constructor(
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private authService: Auth, 
+    private router: Router
+  ) {
     this.signupForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      // Pattern for a standard 10-digit format
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       password: ['', [
         Validators.required, 
-        // Requires 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$')
       ]],
       confirmPassword: ['', Validators.required],
       terms: [false, Validators.requiredTrue]
     }, { 
-      // This validator checks if password and confirmPassword match
       validators: this.passwordMatchValidator 
     });
   }
 
-  
   get f() { 
     return this.signupForm.controls; 
   }
 
-  
+  // 3. Navigation method (Alternative to using routerLink in HTML)
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
+
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirm = control.get('confirmPassword')?.value;
-    
-    if (password !== confirm) {
-      
-      return { passwordMismatch: true };
-    }
-    return null;
+    return password !== confirm ? { passwordMismatch: true } : null;
   }
 
-  
   submit() {
     if (this.signupForm.invalid) {
-      // Highlights all errors if the user tries to submit too early
       this.signupForm.markAllAsTouched();
-      
       this.messageService.add({
-        severity: 'warn', // Using 'warn' for a distinct color (usually orange)
+        severity: 'warn',
         summary: 'Form Incomplete', 
         detail: 'Please fill in all required fields correctly.',
         life: 3000
       });
-      return;
+    } else {
+      const formData = this.signupForm.value;
+      this.authService.register(formData);
+
+      this.messageService.add({
+        severity: 'success', 
+        summary: 'Account Created', 
+        detail: 'Welcome to TripEase! Redirecting to login...',
+        life: 2000
+      });
+
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 2000);
     }
-
-    
-    console.log('Form Submitted successfully:', this.signupForm.value);
-    
-    this.messageService.add({
-      severity: 'success', 
-      summary: 'Account Created', 
-      detail: 'Welcome to TripEase! Redirecting...',
-      life: 3000
-    });
-
-    
   }
 }

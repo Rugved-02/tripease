@@ -13,10 +13,7 @@ import { ToastModule } from 'primeng/toast';
   ],
   template: `
     <p-toast></p-toast>
-    <nav>
-      <a routerLink="/" routerLinkActive="active">Signup</a>
-      <a routerLink="/hotels" routerLinkActive="active">Hotels</a>
-    </nav>
+    
     <router-outlet></router-outlet>
   `
 })

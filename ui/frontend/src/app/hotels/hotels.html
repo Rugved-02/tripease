@@ -1,7 +1,6 @@
 <div id="body" ngSkipHydration>
   <h1>Reserve The Hotel</h1>
   <h4>Find the perfect place to stay</h4>
-
   <p-card class="search-card">
     <form [formGroup]="hotelForm" (ngSubmit)="searchHotels()">
       <div class="form-row">
@@ -93,80 +92,47 @@
     </div>
   </div>
 </div> 
+ 
 
-<!-- <div id="body" ngSkipHydration> 
+ <!-- <div id="body">
   <h1>Reserve The Hotel</h1>
-  <h4>Find the perfect place to stay</h4>
-
   <p-card class="search-card">
     <form [formGroup]="hotelForm" (ngSubmit)="searchHotels()">
       <div class="form-row">
         <div class="form-group">
-          <label for="destination" class="label-with-icon">
-            <i class="pi pi-map-marker small-icon"></i>
-            <span>Destination</span>
-          </label>
-          <input id="destination" type="text" pInputText placeholder="Enter city or location name" formControlName="destination" class="custom-input" />
+          <label>Destination</label>
+          <input pInputText formControlName="destination" 
+                 [class.ng-invalid]="submitted && hotelForm.get('destination')?.invalid" />
+          <small class="p-error" *ngIf="submitted && hotelForm.get('destination')?.errors?.['required']">
+            Location is required.
+          </small>
         </div>
 
         <div class="form-group">
-          <label for="checkin" class="label-with-icon">
-            <i class="pi pi-calendar small-icon"></i>
-            <span>Check-in</span>
-          </label>
-          <p-datepicker id="checkin" formControlName="checkin" dateFormat="dd-mm-yy" [showIcon]="true" [appendTo]="'body'" placeholder="dd-mm-yyyy"></p-datepicker>
+          <label>Check-in</label>
+          <p-datepicker formControlName="checkin" dateFormat="dd-mm-yy" [showIcon]="true"></p-datepicker>
         </div>
 
         <div class="form-group">
-          <label for="checkout" class="label-with-icon">
-            <i class="pi pi-calendar small-icon"></i>
-            <span>Check-out</span>
-          </label>
-          <p-datepicker id="checkout" formControlName="checkout" dateFormat="dd-mm-yy" [showIcon]="true" [appendTo]="'body'" placeholder="dd-mm-yyyy"></p-datepicker>
+          <label>Check-out</label>
+          <p-datepicker formControlName="checkout" dateFormat="dd-mm-yy" [showIcon]="true"></p-datepicker>
+          <small class="p-error" *ngIf="submitted && hotelForm.errors?.['dateRange']">
+            Check-out must be after Check-in.
+          </small>
         </div>
-      </div> 
-
-      <div class="button-container">
-        <button pButton type="submit" icon="pi pi-search" label="Search Hotels" styleClass="full-width-black-btn"></button>
       </div>
+
+      <button pButton type="submit" [loading]="loading" label="Search Hotels"></button>
     </form>
   </p-card>
 
-  <div class="available-section">
-    <h2 class="results-header">Available Hotels ({{availableHotels.length}})</h2>
-    
-    <div *ngFor="let hotel of availableHotels" class="hotel-card-wrapper">
-      <p-card styleClass="hotel-result-card">
-        <div class="card-content">
-          <div class="image-section">
-            <img [src]="hotel.image" [alt]="hotel.name">
-            <span class="rooms-left">{{hotel.roomsLeft}} rooms left</span>
-          </div>
-
-          <div class="details-section">
-            <div class="details-header">
-              <div>
-                <h2 class="hotel-title">{{hotel.name}}</h2>
-                <p class="location-text">📍 {{hotel.location}}</p>
-              </div>
-              <div class="rating-box">
-                <span class="stars">⭐⭐⭐⭐⭐</span>
-                <span class="rating-score"><strong>{{hotel.rating}}</strong> ({{hotel.reviews}} reviews)</span>
-              </div>
+  <div class="available-section" *ngIf="!loading">
+    <div *ngIf="availableHotels.length > 0; else noResults">
+        <div *ngFor="let hotel of availableHotels" class="hotel-card-wrapper">
             </div>
-            <div class="amenities-row">
-              <span>📶 WiFi</span> <span>🏊 Pool</span> <span>💆 Spa</span> <span>🍴 Restaurant</span> <span>🏋️ Gym</span>
-            </div>
-            <div class="footer-row">
-              <div class="price-container">
-                <p class="price-label">Starting from</p>
-                <h3 class="price-value">${{hotel.price}}<span>/night</span></h3>
-              </div>
-              <p-button label="Reserve Now" styleClass="reserve-btn"></p-button>
-            </div>
-          </div>
-        </div>
-      </p-card>
     </div>
+    <ng-template #noResults>
+      <div *ngIf="submitted" class="text-center">No hotels found for "{{hotelForm.value.destination}}"</div>
+    </ng-template>
   </div>
 </div> -->
