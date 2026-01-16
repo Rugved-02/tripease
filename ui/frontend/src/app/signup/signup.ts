@@ -69,7 +69,7 @@ export class Signup {
   }
 
   // 3. Navigation method (Alternative to using routerLink in HTML)
-  goToLogin() {
+  login() {
     this.router.navigate(['/login']);
   }
 
