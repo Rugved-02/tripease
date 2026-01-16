@@ -237,8 +237,16 @@
   }
   
   .card-right {
-    flex-direction: column; /* Stacks Arrival info and Price button */
+    flex-direction: column; 
   }
 }
+:host ::ng-deep .p-toast-message {
+    background: white !important;
+    color: black !important;
+    font-weight: bold;
+}
 
-/* --- RESPONSIVE ADDITIONS END HERE --- */
+
+:host ::ng-deep .p-toast-message .p-toast-message-content * {
+    color: black !important;
+}

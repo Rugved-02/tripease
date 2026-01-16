@@ -120,8 +120,7 @@ export class FlightBookingComponent implements OnInit {
   onBook() {
     this.messageService.add({
       severity: 'success', 
-      summary: 'Confirmed', 
-      detail: 'Flight added to booking',
+      detail: 'Flight added to booking!',
       life: 3000
     });
   }
