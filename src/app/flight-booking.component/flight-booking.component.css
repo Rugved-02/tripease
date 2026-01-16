@@ -1,16 +1,15 @@
+/* 1. Global & Wrapper Styles */
 .page-wrapper {
-  padding:0 150px;
+  padding: 0 10%; /* Using percentage for better initial scaling */
   background-color: #f1f6ff;
   min-height: 100vh;
-  font-family: sans-serif;
-  
+  font-family: 'Inter', sans-serif;
 }
 
-/* Exact Royal Blue from Image */
 .main-title {
   color: #2b63e8; 
   font-size: 40px;
-  font-weight: bolder;
+  font-weight: 800;
   margin-bottom: 4px;
 }
 
@@ -19,6 +18,7 @@
   margin-bottom: 30px;
 }
 
+/* 2. Search Box Section */
 .search-box {
   background: white;
   padding: 25px;
@@ -36,12 +36,11 @@
 
 .field label {
   display: block;
-  font-weight: bolder;
+  font-weight: 700;
   margin-bottom: 8px;
   font-size: 14px;
 }
 
-/* Normal HTML/CSS Input Styles */
 .custom-input {
   width: 100%;
   padding: 12px;
@@ -51,28 +50,33 @@
   font-size: 14px;
 }
 
-.date-picker {
-  cursor: pointer;
-}
-
 .search-btn {
   width: 100%;
-  padding: 15px;
+  padding: 12px;
   background: #0d1117;
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
-  height: 40px;
+  transition: opacity 0.2s;
 }
 
+.search-btn:hover {
+  opacity: 0.9;
+}
+
+/* 3. Filter Row */
 .filter-row {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 30px;
-  font-weight: bolder;
+}
+
+.filter-text {
+  font-weight: 700;
+  color: #4a5568;
 }
 
 .filter-row button {
@@ -81,172 +85,121 @@
   border: 1px solid #e2e8f0;
   background: white;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .filter-row button.active {
   background: #0d1117;
   color: white;
+  border-color: #0d1117;
 }
 
-/* Flight Cards */
-.flight-card {
-  background: white;
-  border-radius: 6px;
-  padding: 20px;
+/* 4. Flight Cards */
+.avail-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.card { 
+  background: white; 
+  border-radius: 12px; 
+  padding: 24px; 
+  margin-bottom: 20px;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03); 
+  border: 1px solid #f1f5f9;
+}
+
+.card-left, .card-center, .card-right {
+  flex: 1;
+}
+
+/* Card - Left (Airline & Icon) */
+.airline-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.blue-icon { 
+  background: linear-gradient(135deg, #4e79ff, #6b46ff);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name-box h3 { margin: 0; font-size: 18px; font-weight: 700; }
+.class-pill { background: #0f172a; color: white; font-size: 10px; padding: 4px 10px; border-radius: 4px; }
+
+.seats-left { font-size: 12px; color: #64748b; margin-top: 10px; }
+
+/* Card - Center (Track/Duration) */
+.card-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.track-info { color: #94a3b8; font-size: 12px; }
+.arrow-line { color: #cbd5e1; margin: 4px 0; font-weight: bold; }
+
+/* Card - Right (Time & Booking) */
+.card-right {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
 
-.airline-info { display: flex; align-items: center; gap: 15px; flex: 1; }
-.logo-box { width: 65px; height: 65px; background: #e2e8f0; border-radius: 10px; display: grid; place-items: center; }
-.badge { background: #0d1117; color: white; padding: 4px 12px; border-radius: 2px; font-size: 12px; margin-left: 10px;}
+.details-right { text-align: right; }
+.time-bold { font-size: 18px; font-weight: 700; margin: 2px 0; }
+.city-gray, .label-txt { color: #64748b; font-size: 13px; margin: 0; }
 
-.journey-info { flex: 2; display: flex; justify-content: center; align-items: center; gap: 30px; text-align: center;}
-.divider { color: #cbd5e1; }
+.booking-box { text-align: right; margin-left: 20px; }
+.price-big { font-size: 26px; font-weight: 800; color: #2b63e8; margin: 0; }
+.book-now-btn { background: #000; color: #fff; padding: 10px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; margin-top: 5px; }
 
-.price-tag { font-size: 30px; font-weight: bold; color: #2b63e8; margin-right: 20px; }
-.book-btn { background: #2b63e8; color: white; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; }
-
-/* Customizing PrimeNG Select width */
+/* 5. PrimeNG Overrides */
 :host ::ng-deep .prime-select-custom {
   width: 100%;
   border-radius: 8px;
   background: #f8fafc !important;
 }
-.wrapper { padding: 40px; background: #f8fbff; min-height: 100vh; font-family: 'Inter', sans-serif; }
-.brand-title { color: #2b63e8; font-weight: 800; font-size: 32px; margin: 0; }
-.brand-sub { color: #64748b; margin-top: 5px; }
 
-/* Search Area */
-.search-section { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-top: 20px; }
-.input-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
-.col label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
-.col input { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; background: #f8fafc; }
-.black-search-btn { width: 100%; background: #0f172a; color: white; padding: 12px; border: none; border-radius: 6px; cursor: pointer; }
-
-/* Filter Area */
-.filter-row { display: flex; align-items: center; gap: 10px; margin: 25px 0; }
-.filter-row button { border: 1px solid #e2e8f0; background: white; padding: 6px 15px; border-radius: 6px; cursor: pointer; }
-.filter-row button.active { background: #0f172a; color: white; border-color: #0f172a; }
-.avail-title { font-size: 20px; font-weight: 700; margin-bottom: 15px; }
-
-/* Card Layout */
-.card { 
-  background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px;
-  display: flex; justify-content: space-between; align-items: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.03); border: 1px solid #f1f5f9;
-}
-
-.card-left { flex: 1; text-align: left; }
-.card-center { flex: 1; display: flex; flex-direction: column; align-items: center; }
-.card-right { flex: 1; display: flex; justify-content: space-between; align-items: flex-end; }
-
-/* Left Elements */
-.airline-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
-.blue-icon { 
-  background:linear-gradient(135deg, #4e79ff, #6b46ff);
-  /* height: 60px; */
-  /* display: flex; */
-  text-align: center;
-  border-radius: 10px;
-  width: fit-content; color: #2b63e8; 
-  padding: 13px
- }
-  .blue-icon svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.name-box h3 { margin: 0; font-size: 20px; }
-.class-pill { background: #0f172a; color: white; font-size: 10px; padding: 5px 10px; border-radius: 6px; margin-left: 1px; }
-.seats-left { font-size: 12px; color: #64748b; margin-top: 15px; }
-
-/* Center Elements */
-.track-info { text-align: center; color: #94a3b8; font-size: 12px; }
-.arrow-line { color: #cbd5e1; margin: 8px 0; letter-spacing: -2px; }
-
-/* Right Elements */
-.details-right { text-align: right; padding-left: 20px; }
-.time-bold { font-size: 18px; font-weight: 700; margin: 4px 0; }
-.city-gray { color: #64748b; font-size: 14px; margin: 0; }
-.label-txt { font-size: 12px; color: #94a3b8; margin: 0; }
-
-/* Pricing & Black Button */
-.booking-box { text-align: right; }
-.price-big { font-size: 28px; font-weight: 800; color: #2b63e8; margin: 0; }
-.per-person { font-size: 12px; color: #64748b; margin: 0 0 10px 0; }
-.book-now-btn { background: #000000; color: #ffffff; padding: 10px 24px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
-
-/* --- RESPONSIVE ADDITIONS START HERE --- */
-
-/* For Tablets (Screens smaller than 1024px) */
-@media screen and (max-width: 1024px) {
-  .page-wrapper {
-    padding: 0 20px; /* Reduces side spacing */
-  }
-}
-
-/* For Mobile Phones (Screens smaller than 768px) */
-@media screen and (max-width: 768px) {
-  .main-title {
-    font-size: 28px; /* Shrinks title so it doesn't wrap weirdly */
-  }
-
-  .filter-row {
-    flex-wrap: wrap; /* Allows filter buttons to wrap to a second line */
-    justify-content: flex-start;
-  }
-
-  .card {
-    flex-direction: column; /* Stacks the Flight Card vertically */
-    align-items: stretch;
-    gap: 20px;
-    text-align: center;
-  }
-
-  .card-left, .card-center, .card-right {
-    flex: none;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  .airline-header {
-    justify-content: center;
-  }
-
-  .details-right {
-    padding-left: 0;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .booking-box {
-    text-align: center;
-    border-top: 1px solid #f1f5f9;
-    padding-top: 15px;
-  }
-
-  .arrow-line {
-    font-size: 10px; /* Makes the ASCII arrow smaller for mobile */
-  }
-  
-  .card-right {
-    flex-direction: column; 
-  }
-}
 :host ::ng-deep .p-toast-message {
-    background: white !important;
-    color: black !important;
-    font-weight: bold;
+  background: white !important;
+  color: black !important;
 }
 
+/* 6. Responsive Design */
+@media screen and (max-width: 1024px) {
+  .page-wrapper { padding: 0 40px; }
+}
 
-:host ::ng-deep .p-toast-message .p-toast-message-content * {
-    color: black !important;
+@media screen and (max-width: 768px) {
+  .page-wrapper { padding: 0 20px; }
+  .main-title { font-size: 28px; }
+  
+  .card {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .card-right {
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+  }
+
+  .booking-box, .details-right {
+    text-align: center;
+    margin: 0;
+  }
 }
