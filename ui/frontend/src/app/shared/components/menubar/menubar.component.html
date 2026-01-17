@@ -55,33 +55,34 @@
         <a routerLink="/homepage"><p>TripEase</p></a>
       </div>
 
-      @if(dark){
+      <!-- @if(dark){
       <i class="pi pi-sun" label="Toggle Dark Mode" (click)="toggleDarkMode()"></i>
       } @else{
       <i class="pi pi-moon" label="Toggle Dark Mode" (click)="toggleDarkMode()"></i>
-      }
+      } -->
     </ng-template>
 
     <ng-template #end>
       <div class="card flex flex-col items-center gap-4">
         <div class="flex flex-wrap gap-4 justify-center">
           <p-button
-            severity="secondary"
+            [style]="loginButtonStyle"
             label="LogIn"
             icon="pi pi-sign-in"
             iconPos="right"
-            [rounded]="true"
-            [raised]="true"
+            [rounded]="false"
+            [raised]="false"
             size="small"
             (click)="directLogin()"
             [dt]=""
           ></p-button
           >&nbsp;&nbsp;
           <p-button
-            label="Register"
+            [style]="signUpButtonStyle"
+            label="Sign Up"
             icon="pi pi-user-plus"
             iconPos="right"
-            [rounded]="true"
+            [rounded]="false"
             [raised]="true"
             size="small"
             (click)="directRegister()"

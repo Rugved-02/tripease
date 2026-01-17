@@ -1,7 +1,7 @@
 /* Footer */
 .p-card {
-  background: var(--p-primary-950);
-  color: var(--p-surface-100);
+  background: var(--p-primary-1000);
+  color: var(--p-slate-400);
   padding: 50px 10% 0px;
   border-radius: 0px;
 }
@@ -29,15 +29,15 @@
 }
 
 .footer-col li:hover {
-  color: #3b82f6;
+  color: var(--p-primary-0);
 }
 
 .footer-bottom {
-  border-top: 1.5px solid var(--p-primary-200);
+  border-top: 1.5px solid var(--p-slate-800);
   padding-top: 10px;
   text-align: center;
   font-size: 0.9rem;
 }
 .footer-bottom p{
-    color: var(--p-surface-0);
+    color: var(--p-slate-500);
 }

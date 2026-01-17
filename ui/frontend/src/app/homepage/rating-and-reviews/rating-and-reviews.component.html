@@ -1,0 +1,27 @@
+
+<p-card header="">
+  <div class="card-content-wrapper">
+    @for (item of ratingReviewDataSanitized(); track $index) {
+    <div class="review-container">
+      <div class="icon-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="var(--p-primary-700)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          [innerHTML]="item.icon"
+        >
+          <!-- icon html from ts through [[innerHTML]=""] -->
+        </svg>
+      </div>
+      <h2>{{ item.headingData }}</h2>
+      <p>{{ item.headingAbout }}</p>
+    </div>
+    }
+  </div>
+</p-card>

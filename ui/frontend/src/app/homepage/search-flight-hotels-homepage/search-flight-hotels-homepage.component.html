@@ -1,85 +1,98 @@
-<!-- <p>search-flight-hotels-homepage.component works!</p> -->
-<div class="card">
-  <p-tabs value="0">
-    <p-tablist>
-      <p-tab value="0">Flights</p-tab>
-      <p-tab value="1">Hotels</p-tab>
-    </p-tablist>
-    <p-tabpanels>
-      <p-tabpanel value="0">
-        <p-toast />
-        <div class="card flex justify-center main-card">
-          <form
-            [formGroup]="exampleForm"
-            (ngSubmit)="onSubmit()"
-            class="flex flex-col gap-6 w-full"
-          >
-            <div class="input-row">
-              <div class="flex flex-col gap-1 input-field">
-                <label for="fromCity" class="font-medium">From</label>
-                <input pInputText id="fromCity" formControlName="fromCity" fluid="true" />
-                @if (isInvalid('fromCity')) {
-                <p-message severity="error" size="small" variant="simple">Required</p-message>
-                }
-              </div>
+<div class="tab-container">
+  <p-selectButton 
+    [options]="stateOptions" 
+    [(ngModel)]="selectedTab" 
+    optionLabel="label" 
+    optionValue="value" 
+    [allowEmpty]="false" 
+    fluid="true">
+  </p-selectButton>
 
-              <div class="flex flex-col gap-1 input-field">
-                <label for="toCity" class="font-medium">To</label>
-                <input pInputText id="toCity" formControlName="toCity" fluid="true" />
-              </div>
-
-              <div class="flex flex-col gap-1 input-field">
-                <label for="dateTravel" class="font-medium">Date</label>
-                <p-datepicker
-                  id="dateTravel"
-                  formControlName="selectedDate"
-                  [showIcon]="true"
-                  fluid="true"
-                  ngSkipHydration
-                />
-              </div>
-            </div>
-
-            <button pButton severity="secondary" type="submit" class="w-full py-3">
-              <span pButtonLabel class="w-full">Submit</span>
-            </button>
-          </form>
-        </div>
-      </p-tabpanel>
-      <p-tabpanel value="1">
-        <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 w-full">
+  <div class="content-area">
+    <!-- For FLIGHTS -->
+    <div *ngIf="selectedTab === 'flights'">
+      <p-toast />
+      <div class="main-card">
+        <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()">
+          
           <div class="input-row">
-            <div class="flex flex-col gap-1 input-field">
-              <label for="toCity" class="font-medium">To</label>
-              <input pInputText id="toCity" formControlName="toCity" fluid="true" />
+            <div class="input-field">
+              <label style-input-label-text for="fromCity">
+                <i style-input-label-icon class="pi pi-map-marker"></i>From
+              </label>
+              <input pInputText style-input-field id="fromCity" formControlName="fromCity" placeholder="Enter City or Airport" fluid="true" />
+              
+              @if (isInvalid('fromCity')) {
+                <p-message severity="error" size="small" variant="simple">Required</p-message>
+              }
             </div>
 
-            <div class="flex flex-col gap-1 input-field">
-              <label for="dateTravel" class="font-medium">Date</label>
-              <p-datepicker
-                id="dateTravel"
-                formControlName="selectedDate"
-                [showIcon]="true"
-                fluid="true"
-                ngSkipHydration
-              />
+            <div class="input-field">
+              <label style-input-label-text for="toCity">
+                <i style-input-label-icon class="pi pi-map-marker"></i>To
+              </label>
+              <input pInputText style-input-field id="toCity" formControlName="toCity" placeholder="Enter Destination" fluid="true" />
+            </div>
+
+            <div class="input-field">
+              <label style-input-label-text for="dateFlightTravel">
+                <i style-input-label-icon class="pi pi-calendar"></i>Date
+              </label>
+              <p-datepicker 
+                id="dateFlightTravel" 
+                class="style-date-picker"
+                formControlName="selectedDate" 
+                [showIcon]="false" 
+                fluid="true" 
+                placeholder="MM/DD/YYYY"
+                ngSkipHydration />
             </div>
           </div>
 
-          <button pButton severity="secondary" type="submit" class="w-full py-3">
-            <span pButtonLabel class="w-full">Submit</span>
+          <button pButton severity="secondary" type="submit">
+            <span pButtonLabel>
+              <i style-search-button-icon class="pi pi-search"></i>Search Flights
+            </span>
           </button>
+
         </form>
-      </p-tabpanel>
-      <p-tabpanel value="2">
-        <p class="m-0">
-          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-          voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-          cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id
-          est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam
-          libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-        </p>
-      </p-tabpanel>
-    </p-tabpanels>
-  </p-tabs>
+      </div>
+    </div>
+
+    <!-- For HOTELS -->
+    <div *ngIf="selectedTab === 'hotels'">
+      <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()">
+        
+        <div class="input-row">
+          <div class="input-field">
+            <label style-input-label-text for="toCity">
+              <i style-input-label-icon class="pi pi-map-marker"></i>To
+            </label>
+            <input pInputText style-input-field id="toCity" formControlName="toCity" placeholder="Enter City or Airport" fluid="true" />
+          </div>
+
+          <div class="input-field">
+            <label style-input-label-text for="dateHotelTravel">
+              <i style-input-label-icon class="pi pi-calendar"></i>Date
+            </label>
+            <p-datepicker 
+              id="dateHotelTravel" 
+              class="style-date-picker"
+              formControlName="selectedDate" 
+              [showIcon]="false" 
+                fluid="true" 
+                placeholder="MM/DD/YYYY"
+              ngSkipHydration />
+          </div>
+        </div>
+
+        <button pButton severity="secondary" type="submit">
+          <span pButtonLabel>
+            <i style-search-button-icon class="pi pi-search"></i>Search Hotels
+          </span>
+        </button>
+
+      </form>
+    </div>
+  </div>
 </div>

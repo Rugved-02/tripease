@@ -2,7 +2,7 @@
 .p-panel{
   border-radius: 0px;
   border: 0px;
-
+  background: var(--p-slate-50);
   padding: 0px 70px 50px;
 }
 
@@ -38,21 +38,39 @@
   /* width: 100%; */
   /* border: 0px solid #f1f5f9; */
   border-radius: 12px;
-  text-align: center;
+  /* width: 99%; */
+  /* text-align: center; */
+  margin-bottom: 10px;
   transition: all 0.3s ease;
+  
+  border: 2px solid var(--p-primary-0);
 }
 
 .p-card:hover {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
   transform: translateY(-5px);
+  border: 2px solid var(--p-surface-100);
 }
 
 .card-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
+  /* font-size: 3rem;
+  margin-bottom: 20px; */
+  background: linear-gradient(to bottom right, var(--p-primary-700), var(--p-indigo-500));
+  border-radius: 12px;
+  padding: 10px;
+  /* max-width: 50px; */
+  line-height: 0;
+  width: fit-content;
+  text-align: center;
 }
 
 .p-card h3 {
   margin-bottom: 15px;
-  color: var(--p-primary-800);
+  color: var(--p-primary-1000);
+}
+
+.p-card p{
+  text-align: left;
+  color: var(--p-primary-1100);
+  /* padding: 0px 5px; */
 }

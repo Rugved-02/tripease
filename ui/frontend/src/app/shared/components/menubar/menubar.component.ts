@@ -67,14 +67,37 @@ export class MenubarComponent implements OnInit {
         this.router.navigate(['/register']);
     }
 
-    toggleDarkMode() {
-        const element = document.querySelector('html');
-        // console.log(element);
-        if (element != null) {
-            element.classList.toggle('p-dark');
-            this.dark = !this.dark;
-        }
-    }
+
+    loginButtonStyle = { '--p-button-primary-background': 'var(--p-primary-0)',
+              	'--p-button-border-radius':'10px',
+                '--p-button-sm-font-size':'0.7rem',
+                '--p-button-primary-color':'var(--p-primary-1000)',
+                '--p-button-primary-hover-background':'var(--p-primary-1050)',
+                '--p-button-primary-hover-color':'var(--p-primary-1000)',
+                '--p-button-primary-border-color':'var(--p-primary-0)',
+                '--p-button-primary-hover-border-color':'var(--p-primary-0)',
+                '--p-button-primary-active-border-color':'var(--p-primary-0)'
+             };
+
+             
+    signUpButtonStyle = { '--p-button-primary-background': 'var(--p-primary-1000)',
+              	'--p-button-border-radius':'10px',
+                '--p-button-sm-font-size':'0.7rem',
+                '--p-button-primary-hover-background':'var(--p-primary-1000)',
+                '--p-button-primary-border-color':'var(--p-primary-1000)',
+                '--p-button-primary-hover-border-color':'var(--p-primary-1000)',
+                '--p-button-primary-active-border-color':'var(--p-primary-1000)'
+             };
+
+    // toggleDarkMode() {
+    //     const element = document.querySelector('html');
+    //     if (element != null) {
+    //         element.classList.toggle('p-dark');
+    //         this.dark = !this.dark;
+    //     }
+    // }
+
+
     // customDesignTokenButton = {
     //     menubar: {
     //         // The main container tokens are nested under 'root'
@@ -110,4 +133,23 @@ export class MenubarComponent implements OnInit {
     //         }
     //     }
     // };
+
+    // loginButtonDT = {
+    //     borderRadius: '10px',
+    //     sm:{
+    //         fontSize:'0.7rem'
+    //     },
+    //     primary: {
+    //         color: 'var(--p-surface-1000)',
+    //         hoverColor:'var(--p-surface-1000)',
+    //         background: 'var(--p-surface-0)',
+    //         hoverBackground: '#0000001a',
+    //         borderColor:'var(--p-surface-0)',
+    //         hoverBorderColor:'var(--p-surface-0)',
+    //         activeBorderColor:'var(--p-surface-0)'
+            
+
+    //     }
+    // }
 }
+

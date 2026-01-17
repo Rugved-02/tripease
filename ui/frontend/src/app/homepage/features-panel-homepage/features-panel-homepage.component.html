@@ -3,9 +3,21 @@
     <h2 class="panel-title">Everything You Need</h2>
     <p class="panel-title-description">All-in-one platform for seamless travel planning</p>
   <div class="card-container">
-    @for (item of dataFeaturesPanel(); track $index) {
+    @for (item of sanitizedFeatures(); track $index) {
       <p-card>
-      <div class="card-icon">{{item.icon}}</div>
+      <div class="card-icon"><svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  width="24" 
+  height="24" 
+  viewBox="0 0 24 24" 
+  fill="none" 
+  stroke="white" 
+  stroke-width="2" 
+  stroke-linecap="round" 
+  stroke-linejoin="round"
+  [innerHTML]="item.icon"
+>
+</svg></div>
       <h3>{{item.title}}</h3>
       <p>{{item.description}}</p>
     </p-card>

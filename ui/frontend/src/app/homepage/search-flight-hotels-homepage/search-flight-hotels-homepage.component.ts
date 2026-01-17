@@ -7,16 +7,24 @@ import { ToastModule } from 'primeng/toast';
 import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { DatePickerModule } from 'primeng/datepicker';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SelectButton } from 'primeng/selectbutton';
+import { FormBuilder,FormsModule, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search-flight-hotels-homepage',
-  imports: [DatePickerModule, ReactiveFormsModule, InputTextModule, ButtonModule, ToastModule, MessageModule, TabsModule, CommonModule],
+  imports: [FormsModule,SelectButton,DatePickerModule, ReactiveFormsModule, InputTextModule, ButtonModule, ToastModule, MessageModule, TabsModule, CommonModule],
   providers: [MessageService],
   templateUrl: './search-flight-hotels-homepage.component.html',
   styleUrl: './search-flight-hotels-homepage.component.css',
 })
 export class SearchFlightHotelsHomepageComponent {
+
+  stateOptions: any[] = [
+    { label: 'Flights', value: 'flights' },
+    { label: 'Hotels', value: 'hotels' }
+  ];
+
+  selectedTab: string = 'flights';
 
   exampleForm: FormGroup = new FormGroup({
     fromCity: new FormControl('', Validators.required),

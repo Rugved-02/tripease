@@ -22,6 +22,8 @@
 }
 
 
+
+
 /* --- Your Existing Styling (Kept & Refined) --- */
 
 .air-icon {
@@ -33,7 +35,7 @@
   margin-right: 5px;
   transition: all 0.3s ease;
   cursor: pointer;
-  color: #ffffff; 
+  color: var(--p-primary-0); 
   background: linear-gradient(90deg, var(--p-violet-800) 0%, var(--p-blue-700) 100%);
 }
 
