@@ -11,10 +11,19 @@
                     <div class="icon-container" [ngClass]="stat.colorClass">
                         <mat-icon>{{stat.icon}}</mat-icon>
                     </div>
-                    <div class="trend-container">
-                        <mat-icon class="trend-icon">trending_up</mat-icon>
-                        <span>{{stat.trend}}</span>
+                  
+                    <div class="trend-container" 
+                        [ngClass]="stat.trend.startsWith('+') ? 'trend-positive' : 'trend-negative'">
+                        
+                        <mat-icon class="trend-icon">
+                            {{ stat.trend.startsWith('+') ? 'trending_up' : 'trending_down' }}
+                        </mat-icon>
+                        
+                        <span>{{ stat.trend }}</span>
                     </div>
+                    
+
+
                     </div>
 
                     <div class="card-body">

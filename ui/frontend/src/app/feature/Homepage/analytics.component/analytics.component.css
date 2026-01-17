@@ -54,7 +54,7 @@
   display: flex;
   justify-content: space-between; /* Keeps icon and trend on one line, pushed apart */
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
 }
 
 .icon-container {
@@ -80,6 +80,7 @@
   margin: 0;
   color: #121212;
   letter-spacing: -1px;
+  margin-bottom: 1.8rem;
 }
 
 .card-footer p {
@@ -90,10 +91,17 @@
 }
 
 /* 6. Growth/Trend Section */
+.trend-positive {
+    color: #22c55e; /* Green */
+}
+
+.trend-negative {
+    color: #ef4444; /* Red */
+}
+
 .trend-container {
   display: flex;
   align-items: center;
-  color: #00c853; 
   font-weight: 600;
   font-size: 0.9rem;
 }

@@ -15,7 +15,7 @@ export class AuthService {
           // password:string='password';
           
           private user:User[]=[ ];
-          // {email:'user@gmail.com',password:'password'},
+          
 
 
           checkAuth(inputemail:string,inputpass:string):boolean{
