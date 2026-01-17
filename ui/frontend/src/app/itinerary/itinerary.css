@@ -1,145 +1,132 @@
+/* =========================================
+   1. GLOBAL LAYOUT & PAGE HEADER
+   ========================================= */
 .container {
   width: 100%;
-  margin: 0;
-  padding: 2rem;
-  font-family: 'Inter', sans-serif;
-  background-color: #f8fafc;
+  padding: 3rem 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f8fafc; /* Slate-50 background */
   min-height: 100vh;
   box-sizing: border-box;
 }
- 
+
 .inside-container {
-  width: 85%;
+  width: 90%;
   margin: auto;
-  max-width: 1200px;
+  max-width: 1100px;
 }
- 
- 
+
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
 }
- 
+
 .page-header h1 {
-  color: #3b82f6 !important; /* Bright Blue to match the screenshot */
-    font-size: 2rem !important;
-    font-weight: 800 !important; /* Extra Bold */
-    margin: 0 0 0.5rem 0 !important; /* Small gap below the title */
-    letter-spacing: -0.02rem;
+  color: #4338ca !important; /* Indigo-700 (TripEase Blue) */
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 1rem 0 !important;
+  letter-spacing: -0.03rem;
 }
- 
+
 .page-header p {
-  color: #64748b !important; /* Muted Grey color */
-    font-size: 1rem !important;
-    margin: 0 !important;
-    font-weight: 400 !important;
+  color: #64748b !important; /* Slate-500 */
+  font-size: 1.1rem !important;
+  margin: 0 !important;
+  font-weight: 500;
 }
- 
+
 /* =========================================
    2. BUTTONS & BADGES
    ========================================= */
- 
-/* BLACK BUTTONS (Sign Up, Create New, Download PDF) */
-.create-btn,
 .black-button {
-    background-color: #0f172a !important; /* Dark Black/Blue */
-    color: #ffffff !important;
-    border: 1px solid #0f172a !important;
-    border-radius: 6px !important;
-    padding: 0.8rem 1.2rem !important;
-    font-weight: 600 !important;
-    font-size: 0.95rem !important;
-    cursor: pointer !important;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    transition: background-color 0.2s;
+  background-color: #0f172a !important; /* Slate-900 */
+  color: #ffffff !important;
+  border: 1px solid #0f172a !important;
+  border-radius: 10px !important;
+  padding: 0.8rem 1.5rem !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
- 
-.create-btn:hover,
+
 .black-button:hover {
-    background-color: #1e293b !important;
+  background-color: #1e293b !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
- 
-/* ACTIVITY BADGE (e.g., "3 Activities") */
+
 .activity-badge {
-    background-color: #dbeafe; /* Light Blue BG */
-    color: #2563eb;           /* Dark Blue Text */
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;     /* Pill shape */
-    font-size: 0.85rem;
-    font-weight: 600;
+  background-color: #e0e7ff; /* Indigo-100 */
+  color: #4338ca;            /* Indigo-700 */
+  padding: 0.4rem 1rem;
+  border-radius: 99px;       /* Pill shape */
+  font-size: 0.85rem;
+  font-weight: 700;
 }
- 
+
 /* =========================================
    3. ITINERARY CARD
    ========================================= */
 .itinerary-card {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  padding: 2rem;
-  border: 1px solid #e2e8f0;
+  border-radius: 20px; /* Smooth large radius */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  padding: 3rem;
+  border: 1px solid #f1f5f9;
+  margin-bottom: 3rem;
 }
- 
-/* Header inside the white card */
+
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
- 
+
 .card-header h2 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #0f172a;
   font-weight: 700;
+  letter-spacing: -0.02em;
 }
- 
+
 .date-range {
   color: #64748b;
   margin-top: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
- 
+
 /* =========================================
-   4. TIMELINE STRUCTURE (FIXED)
+   4. TIMELINE CUSTOMIZATION (Exact Look)
    ========================================= */
- 
-/* 1. HIDE the empty left-side column */
-::ng-deep .p-timeline-left .p-timeline-event-opposite {
-  flex: 0 !important;
-  padding: 0 !important;
+/* Hide the left side of the timeline to make it single-column */
+::ng-deep .p-timeline-event-opposite {
   display: none !important;
 }
- 
-/* 2. FORCE the content (cards) to take FULL width */
-::ng-deep .p-timeline-left .p-timeline-event-content {
-  flex: 1 1 auto !important;
-  width: 100% !important;
-  padding-bottom: 1.5rem; /* Space between rows */
+
+/* Adjust content spacing */
+::ng-deep .p-timeline-event-content {
+  padding-bottom: 2rem !important;
+  padding-left: 1.5rem !important;
+  width: 100%;
 }
- 
-/* 3. ADD the Vertical Connecting Line */
+
+/* The vertical connecting line */
 ::ng-deep .p-timeline-event-connector {
-    background-color: #e2e8f0 !important; /* Light grey line */
-    width: 2px !important;
+  background-color: #e2e8f0 !important;
+  width: 3px !important;
 }
- 
-/* 4. ADJUST the spacing for the separator */
-::ng-deep .p-timeline-event-separator {
-    flex: 0 0 auto !important;
-    margin-right: 1.5rem !important; /* Gap between line and card */
-}
- 
-/* 5. CUSTOM MARKER (The Circle Icon) */
+
+/* The Circle Marker */
 .custom-marker {
   display: flex;
   width: 3rem;
@@ -150,214 +137,194 @@
   color: white;
   z-index: 10;
   position: relative;
-  /* Adds a white ring around the circle so it stands out from the line */
-  box-shadow: 0 0 0 4px #ffffff;
+  /* KEY FIX: This white shadow creates the 'gap' between the line and the circle */
+  box-shadow: 0 0 0 8px #ffffff; 
 }
- 
+
 /* =========================================
-   5. EVENT BOX & CLOCK STYLING
+   5. EVENT BOX (The Activity Card)
    ========================================= */
- 
-/* The White Box containing Flight/Hotel details */
 .event-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 1.8rem 2rem !important;
-  background: white;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  padding: 1.75rem 2rem !important;
+  background: #ffffff;
   width: 100%;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
 }
- 
+
+/* Hover effect to make it pop like the screenshot */
+.event-box:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
 .event-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  display: flex;
+  flex-direction: column;
 }
- 
-/* --- CLOCK ICON STYLING --- */
-/* Matches the screenshot of the clock you uploaded */
+
 .event-time {
-  color: #94a3b8; /* Light Grey Text */
-  font-size: 0.85rem;
-  font-weight: 500;
-  display: flex;      
+  color: #64748b; /* Muted slate */
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;         /* Space between Icon and Text */
+  gap: 0.5rem;
   margin-bottom: 0.25rem;
 }
- 
-/* Ensure the clock icon is the right size and color */
-.event-time i {
-    font-size: 0.95rem;
-    color: #94a3b8;
-}
- 
-/* Event Title (e.g., Flight Departure) */
+
 .event-details h3 {
-  margin: 5px 0;
-  font-size: 1.35rem !important; /* Increased from 1.1rem */
+  margin: 0.25rem 0;
+  font-size: 1.35rem !important;
   color: #0f172a;
-  font-weight: 800 !important;    /* Extra Bold */
-  letter-spacing: -0.02em;        /* Slight tightening for modern look */
+  font-weight: 700 !important; /* Extra Bold matches screenshot */
 }
- 
-/* Event Subtitle (e.g., Departure from JFK) */
-.event-time {
+
+.event-details p {
+  margin: 0;
   color: #64748b;
-  font-size: 0.95rem !important; /* Increased from 0.85rem */
-  font-weight: 500;
-  display: flex;      
-  align-items: center;
-  gap: 0.5rem;        
-  margin-bottom: 0.5rem;
+  font-size: 1rem;
 }
- 
-/* Edit Button */
-::ng-deep .p-button.p-button-text.edit-btn {
-    color: #0f172a !important;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
+
+/* The 'Edit' Text Link */
+.edit-link-btn {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  text-decoration: none;
+  font-size: 0.95rem !important;
+  padding: 0.5rem !important;
 }
- 
+
+.edit-link-btn:hover {
+  background: transparent !important;
+  text-decoration: underline !important;
+}
+
 /* =========================================
    6. CARD FOOTER
    ========================================= */
-/* --- FOOTER BUTTONS FIX --- */
- 
 .card-footer {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  padding-top: 2rem !important;
-  border-top: 1px solid #e2e8f0;
-  margin-top: 1.5rem;
+  gap: 1.5rem;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid #f1f5f9;
+  margin-top: 0.5rem;
 }
- 
-/* Common style for ALL buttons (Height & Width) */
+
+/* Make buttons equal width and chunky */
 .card-footer button {
-    flex: 1; /* Makes all 3 buttons equal width */
-    padding: 1rem 0 !important; /* Increases HEIGHT */
-    font-size: 0.95rem !important;
-    font-weight: 600 !important;
-    border-radius: 6px !important;
-    cursor: pointer;
-    transition: background-color 0.2s; /* Smooth transition */
-    
-}
- 
-/* 1. "View Details" - White with Border */
-.card-footer button:nth-child(1) {
-    background-color: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    color: #0f172a !important;
-}
- 
-/* HOVER EFFECT for Button 1 (Light Gray) */
-.card-footer button:nth-child(1):hover {
-    background-color: #f1f5f9 !important; /* Changes to Light Gray on hover */
-}
- 
- 
-/* 2. "Share Itinerary" - White with Border (Same as above) */
-.card-footer button:nth-child(2) {
-    background-color: #ffffff !important; /* changed to WHITE */
-    border: 1px solid #e2e8f0 !important;
-    color: #0f172a !important;
-}
- 
-/* HOVER EFFECT for Button 2 (Light Gray) */
-.card-footer button:nth-child(2):hover {
-    background-color: #f1f5f9 !important; /* Changes to Light Gray on hover */
-}
- 
-/* 3. "Download PDF" - Black (Solid) */
-.card-footer button:nth-child(3) {
-    background-color: #0f172a !important;
-    border: 1px solid #0f172a !important;
-    color: #ffffff !important;
-}
- 
-/* HOVER EFFECT for Button 3 (Stays Dark) */
-.card-footer button:nth-child(3):hover {
-    background-color: #1e293b !important; /* Slightly lighter black/blue */
-}
- 
- 
-/* =========================================
-   7. NAVBAR (From previous request)
-   ========================================= */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 3rem;
-  background-color: white;
-  border-bottom: 1px solid #e2e8f0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
- 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: #4338ca;
-}
- 
-.logo-icon {
-  background-color: #4338ca;
-  color: white;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-}
- 
-.nav-center {
-  display: flex;
-  gap: 2rem;
-}
- 
-.nav-link {
-  text-decoration: none;
-  color: #64748b;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: color 0.2s;
-}
- 
-.nav-link:hover, .nav-link.active {
-  color: #2563eb;
-}
- 
-.nav-link.active {
-  background-color: #3b82f6;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-}
- 
-.nav-link.active i {
-  color: white;
-}
- 
-.login-btn {
-  color: #0f172a !important;
+  flex: 1; 
+  padding: 1rem 0 !important;
+  font-size: 1rem !important;
   font-weight: 600 !important;
+  border-radius: 10px !important;
 }
- 
-.small-btn {
-    padding: 0.5rem 1rem !important;
-    font-size: 0.85rem !important;
+
+/* White Buttons (View Details, Share) */
+.p-button-outlined.p-button-secondary {
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+.p-button-outlined.p-button-secondary:hover {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* =========================================
+   7. DIALOG STYLES
+   ========================================= */
+/* ::ng-deep .p-dialog .p-dialog-header {
+  border-bottom: 1px solid #f1f5f9;
+  padding: 1.5rem;
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+  padding: 2rem;
+}
+
+::ng-deep .p-dialog {
+  border-radius: 16px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+} */
+
+
+/* Color & Variable Definitions */
+/* Container & Layout */
+/* Dialog Layout */
+::ng-deep .p-dialog {
+  border-radius: 12px !important;
+}
+
+::ng-deep .p-dialog .p-dialog-header {
+  border-bottom: 1px solid #f1f5f9;
+  padding: 1.5rem;
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+  padding: 1.5rem 2rem !important;
+}
+
+/* Input Field Refinement */
+::ng-deep .p-inputtext {
+  width: 100%;
+  padding: 0.75rem 1rem !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  font-size: 0.95rem;
+  color: #1f2937;
+  background: #ffffff;
+}
+
+/* Specific Input Widths */
+input[formControlName="time"] {
+  width: 100px !important;
+  text-align: center;
+}
+
+/* Activity Row Styling */
+.surface-ground {
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 10px !important;
+  padding: 1.25rem !important;
+}
+
+/* Primary "Save/Update" Button */
+.black-button {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem;
+}
+
+/* Text Buttons (Add Another / Cancel) */
+::ng-deep .p-button-text {
+  color: #4b5563 !important;
+  font-weight: 500 !important;
+}
+
+/* Trash/Danger Button */
+::ng-deep .p-button-danger.p-button-text {
+  color: #dc2626 !important;
+}
+
+/* Form Spacing */
+.gap-4 { gap: 1.5rem !important; }
+.gap-2 { gap: 0.5rem !important; }
+
+hr {
+  border: 0;
+  border-top: 1px solid #f1f5f9;
+  margin: 0.5rem 0;
 }
