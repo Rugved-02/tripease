@@ -8,7 +8,7 @@ import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
-import { AuthService } from '../../../../core/services/auth/auth-service';
+import { AuthService } from '../../../core/services/auth/auth-service';
 import { MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RouterLink } from '@angular/router';
@@ -91,8 +91,8 @@ export class LoginComponent implements OnInit {
        }
     }
 
-    register(){
-      this.router.navigate(['/register'])
+    signup(){
+      this.router.navigate(['/signup'])
      }
     toggleDark(){
       const element = document.querySelector('html');

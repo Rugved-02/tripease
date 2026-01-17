@@ -1,41 +1,54 @@
 import { Injectable } from '@angular/core';
 
-export interface User{
-  email:string;
-  password:string;
+// Renamed from User to UserCredentials for clarity
+export interface UserCredentials {
+  email: string;
+  password: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-
-
 export class AuthService {
-          // username:string='user';
-          // password:string='password';
-          
-          private user:User[]=[ ];
-          
 
+  private userRegistry: UserCredentials[] = [];
+  private currentUser:string | null = null;
 
-          checkAuth(inputemail:string,inputpass:string):boolean{
-            // if(this.username==user && this.password==pass){
-            //   return true;
-            // }
-            // else{
-            //   return false;
-            // }
-            console.log("searching for",inputemail,inputpass);
-            console.log("In database",this.user);
-            return this.user.some(user =>
-              user.email === inputemail && user.password === inputpass 
-            );
-          }
+  /*
+   * Validates if the provided credentials exist in the registry.
+   */
+  checkAuth(inputEmail: string, inputPass: string): boolean {
+    console.log("Searching for:", inputEmail);
+    console.log("Current registry state:", this.userRegistry);
 
-          addUser(newUser: User) {
-          this.user.push(newUser);
-          console.log("Current user list",this.user);
-          }
+    const authenticatedAccount = this.userRegistry.find(account => 
+      account.email === inputEmail && account.password === inputPass
+    );
 
+    if (authenticatedAccount) {
+      // Set the class property to the email of the found user
+      this.currentUser = authenticatedAccount.email;
+      console.log("Login successful for:", this.currentUser);
+      return true;
+    } else {
+      this.currentUser = null; // Clear if login fails
+      return false;
+    }
+  }
 
+  /**
+   * Adds a new set of credentials to the internal registry.
+   */
+  addUser(newAccount: UserCredentials): void {
+    this.userRegistry.push(newAccount);
+    console.log("User successfully added. Total users:", this.userRegistry.length);
+  }
+
+  isLoggedIn(){
+    console.log("service is loggedIn");
+    if(this.currentUser === null){
+      return false;
+    }
+    return true;
+  }
 }

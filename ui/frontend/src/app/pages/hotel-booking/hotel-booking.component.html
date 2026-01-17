@@ -1,0 +1,111 @@
+<div id="body" ngSkipHydration>
+  <h1>Reserve The Hotel</h1>
+  <h4>Find the perfect place to stay</h4>
+  
+  <p-card class="search-card">
+    <form [formGroup]="hotelForm" (keyup)="searchHotels()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="destination" class="label-with-icon">
+            <i class="pi pi-map-marker small-icon"></i>
+            <span>Destination</span>
+          </label>
+          <input
+            id="destination"
+            type="text"
+            pInputText
+            placeholder="Try 'Dubai' or 'London'"
+            formControlName="destination"
+            class="custom-input"
+          />
+        </div>
+        
+
+        <div class="form-group">
+          <label for="checkin" class="label-with-icon">
+            <i class="pi pi-calendar small-icon"></i>
+            <span>Check-in</span>
+          </label>
+          <p-datepicker
+            id="checkin"
+            formControlName="checkin"
+            dateFormat="dd-mm-yy"
+            [showIcon]="true"
+            placeholder="dd-mm-yyyy"
+          ></p-datepicker>
+        </div>
+
+        <div class="form-group">
+          <label for="checkout" class="label-with-icon">
+            <i class="pi pi-calendar small-icon"></i>
+            <span>Check-out</span>
+          </label>
+          <p-datepicker
+            id="checkout"
+            formControlName="checkout"
+            dateFormat="dd-mm-yy"
+            [showIcon]="true"
+            placeholder="dd-mm-yyyy"
+          ></p-datepicker>
+        </div>
+      </div> 
+
+      <button pButton type="submit" icon="pi pi-search" label="Search Hotels"></button>
+    </form>
+  </p-card>
+
+  <div class="available-section">
+    <div *ngIf="availableHotels.length > 0; else noResults">
+      <h2 class="results-header">Available Hotels ({{availableHotels.length}})</h2>
+      
+      <div *ngFor="let hotel of availableHotels" class="hotel-card-wrapper">
+        <p-card styleClass="hotel-result-card">
+          <div class="card-content">
+            <div class="image-section">
+              <img [src]="hotel.image" [alt]="hotel.name">
+              <span class="rooms-left">{{hotel.roomsLeft}} rooms left</span>
+            </div>
+
+            <div class="details-section">
+              <div class="details-header">
+                <div>
+                  <h2 class="hotel-title">{{hotel.name}}</h2>
+                  <p class="location-text"><i class="pi pi-map-marker small-icon"></i> {{hotel.location}}</p>
+                </div>
+                <div class="rating-box">
+                  <span class="stars">
+                    <i *ngFor="let s of getStars(hotel.stars)" class="pi pi-star-fill" style="color: #fbbf24; margin-right: 2px;"></i>
+                    <i *ngFor="let s of getStars(5 - hotel.stars)" class="pi pi-star" style="color: #cbd5e1; margin-right: 2px;"></i>
+                  </span>
+                  <span class="rating-score">
+                    <strong>{{hotel.rating}}</strong> ({{hotel.reviews}} reviews)
+                  </span>
+                </div>
+              </div>
+
+              <div class="amenities-row">
+                <span>📶 WiFi</span> <span>🏊 Pool</span> <span>💆 Spa</span> <span>🍴 Restaurant</span> <span>🏋️ Gym</span>
+              </div>
+
+              <div class="footer-row">
+                <div class="price-container">
+                  <p class="price-label">Starting from</p>
+                  <h3 class="price-value">${{hotel.price}}<span>/night</span></h3>
+                </div>
+                <p-button label="Book Now" styleClass="reserve-btn" (click)="onBook(hotel)"></p-button>
+              </div>
+            </div>
+          </div>
+        </p-card>
+      </div>
+    </div>
+
+    <ng-template #noResults>
+      <div class="no-results-box">
+        <i class="pi pi-search" style="font-size: 3rem; color: #cbd5e1;"></i>
+        <h2>No Hotels Found</h2>
+        <p>We couldn't find any hotels matching your search. Try another destination.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

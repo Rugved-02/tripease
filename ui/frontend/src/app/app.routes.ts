@@ -10,21 +10,56 @@ import { FeaturesPanelHomepageComponent } from './homepage/features-panel-homepa
 import { PaymentComponent } from './payment/payment.component';
 import { CardPaymentMethodComponent } from './payment/card-payment-method.component/card-payment-method.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { LoginComponent } from './pages/auth/login/login/login.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { SignupComponent } from './pages/auth/signup/signup.component';
+import { FlightBookingComponent } from './pages/flight-booking/flight-booking.component';
+import { HotelBookingComponent } from './pages/hotel-booking/hotel-booking.component';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { ItineraryPlanningComponent } from './pages/itinerary-planning/itinerary-planning.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { authGuard } from './core/guards/auth/auth-guard';
 
 export const routes: Routes = [
-  { path:'', redirectTo:"homepage", pathMatch:'full'},
-  // { path:'register',component:Register},
-  { path:'login',component:LoginComponent},
-//   { path: 'homepage', component: Homepage },
-  { path: 'menubar', component: MenubarComponent },
-  { path: 'aboutUs', component: AboutUs },
-  { path: 'searchFlightHomepage', component: SearchFlightHotelsHomepageComponent },
-  { path: 'footer', component: FooterComponent },
-  { path: 'featuresPanelHomepage', component: FeaturesPanelHomepageComponent },
-  { path: 'payment', component: PaymentComponent },
-  { path: 'cardPaymentMethod', component: CardPaymentMethodComponent },
-  { path: '', component: MainLayoutComponent, children:[{
-    path: 'homepage', component:Homepage    
-  }] }
+  { path: '', redirectTo: 'homepage', pathMatch: 'full' },
+  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent },
+  
+  {
+    path: '',
+    component: MainLayoutComponent,
+    children: [
+      {
+        path: 'homepage',
+        component: Homepage,
+      },
+      {
+        path: 'bookFlight',
+        component: FlightBookingComponent,
+      },
+      {
+        path: 'bookHotel',
+        component: HotelBookingComponent,
+      },
+      {
+        path: 'analytics',
+        component: AnalyticsComponent,
+        canActivate:[authGuard]
+      },
+      {
+        path: 'itineraryPlanning',
+        component: ItineraryPlanningComponent,
+        canActivate:[authGuard]
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate:[authGuard]
+      },
+      {
+        path: 'payment',
+        component: PaymentComponent,
+        canActivate:[authGuard]
+      },
+    ],
+  },
 ];

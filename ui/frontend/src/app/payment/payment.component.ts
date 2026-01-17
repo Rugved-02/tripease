@@ -1,17 +1,42 @@
 import { CurrencyPipe, NgIf, NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { MenubarComponent } from "../shared/components/menubar/menubar.component";
 import { CardPaymentMethodComponent } from "./card-payment-method.component/card-payment-method.component";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
-  imports: [CardModule, CurrencyPipe, FormsModule, NgIf, MenubarComponent, NgClass, CardPaymentMethodComponent],
+  imports: [CardModule, CurrencyPipe, FormsModule, NgIf, CardPaymentMethodComponent],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css',
 })
-export class PaymentComponent {
+export class PaymentComponent implements OnInit {
+
+  private route = inject(ActivatedRoute);
+
+  bookingId:string = "";
+  serviceFee:number = 0.00;
+    taxes:number = 0.00;
+  processingFee:number = 0.00;
+
+  totalFee:number = 0.00;
+
+  ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    this.bookingId = params['id'];
+    this.serviceFee = params['price'];
+    console.log(params['flightNo']);    
+    console.log(params['price']); 
+  });
+  this.taxes = this.serviceFee * 0.10;
+   this.processingFee = this.serviceFee * 0.03;
+
+  this.totalFee = Number(this.serviceFee) +Number(this.taxes)+Number(this.processingFee);
+  console.log(this.serviceFee +this.taxes+this.processingFee);
+  console.log(this.totalFee);
+}
 
   paymentMethod:PaymentMethod[] =[
     { icon:'pi pi-credit-card', methodInitial:'card', methodName:'Credit/Debit Card'},
@@ -19,12 +44,8 @@ export class PaymentComponent {
     { icon:'pi pi-building-columns', methodInitial:'bank', methodName:'Bank Transfer'},
   ];
   
-  bookingId:string = "FL001";
-  serviceFee:number = 350.00;
-  taxes:number = 52.50;
-  processingFee:number = 7.50;
+  
 
-  totalFee:number = this.serviceFee+this.taxes+this.processingFee;
 
   selectedMethod: string = 'card';
 
@@ -35,6 +56,7 @@ export class PaymentComponent {
     expiry: '',
     cvv: ''
   };
+
 
   selectMethod(method: string): void {
     this.selectedMethod = method;
@@ -51,3 +73,4 @@ export interface PaymentMethod {
   methodInitial:string;
   methodName:string;
 }
+

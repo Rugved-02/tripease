@@ -10,6 +10,8 @@
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 0px;
+  min-height: 1.5em;
+  align-content: center;
   /* color: var(--p-primary-700); */
   background-image: linear-gradient(to right, var(--p-blue-800), var(--p-violet-700));
     -webkit-background-clip: text;

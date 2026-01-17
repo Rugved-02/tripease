@@ -9,8 +9,10 @@
 .hero-title {
   font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive size */
   font-weight: 800;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   color: var(--p-primary-0);
+  min-height: 1.5em;
+  align-content: center;
   /* background: linear-gradient(90deg, var(--p-indigo-800), var(--p-indigo-500)); 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -51,6 +53,7 @@
 .p-card{
   border-radius: 0px;
   padding-bottom: 50px;
+  height: 90vh;
   background: linear-gradient(to bottom right, var(--p-primary-700), var(--p-violet-800));
    /* background: linear-gradient(to bottom right, var(--p-blue-700), var(--p-violet-800)); */
   /* background: linear-gradient(90deg, var(--p-violet-800) 0%, var(--p-blue-700) 100%); */

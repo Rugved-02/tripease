@@ -63,8 +63,35 @@
     </ng-template>
 
     <ng-template #end>
-      <div class="card flex flex-col items-center gap-4">
-        <div class="flex flex-wrap gap-4 justify-center">
+      @if(isLoggedIn()){
+        <div class="profile-wrapper">
+      <button class="round-btn" (click)="toggleProfileMenu()">P</button>
+
+      <!-- DROPDOWN -->
+      <div class="profile-menu" *ngIf="showProfileMenu">
+        <div class="menu-item">
+          <i class="pi pi-user"></i>
+          Dashboard
+        </div>
+        <div class="menu-item">
+          <i class="pi pi-calendar"></i>
+          My Trips
+        </div>
+        <div class="menu-item">
+          <i class="pi pi-chart-bar"></i>
+          Analytics
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item logout">
+          <i class="pi pi-sign-out"></i>
+          Log out
+        </div>
+      </div>
+    </div>
+      }
+      @else {
+        <div>
+        <div>
           <p-button
             [style]="loginButtonStyle"
             label="LogIn"
@@ -85,11 +112,13 @@
             [rounded]="false"
             [raised]="true"
             size="small"
-            (click)="directRegister()"
+            (click)="directSignup()"
           />
-          <div class="card flex justify-center gap-4"></div>
+          <div></div>
         </div>
       </div>
+      }
+      
     </ng-template>
   </p-menubar>
 </div>

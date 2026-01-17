@@ -1,0 +1,93 @@
+<div class="screen">
+    <div class="analytics-container">
+        <h1>Analytics Dashboard</h1>
+        <p>Monitor your business performance and trends</p>
+
+        <div class="cards">
+            @for(stat of dashboardStats;track stat){
+                <p-card >
+                    <div class="card-header">
+                    <div class="icon-container" [ngClass]="stat.colorClass">
+                        <mat-icon>{{stat.icon}}</mat-icon>
+                    </div>
+                  
+                    <div class="trend-container" 
+                        [ngClass]="stat.trend.startsWith('+') ? 'trend-positive' : 'trend-negative'">
+                        
+                        <mat-icon class="trend-icon">
+                            {{ stat.trend.startsWith('+') ? 'trending_up' : 'trending_down' }}
+                        </mat-icon>
+                        
+                        <span>{{ stat.trend }}</span>
+                    </div>
+                    
+
+
+                    </div>
+
+                    <div class="card-body">
+                    <h1>{{stat.value}}</h1>
+                    </div>
+
+                    <div class="card-footer">
+                    <p>{{stat.label}}</p>
+                    </div>
+                </p-card>
+            }
+
+        </div>
+
+
+        <div class="charts-grid">
+            <p-card class="chart-card">
+            <h3><mat-icon style="color: #22c55e;">attach_money</mat-icon> Revenue Trend</h3>
+            <p-chart type="line" [data]="lineData"></p-chart>
+            </p-card>
+
+            <!-- <p-card class="chart-card">
+            <h3><mat-icon style="color: #3b82f6;">shopping_bag</mat-icon> Bookings Distribution</h3>
+            <p-chart type="pie" [data]="pieData"></p-chart>
+            </p-card> -->
+            <p-card class="chart-card">
+                <div class="chart-title">
+                    <mat-icon style="color: #2979ff;">shopping_bag</mat-icon>
+                    Bookings Distribution
+                </div>
+                <div class="chart-container">
+                    <p-chart type="pie" [data]="pieData" [options]="pieOptions" height="280px"></p-chart>
+                </div>
+            </p-card>
+
+        </div>
+
+        <div class="full-width-chart">
+            <p-card>
+                <div class="chart-title">
+                <mat-icon style="color: #6366f1;">group</mat-icon>
+                Customer Growth
+                </div>
+                <p-chart type="bar" [data]="barData" [options]="barOptions" height="350px"></p-chart>
+            </p-card>
+        </div>
+        <div class="summary-grid">
+            <p-card class="summary-card peak-season">
+                <p class="summary-label">Peak Booking Season</p>
+                <h1 class="summary-value">Summer</h1>
+                <p class="summary-footer">June - August shows highest bookings</p>
+            </p-card>
+
+            <p-card class="summary-card avg-value">
+                <p class="summary-label">Average Booking Value</p>
+                <h1 class="summary-value">$542</h1>
+                <p class="summary-footer">15% increase from last quarter</p>
+            </p-card>
+
+            <p-card class="summary-card retention">
+                <p class="summary-label">Customer Retention</p>
+                <h1 class="summary-value">87%</h1>
+                <p class="summary-footer">Customers return for repeat bookings</p>
+            </p-card>
+        </div>
+
+    </div>
+</div>

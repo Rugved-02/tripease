@@ -1,0 +1,250 @@
+.analytics-container{
+  width: 85%;
+  
+}
+
+
+.screen {
+  background-color: #f3f7fa; /* Light grey/blue background like the screenshot */
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.analytics-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 2. Page Header Styling */
+.analytics-container h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.analytics-container p {
+  color: #64748b;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+/* 3. Stats Cards Grid (Top Row) */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Overriding PrimeNG default card styling */
+:host ::ng-deep .p-card {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+:host ::ng-deep .p-card-body {
+  padding: 1.5rem;
+}
+
+/* 4. Card Internal Elements */
+.card-header {
+  display: flex;
+  justify-content: space-between; /* Keeps icon and trend on one line, pushed apart */
+  align-items: center;
+  margin-bottom: 1.8rem;
+}
+
+.icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* Icon Colors from Screenshot */
+.revenue-bg { background-color: #00c853; } 
+.customers-bg { background-color: #2979ff; } 
+.flights-bg { background-color: #6161ff; } 
+.hotels-bg { background-color: #a033ff; }
+
+/* 5. Typography */
+.card-body h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0;
+  color: #121212;
+  letter-spacing: -1px;
+  margin-bottom: 1.8rem;
+}
+
+.card-footer p {
+  color: #707e94;
+  font-size: 0.95rem;
+  margin-top: 8px;
+  font-weight: 400;
+}
+
+/* 6. Growth/Trend Section */
+.trend-positive {
+    color: #22c55e; /* Green */
+}
+
+.trend-negative {
+    color: #ef4444; /* Red */
+}
+
+.trend-container {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.trend-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+}
+
+/* 7. Charts Grid Section */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  align-items: stretch;
+}
+
+.chart-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Fix for Material Icons rendering */
+mat-icon {
+  display: inline-flex !important;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; 
+}
+
+
+.full-width-chart {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+/* Titles inside the chart cards */
+.chart-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2rem;
+}
+
+/* Ensure the chart takes up the full container width */
+:host ::ng-deep .p-chart {
+  width: 100%;
+}
+
+/* Styling the tooltip (this matches the white box in Screenshot 12) */
+.chart-card {
+  position: relative;
+}
+
+
+/* Layout Containers */
+.screen {
+  background-color: #f3f7fa;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.analytics-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Container for the three bottom cards */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* 1. Global Override for all Summary p-cards */
+:host ::ng-deep .summary-card .p-card {
+  border-radius: 24px !important;
+  border: none !important;
+  height: 100%;
+}
+
+/* 2. Overriding the internal PrimeNG body padding */
+:host ::ng-deep .summary-card .p-card-body {
+  padding: 2.5rem !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+}
+
+/* 3. Specific Background Colors */
+/* No space between .summary-card and the color class because they are on the same element */
+:host ::ng-deep .summary-card.peak-season{ background-color: #2979ff !important; } /* Blue */
+:host ::ng-deep .summary-card.avg-value{ background-color: #6161ff !important; } /* Indigo */
+:host ::ng-deep .summary-card.retention{ background-color: #a033ff !important; } /* Purple */
+
+/* 4. Text Content Styling */
+:host ::ng-deep .summary-card.peak-season .summary-label,
+:host ::ng-deep .summary-card.avg-value .summary-label,
+:host ::ng-deep .summary-card.retention .summary-label {
+  font-size: 1.0rem;
+  font-weight: 400;
+  opacity: 0.95;
+  margin: 0 0 1.5rem 0;
+  color: white;
+}
+
+:host ::ng-deep .summary-card.peak-season .summary-value,
+:host ::ng-deep .summary-card.avg-value .summary-value,
+:host ::ng-deep .summary-card.retention .summary-value  {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -1px;
+  color: white;
+}
+
+:host ::ng-deep .summary-card.peak-season .summary-footer,
+:host ::ng-deep .summary-card.avg-value .summary-footer,
+:host ::ng-deep .summary-card.retention .summary-footer  {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin: 2rem 0 0 0;
+  font-weight: 300;
+  color: white;
+}
+
+
+/* Responsive adjustment for mobile */
+@media (max-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
