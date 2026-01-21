@@ -3,12 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { Landing } from './landing/landing';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
-import { Example } from './example/example';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,ButtonModule,Example],
+  imports: [RouterOutlet,ButtonModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

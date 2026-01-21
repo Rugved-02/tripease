@@ -5,7 +5,7 @@ import { Login } from './login/login';
 import { ForgotPasswordComponent } from './forgot-password.component/forgot-password.component';
 import { DashboardComponent } from './dashboard.component/dashboard.component';
 import { FlightBookingComponent } from './flight-booking.component/flight-booking.component';
-import { Example } from './example/example';
+
 
 export const routes: Routes = [
     {path:'',component:Landing},
@@ -14,6 +14,5 @@ export const routes: Routes = [
     {path:'forgotPassword',component:ForgotPasswordComponent},
     {path:'dashboard',component:DashboardComponent},
     {path:'flight-booking',component:FlightBookingComponent
-    },
-    {path:'example',component:Example}
+    }
 ];
