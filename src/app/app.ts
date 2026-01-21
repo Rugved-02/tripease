@@ -3,16 +3,17 @@ import { RouterOutlet } from '@angular/router';
 import { Landing } from './landing/landing';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
-
+import { Example } from './example/example';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,ButtonModule],
+  imports: [RouterOutlet,ButtonModule,Example],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
+
   protected readonly title = signal('frontend');
   dark:boolean=false;
   constructor(private router:Router){}
