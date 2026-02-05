@@ -1,0 +1,98 @@
+<div class="tab-container">
+  <p-selectButton 
+    [options]="stateOptions" 
+    [(ngModel)]="selectedTab" 
+    optionLabel="label" 
+    optionValue="value" 
+    [allowEmpty]="false" 
+    fluid="true">
+  </p-selectButton>
+
+  <div class="content-area">
+    <!-- For FLIGHTS -->
+    <div *ngIf="selectedTab === 'flights'">
+      <p-toast />
+      <div class="main-card">
+        <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()">
+          
+          <div class="input-row">
+            <div class="input-field">
+              <label style-input-label-text for="fromCity">
+                <i style-input-label-icon class="pi pi-map-marker"></i>From
+              </label>
+              <input pInputText style-input-field id="fromCity" formControlName="fromCity" placeholder="Enter City or Airport" fluid="true" />
+              
+              @if (isInvalid('fromCity')) {
+                <p-message severity="error" size="small" variant="simple">Required</p-message>
+              }
+            </div>
+
+            <div class="input-field">
+              <label style-input-label-text for="toCity">
+                <i style-input-label-icon class="pi pi-map-marker"></i>To
+              </label>
+              <input pInputText style-input-field id="toCity" formControlName="toCity" placeholder="Enter Destination" fluid="true" />
+            </div>
+
+            <div class="input-field">
+              <label style-input-label-text for="dateFlightTravel">
+                <i style-input-label-icon class="pi pi-calendar"></i>Date
+              </label>
+              <p-datepicker 
+                id="dateFlightTravel" 
+                class="style-date-picker"
+                formControlName="selectedDate" 
+                [showIcon]="false" 
+                fluid="true" 
+                placeholder="MM/DD/YYYY"
+                ngSkipHydration />
+            </div>
+          </div>
+
+          <button pButton severity="secondary" type="submit">
+            <span pButtonLabel>
+              <i style-search-button-icon class="pi pi-search"></i>Search Flights
+            </span>
+          </button>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- For HOTELS -->
+    <div *ngIf="selectedTab === 'hotels'">
+      <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()">
+        
+        <div class="input-row">
+          <div class="input-field">
+            <label style-input-label-text for="toCity">
+              <i style-input-label-icon class="pi pi-map-marker"></i>To
+            </label>
+            <input pInputText style-input-field id="toCity" formControlName="toCity" placeholder="Enter City or Airport" fluid="true" />
+          </div>
+
+          <div class="input-field">
+            <label style-input-label-text for="dateHotelTravel">
+              <i style-input-label-icon class="pi pi-calendar"></i>Date
+            </label>
+            <p-datepicker 
+              id="dateHotelTravel" 
+              class="style-date-picker"
+              formControlName="selectedDate" 
+              [showIcon]="false" 
+                fluid="true" 
+                placeholder="MM/DD/YYYY"
+              ngSkipHydration />
+          </div>
+        </div>
+
+        <button pButton severity="secondary" type="submit">
+          <span pButtonLabel>
+            <i style-search-button-icon class="pi pi-search"></i>Search Hotels
+          </span>
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+/* .p-tabs{
+    margin: 20px;
+}
+.p-tab{
+    
+    border-radius: 20px;
+    margin: 20px 10px 10px;
+    width: 48.2%;
+    padding: 10px;
+    text-align: center;
+    background: var(--p-primary-300);
+    color: var(--p-primary-900);
+}
+
+.p-tab-active {
+    background: var(--p-primary-700);
+    color: var(--p-surface-100);
+} */
+
+
+.content-area{
+  padding-top: 20px;
+}
+/* Container for the 3 inputs */
+.input-row {
+  display: flex;
+  flex-direction: row; /* Side by side */
+  flex-wrap: wrap;     /* Wrap to next line if screen is narrow */
+  gap: 1.5rem;         /* Space between the inputs */
+  width: 100%;
+}
+
+/* Individual field logic */
+.input-field {
+  flex: 1 1 30%;     /* Grow/Shrink, with a 250px base width */
+  /* min-width: 0; */
+   max-width: 31%;        /*Prevents flex items from overflowing */
+}
+
+/* Ensure the button stays full width and below */
+button[pButton] {
+  width: 100% !important;
+  /* display: flex; */
+  justify-content: center;
+  margin-top: 1rem;
+  background: var(--p-primary-1000);
+  color: var(--p-primary-0);
+}
+button[pButton]:hover{
+  background: color-mix(in srgb, var(--p-primary-1000), transparent 15%);
+  color: var(--p-primary-0);
+}
+
+/* Responsive: If the screen is very small, stack them tightly */
+@media (max-width: 640px) {
+  .input-row {
+    gap: 1rem;
+  }
+  .input-field {
+    flex: 1 1 100%; /* Forces fields to take full width on mobile */
+  }
+}
+
+/* new tab sleect button styling */
+.tab-container{
+  width: 70%;
+  /* max-width: ; */
+  justify-self: center;
+  padding: 22px;
+  background: var(--p-primary-0);
+  border-radius: 15px;
+}
+
+/* search flight and hotels button in form */
+i[style-input-label-icon]{
+  font-size: 1rem;
+  padding: 0px 5px 5px 5px;
+  color: var(--p-primary-1000);
+}
+
+i[style-search-button-icon]{
+  font-size: 0.8rem;
+  padding-right: 15px;
+}
+
+input[style-input-field]{
+  border-color: var(--p-primary-1100);
+  background: #f3f3f3;
+}
+input[style-input-field]::placeholder{
+  color: color-mix(in srgb, var(--p-primary-1000), transparent 50%);
+  font-size: smaller;
+}
+
+label[style-input-label-text]{
+  color: var(--p-primary-1000);
+}
+/* 1. Style the Input Box */
+:host ::ng-deep .style-date-picker .p-inputtext {
+    transition: box-shadow 0.2s;
+    border-color: var(--p-primary-1100);
+  background: #f3f3f3;
+}
+
+:host ::ng-deep .style-date-picker .p-inputtext::placeholder {
+    color: color-mix(in srgb, var(--p-primary-1000), transparent 50%);
+    font-size: smaller;
+}
