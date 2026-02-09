@@ -10,7 +10,7 @@ import { RatingAndReviewsComponent } from "../rating-and-reviews/rating-and-revi
 
 @Component({
   selector: 'app-homepage',
-  imports: [MenubarComponent, ImageModule, TagModule, CardModule, SearchFlightHotelsHomepageComponent, FooterComponent, FeaturesPanelHomepageComponent, RatingAndReviewsComponent],
+  imports: [ImageModule, TagModule, CardModule, SearchFlightHotelsHomepageComponent, FooterComponent, FeaturesPanelHomepageComponent, RatingAndReviewsComponent],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css',
 })

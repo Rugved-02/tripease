@@ -4,94 +4,101 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  /* Syncs with Primary 500 to 700 from your app.config.ts */
-  background: linear-gradient(135deg, var(--p-primary-500) 0%, var(--p-primary-700) 100%);
-}
+  padding: 20px 0px;
+  /* margin: 20px; */
+  background: linear-gradient(to bottom right, var(--gradient-blue) 0%, var(--gradient-purple) 100%);
+   }
 
 /* Main Card */
 .register-card {
   background: #ffffff; 
   width: 430px;
-  padding: 30px;
+  /* padding: 30px; */
   border-radius: 16px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  margin: 20px 0;
+  /* margin: 20px 0; */
 }
 
 /* Header & Typography */
-.logo {
-  font-weight: bold;
-  color: var(--p-primary-500); /* Uses Primary 500 */
-  font-size: 30px;
-  margin-bottom: 10px;
-  text-align: center;
-}
 
+ .logo-text-wrapper{
+  justify-self: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+ }
+h2 {
+  text-align: center;
+  color: var(--p-primary-1000) /* Slightly darker for headings */
+} 
 .subtitle {
-  color: #6b7280;
-  margin-bottom: 20px;
+  color: var(--p-primary-1100);
+  /* margin-bottom: 20px; */
   text-align: center;
   font-size: 16px;
 }
 .p-button{
   background-color: black;
 }
-h2 {
-  margin-left: 60px;
-  color: black /* Slightly darker for headings */
-} 
+
 
 /* Form Elements */
 label {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: #374151;
   display: block;
+    font-weight: 500;
+    color: var(--p-primary-1000);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
 }
 
 #label-icon {
-  margin-right: 8px;
+
+  font-size: 0.8rem;
+  padding: 0px 5px 5px 5px;
+  color: var(--p-primary-1000);
+
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 8px;
+  margin-bottom: 3px;
+
   width: 100%;
 }
 
 /* Input Styles */
-.p-inputtext,
-:host ::ng-deep .p-password input {
-  width: 100% !important;
-  padding: 12px 14px !important;
-  border:none;
-  background-color: rgb(248, 248, 245);
-  transition: border-color 0.2s, box-shadow 0.2s;
+.custom-input, ::ng-deep .p-inputtext {
+  border-color: var(--p-slate-100);
+  background-color: var(--p-slate-100);
+  border: 1px solid var(--p-slate-100);
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--p-primary-1000);
+  font-size: small;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
 }
 
-.p-inputtext:focus,
-:host ::ng-deep .p-password input:focus {
-  border-color: var(--p-primary-500) !important;
-  box-shadow: 0 0 0 2px var(--p-primary-100) !important; /* Glow matches theme */
-  outline: none;
+.custom-input::placeholder, ::ng-deep .p-inputtext::placeholder {
+  color: color-mix(in srgb, var(--p-primary-1000), transparent 50%);
+  /* font-size: smaller; */
 }
+.custom-input:hover, ::ng-deep .p-inputtext:enabled:hover {
+  border: 1px solid var(--p-slate-100);
+}
+.custom-input:focus, ::ng-deep .p-inputtext:enabled:focus {
+  border: 1px solid var(--p-slate-400);
+  box-shadow: 0 0 0 3px var(--p-slate-300);
+}
+
 
 /* Password Reveal Icon Fix */
-:host ::ng-deep .p-password {
-  width: 100% !important;
+
+/* styling the password show icon in password field */
+::ng-deep .p-password-toggle-mask-icon{
+        --p-password-icon-color: var(--p-slate-600);
 }
 
-:host ::ng-deep .p-password-reveal-icon,
-:host ::ng-deep .p-password-hide-icon {
-  position: absolute !important;
-  top: 50% !important;
-  right: 14px !important;
-  transform: translateY(-50%) !important;
-  z-index: 10;
-}
 
 /* Error Handling */
 .error-container {
@@ -105,17 +112,18 @@ label {
   font-size: 13px;
   font-weight: 500;
 }
-::ng-deep .submit-btn{
-  background-color: black;
-  width: 100%;
-  padding: 12px;
-  border: none;
-  color: #ffffff;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  justify-content: center;
-  transition: transform 0.2s;
+
+/*  Primary Create Account Button */
+::ng-deep .signin-btn.p-button {
+    margin-top: 10px;
+    background: black;
+    border: none !important;
+    width: 100%;
+    height: 35px;
+    border-radius: 10px !important;
+    padding: 0.85rem !important;
+    font-weight: 600 !important;
+    color: var(--p-primary-50) !important;
 }
 
 
@@ -166,6 +174,14 @@ label {
   cursor: pointer;
 }
 
+.termsAndCond-link{
+  color: var(--gradient-blue);
+  text-decoration: none;
+}
+.termsAndCond-link:hover{
+  text-decoration: underline;
+}
+
 /* Divider Styling */
 :host ::ng-deep .p-divider {
     --p-divider-border-color: #d1d5db;
@@ -174,20 +190,15 @@ label {
     margin: 15px 0 !important;
 }
 
-/* Sign In Link */
-.signin {
+/* login-card-footer Sign In Link */
+
+.login-card-footer{
   text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-  color: #6b7280;
 }
-
-.signin a {
-  color: var(--p-primary-500);
-  text-decoration: none;
-  font-weight: 600;
+.text-muted{
+  color: var(--p-primary-1100);
 }
-
-.signin a:hover {
-  text-decoration: underline;
+::ng-deep .login-link-btn{
+  font-size: 1rem;
+  color: var(--gradient-blue);
 }

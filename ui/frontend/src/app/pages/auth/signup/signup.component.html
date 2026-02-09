@@ -2,7 +2,9 @@
 <p-toast></p-toast>
 <div class="page">
   <p-card class="register-card">
-    <div class="logo">✈ TripEase</div>
+    <div class="logo-text-wrapper">
+      <app-logo-text></app-logo-text>
+    </div>
     <h2>Create Your Account</h2>
     <p class="subtitle">Start your journey with us today</p>
 
@@ -17,7 +19,7 @@
     id="fullName" 
     type="text" 
     pInputText 
-    placeholder="John Doe" 
+    placeholder="Enter Name" 
     formControlName="fullName" 
     class="custom-input" />
 
@@ -127,13 +129,14 @@
     <p-checkbox 
       formControlName="terms" 
       [binary]="true" 
-      inputId="terms">
+      inputId="terms"
+      inputClass="termsAndCond-checkbox">
     </p-checkbox>
     
     <label for="terms" class="terms-label">
       I agree to the
-      <a href="assets/sample-terms.pdf" target="_blank" class="link">Terms of Service</a> and
-  <a href="assets/sample-privacy.pdf" target="_blank" class="link">Privacy Policy</a>
+      <a href="assets/sample-terms.pdf" target="_blank" class="termsAndCond-link">Terms of Service</a> and
+  <a href="assets/sample-privacy.pdf" target="_blank" class="termsAndCond-link">Privacy Policy</a>
     </label>
   </div>
 
@@ -145,7 +148,7 @@
 </div>
 
       
-      <button pButton type="submit" label="Create Account" class="submit-btn"></button>
+      <p-button type="submit" label="Create Account" styleClass="signin-btn w-full" />
     </form>
 
     
@@ -154,8 +157,9 @@
       Already have an account?
       <a routerLink="/login">Sign in here</a>
       </p>-->
-    <span class="text-muted">Already have an account?</span>
+      <div class="login-card-footer"><span class="text-muted">Already have an account?</span>
     <p-button label="Sign in here" [link]="true" (click)="login()" styleClass="login-link-btn"></p-button>
+    </div>
     
   </p-card>
 </div> 

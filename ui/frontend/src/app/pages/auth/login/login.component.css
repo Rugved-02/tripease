@@ -1,11 +1,10 @@
-/* 1. Main Layout Wrapper - Alignment Kept Exactly as Original */
+/* 1. Main Layout Wrapper */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* Pulls your 135deg Blue-to-Purple gradient from the preset */
-    background: linear-gradient(to bottom right, var(--p-primary-700), var(--p-violet-800));
+  background: linear-gradient(to bottom right, var(--gradient-blue) 0%, var(--gradient-purple) 100%);
     padding: 2rem;
     font-family: 'Inter', sans-serif;
 }
@@ -17,7 +16,7 @@
 /* 2. Login Card & PrimeNG Card Override */
 .login-card {
     width: 100%;
-    max-width: 450px; 
+    max-width: 400px; 
     border-radius: 15px;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -31,41 +30,14 @@
     border: none !important;
 }
 
-
- .brand-header {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    gap: 12px;
-    margin-bottom: 1.5rem;
+.logo-tripease-wrapper{
+    max-width: fit-content;
+    justify-self: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 7%;
 }
 
-.logo-box {
-    background: var(--p-primary-600);
-    color: #ffffff;
-    width: 45px; /* Slightly smaller to match text weight */
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    /* Removed margin-bottom to keep it centered with the text */
-    flex-shrink: 0; 
-    cursor: pointer;
-}
-
-.tripease-heading {
-    margin: 0;
-}
-
-.brand-name {
-    font-size: 1.75rem; /* Increased from 1.0rem for better visibility */
-    font-weight: 800;
-    color: var(--p-primary-600);
-    margin: 0;
-    cursor: pointer;
-    letter-spacing: -0.5px;
-}
 
 .welcome-section {
     text-align: center;
@@ -74,10 +46,14 @@
 }
 
 .welcome-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: var(--p-surface-900);
+    color: var(--p-primary-1000);
     margin-bottom: 0.5rem;
+}
+
+.text-muted{
+    color: var(--p-primary-1100);
 }
 
 /* 4. Form Field Alignment */
@@ -89,13 +65,50 @@
 
 .field-label {
     display: block;
-    font-weight: 600;
-    color: var(--p-surface-950);
-    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--p-primary-1000);
+    margin-bottom: 5px;
     font-size: 0.9rem;
 }
 
-::ng-deep .custom-input {
+/* new chnages to syling input field of form */
+.custom-input, ::ng-deep .p-inputtext {
+  border-color: var(--p-slate-100);
+  background-color: var(--p-slate-100);
+  border: 1px solid var(--p-slate-100);
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--p-primary-1000);
+  font-size: small;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-input::placeholder, ::ng-deep .p-inputtext::placeholder {
+  color: color-mix(in srgb, var(--p-primary-1000), transparent 50%);
+  /* font-size: smaller; */
+}
+.custom-input:hover, ::ng-deep .p-inputtext:enabled:hover {
+  border: 1px solid var(--p-slate-100);
+}
+.custom-input:focus, ::ng-deep .p-inputtext:enabled:focus {
+  border: 1px solid var(--p-slate-400);
+  box-shadow: 0 0 0 3px var(--p-slate-300);
+}
+
+
+/* styling the password show icon in password field */
+::ng-deep .p-password-toggle-mask-icon{
+        --p-password-icon-color: var(--p-slate-600);
+}
+
+i[style-input-label-icon] {
+  font-size: 0.8rem;
+  padding: 0px 5px 5px 5px;
+  color: var(--p-primary-1000);
+}
+
+/* ::ng-deep .custom-input {
     background: var(--p-primary-1050) !important;
     border: 1px solid var(--p-primary-1100) !important;
     border-radius: 10px !important;
@@ -103,7 +116,7 @@
     color: var(--p-primary-1000);
     --p-inputtext-placeholder-color: var(--p-primary-1000);
     width: 100%;
-}
+} */
 
 ::ng-deep .custom-input, 
 ::ng-deep .p-password, 
@@ -154,7 +167,7 @@ small.p-error {
     border-radius: 10px !important;
     padding: 0.85rem !important;
     font-weight: 600 !important;
-    color: #ffffff !important;
+    color: var(--p-primary-50) !important;
 }
 
 

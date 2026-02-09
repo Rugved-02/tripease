@@ -90,7 +90,7 @@
               <div class="footer-row">
                 <div class="price-container">
                   <p class="price-label">Starting from</p>
-                  <h3 class="price-value">${{hotel.price}}<span>/night</span></h3>
+                  <h3 class="price-value">{{hotel.price | currency:'INR'}}<span>/night</span></h3>
                 </div>
                 <p-button label="Book Now" styleClass="reserve-btn" (click)="onBook(hotel)"></p-button>
               </div>

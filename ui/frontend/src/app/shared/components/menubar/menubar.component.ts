@@ -14,6 +14,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { SelectModule } from 'primeng/select';
 import { DesignTokens } from '@primeuix/themes/types';
 import { AuthService } from '../../../core/services/auth/auth-service';
+import { LogoTextComponent } from "../logo-text/logo-text.component";
 
 @Component({
   selector: 'app-menubar-component',
@@ -31,7 +32,8 @@ import { AuthService } from '../../../core/services/auth/auth-service';
     Ripple,
     NgClass,
     NgIf,
-  ],
+    LogoTextComponent
+],
   templateUrl: './menubar.component.html',
   styleUrl: './menubar.component.css',
 })

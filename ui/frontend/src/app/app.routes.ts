@@ -18,11 +18,15 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { ItineraryPlanningComponent } from './pages/itinerary-planning/itinerary-planning.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from './core/guards/auth/auth-guard';
+import { LogoTextComponent } from './shared/components/logo-text/logo-text.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
+
+  // testing path here
+  { path:'logoText', component:LogoTextComponent},
   
   {
     path: '',

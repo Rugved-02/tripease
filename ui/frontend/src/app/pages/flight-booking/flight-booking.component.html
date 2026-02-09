@@ -4,7 +4,7 @@
   <h1 class="main-title">Book Your Flight</h1>
   <p class="subtitle">Find the best flights for your journey</p>
 
-  <div class="search-box">
+  <!-- <div class="search-box">
     <div class="grid-inputs">
       <div class="field">
         <label><i class="pi pi-map-marker"></i>  From</label>
@@ -30,7 +30,42 @@
       </div> 
     </div>
     <button class="search-btn" (click)="onSearch(fromInput.value, toInput.value)"><i class="pi pi-search"></i> Search Flights</button>
+  </div> -->
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-box">
+  <div class="grid-inputs">
+    
+    <div class="field">
+      <label><i class="pi pi-map-marker"></i> From</label>
+      <input style-input-field type="text" formControlName="from" class="custom-input" placeholder="New York (JFK)">
+    </div>
+
+    <div class="field">
+      <label><i class="pi pi-map-marker"></i> To</label>
+      <input style-input-field type="text" formControlName="to" class="custom-input" placeholder="Los Angeles (LAX)">
+    </div>
+
+    <div class="field">
+      <label><i class="pi pi-calendar"></i> Departure Date</label>
+      <input style-input-field type="date" formControlName="departureDate" class="custom-input date-picker">
+    </div>
+
+    <div class="field">
+      <label><i class="pi pi-users"></i> Passengers</label>
+      <p-select 
+        [options]="passengerOptions" 
+        formControlName="passengers" 
+        optionLabel="label" 
+        placeholder="Select Passengers"
+        styleClass="prime-select-custom">
+      </p-select>
+    </div> 
+
   </div>
+
+  <button type="submit" class="search-btn" [disabled]="searchForm.invalid">
+    <i class="pi pi-search"></i> Search Flights
+  </button>
+</form>
 
   <div class="filter-row">
     <span class="filter-text"><i class="pi pi-filter"></i> Filter by Class:</span>
@@ -74,7 +109,7 @@
         <p class="city-gray">{{flight.arrCity}}</p>
       </div>
       <div class="booking-box">
-        <p class="price-big">${{flight.price}}</p>
+        <p class="price-big">{{flight.price | currency:'INR'}}</p>
         <p class="per-person">per person</p>
         <button class="book-now-btn" (click)="onBook(flight)">Book Now</button>
       </div>

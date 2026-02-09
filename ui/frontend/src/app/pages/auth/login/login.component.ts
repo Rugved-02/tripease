@@ -12,20 +12,20 @@ import { AuthService } from '../../../core/services/auth/auth-service';
 import { MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RouterLink } from '@angular/router';
+import { LogoTextComponent } from "../../../shared/components/logo-text/logo-text.component";
 
 @Component({
   selector: 'app-login',
   imports: [InputTextModule,
-            ButtonModule,
-            FloatLabelModule,
-            PasswordModule,
-            ReactiveFormsModule,
-            CardModule,
-            MessageModule,
-            ToastModule,
-            CheckboxModule ,
-            RouterLink
-          ],
+    ButtonModule,
+    FloatLabelModule,
+    PasswordModule,
+    ReactiveFormsModule,
+    CardModule,
+    MessageModule,
+    ToastModule,
+    CheckboxModule,
+    RouterLink, LogoTextComponent],
           providers:[MessageService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',

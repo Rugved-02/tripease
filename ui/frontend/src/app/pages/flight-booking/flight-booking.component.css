@@ -203,3 +203,28 @@
     margin: 0;
   }
 }
+
+/* new chnages to syling input field of form */
+input[style-input-field] {
+  border-color: var(--p-slate-100);
+  background-color: var(--p-slate-200);
+  /* border: 1px solid var(--p-slate-100); */
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--p-primary-1000);
+  font-size: small;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+input[style-input-field]::placeholder {
+  color: color-mix(in srgb, var(--p-primary-1000), transparent 50%);
+  /* font-size: smaller; */
+}
+input[style-input-field]:hover {
+  border: none;
+}
+input[style-input-field]:focus {
+  border: 1px solid var(--p-slate-400);
+  box-shadow: 0 0 0 3px var(--p-slate-300);
+}

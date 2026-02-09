@@ -40,7 +40,18 @@ export class FlightBookingService {
     { airline: 'Virgin Atlantic', flightNo: 'VS 003', class: 'Economy', depTime: '12:30 PM', depCity: 'London (LHR)', arrTime: '03:40 PM', arrCity: 'New York (JFK)', duration: '8h 10m', price: 590, seats: 40 }
   ];
 
-  getFlights(): Flight[] {
-    return this.flights;
+  getFlights(fromLoc: string, toLoc: string): Flight[] {
+    const searchFrom = fromLoc.toLowerCase().trim();
+    const searchTo = toLoc.toLowerCase().trim();
+
+    console.log("getflightsservice"+fromLoc);
+
+    const filteredFlights:Flight[] = this.flights.filter((flight) => {
+      return (
+        flight.depCity.toLowerCase().includes(searchFrom) &&
+        flight.arrCity.toLowerCase().includes(searchTo)
+      );
+    });
+    return filteredFlights;
   }
 }

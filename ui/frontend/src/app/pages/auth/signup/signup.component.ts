@@ -19,20 +19,22 @@ import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/api';
 import { DividerModule } from 'primeng/divider';
+import { LogoTextComponent } from "../../../shared/components/logo-text/logo-text.component";
 
 @Component({
   selector: 'app-signup',
   imports: [
-    CommonModule, 
-    ReactiveFormsModule, 
-    InputTextModule, 
-    PasswordModule, 
-    ButtonModule, 
-    CheckboxModule, 
+    CommonModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    PasswordModule,
+    ButtonModule,
+    CheckboxModule,
     ToastModule,
     CardModule,
     DividerModule,
-  ],
+    LogoTextComponent
+],
   providers: [MessageService],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',

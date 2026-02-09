@@ -5,7 +5,7 @@
     
     <div class="form-group">
       <label for="cardName">Cardholder Name</label>
-      <input id="cardName" type="text" formControlName="cardName" placeholder="John Doe">
+      <input id="cardName" type="text" formControlName="cardName" placeholder="Enter Name">
       <div class="error-slot">
         <small *ngIf="paymentForm.get('cardName')?.touched && paymentForm.get('cardName')?.errors?.['required']">Name is required.</small>
         <small *ngIf="paymentForm.get('cardName')?.touched && paymentForm.get('cardName')?.errors?.['minlength']">Minimum 3 characters required.</small>
