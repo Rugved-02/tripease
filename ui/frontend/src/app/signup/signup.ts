@@ -34,7 +34,7 @@ import { DividerModule } from 'primeng/divider';
     ToastModule,
     CardModule,
     DividerModule,
-    RouterLink // 2. Added RouterLink here
+    RouterLink 
   ],
   providers: [MessageService],
   templateUrl: './signup.html',
@@ -72,7 +72,6 @@ export class Signup {
   login() {
     this.router.navigate(['/login']);
   }
-
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirm = control.get('confirmPassword')?.value;
