@@ -1,0 +1,186 @@
+/* 1. Main Layout Wrapper */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  background: linear-gradient(to bottom right, var(--gradient-blue) 0%, var(--gradient-purple) 100%);
+    padding: 2rem;
+    font-family: 'Inter', sans-serif;
+}
+
+ ::ng-deep .dark .login-container{
+    background: linear-gradient(135deg,var(--color-blue-500),var(--p-surface-100));
+}
+
+/* 2. Login Card & PrimeNG Card Override */
+.login-card {
+    width: 100%;
+    max-width: 400px; 
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+::ng-deep .login-card .p-card {
+    background: var(--p-surface-0) !important; /* White in light mode */
+    border-radius: 24px !important;
+    padding: 2.5rem 3rem !important; /* Preserved original heavy padding */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2) !important;
+    border: none !important;
+}
+
+.logo-tripease-wrapper{
+    max-width: fit-content;
+    justify-self: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 7%;
+}
+
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    
+}
+
+.welcome-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--p-primary-1000);
+    margin-bottom: 0.5rem;
+}
+
+.text-muted{
+    color: var(--p-primary-1100);
+}
+
+/* 4. Form Field Alignment */
+.form-field {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.field-label {
+    display: block;
+    font-weight: 500;
+    color: var(--p-primary-1000);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+/* new chnages to syling input field of form */
+.custom-input, ::ng-deep .p-inputtext {
+  border-color: var(--p-slate-100);
+  background-color: var(--p-slate-100);
+  border: 1px solid var(--p-slate-100);
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--p-primary-1000);
+  font-size: small;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-input::placeholder, ::ng-deep .p-inputtext::placeholder {
+  color: color-mix(in srgb, var(--p-primary-1000), transparent 50%);
+  /* font-size: smaller; */
+}
+.custom-input:hover, ::ng-deep .p-inputtext:enabled:hover {
+  border: 1px solid var(--p-slate-100);
+}
+.custom-input:focus, ::ng-deep .p-inputtext:enabled:focus {
+  border: 1px solid var(--p-slate-400);
+  box-shadow: 0 0 0 3px var(--p-slate-300);
+}
+
+
+/* styling the password show icon in password field */
+::ng-deep .p-password-toggle-mask-icon{
+        --p-password-icon-color: var(--p-slate-600);
+}
+
+i[style-input-label-icon] {
+  font-size: 0.8rem;
+  padding: 0px 5px 5px 5px;
+  color: var(--p-primary-1000);
+}
+
+/* ::ng-deep .custom-input {
+    background: var(--p-primary-1050) !important;
+    border: 1px solid var(--p-primary-1100) !important;
+    border-radius: 10px !important;
+    padding: 0.75rem 1rem !important;
+    color: var(--p-primary-1000);
+    --p-inputtext-placeholder-color: var(--p-primary-1000);
+    width: 100%;
+} */
+
+::ng-deep .custom-input, 
+::ng-deep .p-password, 
+::ng-deep .p-password input {
+    width: 100% !important;
+}
+
+/* 5. Error Message Wrapper Alignment */
+.error-message-wrapper {
+    height: 20px;      
+    margin-top: 4px;    
+    margin-bottom: 8px; 
+    display: flex;
+    align-items: center;
+}
+
+.p-error, 
+small.p-error {
+    color: var(--p-red-500);
+    font-size: 1.0rem;
+    line-height: 1;
+    margin: 0;
+    display: block;
+}
+
+/* 6. Action Row Alignment */
+.options-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--p-surface-950);
+    align-items: center;
+    margin: 1rem 0;
+}
+
+::ng-deep .forgot-password-btn.p-button {
+    font-size: 0.85rem !important;
+    padding: 0 !important;
+    color: var(--p-primary-500) !important;
+}
+
+/* 7. Primary Sign-In Button */
+::ng-deep .signin-btn.p-button {
+    margin-top: 10px;
+    background: black;
+    border: none !important;
+    width: 100%;
+    height: 35px;
+    border-radius: 10px !important;
+    padding: 0.85rem !important;
+    font-weight: 600 !important;
+    color: var(--p-primary-50) !important;
+}
+
+
+/* 9. Footer Alignment */
+.signup-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--p-surface-600);
+}
+
+::ng-deep .signup-link-btn.p-button {
+    font-weight: 700 !important;
+    color: var(--p-primary-600) !important;
+    padding: 0 4px !important;
+}

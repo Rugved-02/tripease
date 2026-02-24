@@ -1,0 +1,118 @@
+<div class="page-wrapper">
+  <p-toast position="bottom-right"></p-toast>
+
+  <h1 class="main-title">Book Your Flight</h1>
+  <p class="subtitle">Find the best flights for your journey</p>
+
+  <!-- <div class="search-box">
+    <div class="grid-inputs">
+      <div class="field">
+        <label><i class="pi pi-map-marker"></i>  From</label>
+        <input type="text" #fromInput class="custom-input" placeholder="New York (JFK)">
+      </div>
+      <div class="field">
+        <label><i class="pi pi-map-marker"></i>  To</label>
+        <input type="text" #toInput class="custom-input" placeholder="Los Angeles (LAX)">
+      </div>
+      <div class="field">
+        <label><i class="pi pi-calendar"></i>  Departure Date</label>
+        <input type="date" class="custom-input date-picker">
+      </div>
+      <div class="field">
+        <label><i class="pi pi-users"></i>  Passengers</label>
+        <p-select 
+          [options]="passengerOptions" 
+          [(ngModel)]="selectedPassenger" 
+          optionLabel="label" 
+          placeholder="1 Adult"
+          styleClass="prime-select-custom">
+        </p-select>
+      </div> 
+    </div>
+    <button class="search-btn" (click)="onSearch(fromInput.value, toInput.value)"><i class="pi pi-search"></i> Search Flights</button>
+  </div> -->
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-box">
+  <div class="grid-inputs">
+    
+    <div class="field">
+      <label><i class="pi pi-map-marker"></i> From</label>
+      <input style-input-field type="text" formControlName="from" class="custom-input" placeholder="New York (JFK)">
+    </div>
+
+    <div class="field">
+      <label><i class="pi pi-map-marker"></i> To</label>
+      <input style-input-field type="text" formControlName="to" class="custom-input" placeholder="Los Angeles (LAX)">
+    </div>
+
+    <div class="field">
+      <label><i class="pi pi-calendar"></i> Departure Date</label>
+      <input style-input-field type="date" formControlName="departureDate" class="custom-input date-picker">
+    </div>
+
+    <div class="field">
+      <label><i class="pi pi-users"></i> Passengers</label>
+      <p-select 
+        [options]="passengerOptions" 
+        formControlName="passengers" 
+        optionLabel="label" 
+        placeholder="Select Passengers"
+        styleClass="prime-select-custom">
+      </p-select>
+    </div> 
+
+  </div>
+
+  <button type="submit" class="search-btn" [disabled]="searchForm.invalid">
+    <i class="pi pi-search"></i> Search Flights
+  </button>
+</form>
+
+  <div class="filter-row">
+    <span class="filter-text"><i class="pi pi-filter"></i> Filter by Class:</span>
+    <button [class.active]="selectedFilter === 'All'" (click)="filterByClass('All')">All Classes</button>
+    <button [class.active]="selectedFilter === 'Economy'" (click)="filterByClass('Economy')">Economy</button>
+    <button [class.active]="selectedFilter === 'Business'" (click)="filterByClass('Business')">Business</button>
+    <button [class.active]="selectedFilter === 'First Class'" (click)="filterByClass('First Class')">First Class</button>
+  </div>
+  <h2 class="avail-title">Available Flights ({{filteredFlights.length}})</h2>
+<div class="card" *ngFor="let flight of filteredFlights">
+    <div class="card-left">
+      <div class="airline-header">
+        <div class="blue-icon" [innerHTML]="getSafeIcon()"></div>
+        <div class="name-box">
+          <h3>{{flight.airline}}</h3>
+          <small>{{flight.flightNo}}</small>
+        </div>
+        <span class="class-pill">{{flight.class}}</span>
+      </div>
+      <div class="details-left">
+        <p class="label-txt">Departure</p>
+        <p class="time-bold">{{flight.depTime}}</p>
+        <p class="city-gray">{{flight.depCity}}</p>
+        <p class="seats-left"><i class="pi pi-users"></i> {{flight.seats}} seats left</p>
+      </div>
+    </div>
+
+    <div class="card-center">
+       <div class="track-info">
+        <i class="pi pi-clock"></i><br>
+         <span>{{flight.duration}}</span>
+         <div class="arrow-line">─────────────────▶</div>
+         <span class="direct-txt">Direct</span>
+       </div>
+    </div>
+
+    <div class="card-right">
+      <div class="details-right">
+        <p class="label-txt">Arrival</p>
+        <p class="time-bold">{{flight.arrTime}}</p>
+        <p class="city-gray">{{flight.arrCity}}</p>
+      </div>
+      <div class="booking-box">
+        <p class="price-big">{{flight.price | currency:'INR'}}</p>
+        <p class="per-person">per person</p>
+        <button class="book-now-btn" (click)="onBook(flight)">Book Now</button>
+      </div>
+    </div>
+  </div>
+</div>

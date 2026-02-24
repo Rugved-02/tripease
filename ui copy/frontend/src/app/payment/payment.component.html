@@ -1,0 +1,95 @@
+
+<div class="page-wrapper">
+  <div class="container-wrapper-heading">
+    <h1>Complete Your Payment</h1>
+    <p>Secure payment for booking #{{bookingId}}</p>
+  </div>
+
+  <div class="container-wrapper-payment">
+    <div class="container-one">
+      <div class="sub-div">
+        <p-card header="">
+          <div class="payment-container">
+            <h3 class="section-title">Select Payment Method</h3>
+
+            <!-- to display available payment methods -->
+            <div class="method-list">
+              @for (methodItem of paymentMethod; track $index) {
+              <div
+                class="method-card"
+                [class.active]="selectedMethod === methodItem.methodInitial"
+                (click)="selectMethod(methodItem.methodInitial)"
+              >
+                <div class="radio-indicator">
+                  <div class="dot" *ngIf="selectedMethod === methodItem.methodInitial"></div>
+                </div>
+                <i [className]="methodItem.icon" style="font-size: 1rem; margin-right: 10px;"></i>
+                <span class="method-label">{{ methodItem.methodName }}</span>
+              </div>
+              }
+            </div>
+          </div>
+        </p-card>
+      </div>
+      <div class="sub-div">
+        <p-card header="">
+          <div class="form-section" *ngIf="selectedMethod === 'card'">
+            <app-card-payment-method></app-card-payment-method>
+          </div>
+
+          <div class="info-box" *ngIf="selectedMethod !== 'card'">
+            <p>You will be redirected to complete the {{ selectedMethod }} transaction safely.</p>
+          </div>
+        </p-card>
+      </div>
+    </div>
+
+    <div class="container-two">
+      <p-card class="order-summary-card" header="">
+        <h3>Order Summary</h3>
+        <div class="total-payment">
+          <p class="fee">
+            <span class="fee-type">Service Fee</span
+            ><span class="fee-amount">{{ serviceFee | currency : 'INR' }}</span>
+          </p>
+          <p class="fee">
+            <span class="fee-type">Taxes</span
+            ><span class="fee-amount">{{ taxes | currency : 'INR' }}</span>
+          </p>
+          <p class="fee">
+            <span class="fee-type">Processing Fee</span
+            ><span class="fee-amount">{{ processingFee | currency : 'INR' }}</span>
+          </p>
+          <hr />
+          <p class="fee fee-total">
+            <span class="fee-total-type">Total</span
+            ><span class="fee-total-amount">{{ totalFee | currency : 'INR' }}</span>
+          </p>
+        </div>
+
+        <div class="platform-advantage">
+          <p class="feature-advantage">
+            <i class="pi pi-check-circle" style="font-size: 0.8rem; margin-right: 5px"></i>Free
+            cancellation withtin 24 hours
+          </p>
+          <p class="feature-advantage">
+            <i class="pi pi-check-circle" style="font-size: 0.8rem; margin-right: 5px"></i>Best
+            price guarantee
+          </p>
+          <p class="feature-advantage">
+            <i class="pi pi-check-circle" style="font-size: 0.8rem; margin-right: 5px"></i>24/7
+            customer support
+          </p>
+        </div>
+
+        <div class="secure-payment-badge">
+          <i class="pi pi-shield"></i>
+          <p>
+            Your payment is protected by our secure payment system and you're covered by our buyer
+            protection policy.
+          </p>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+@import "primeicons/primeicons.css";
+
+.sticky-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+
+:host ::ng-deep .p-menubar-root-list {
+    /* Takes up all available middle space */
+    flex-grow: 1;           
+    /* Centers the [model]="items" */
+    justify-content: center; 
+}
+
+:host ::ng-deep .p-menubar{
+    padding: 10px 0px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 0px;
+  } 
+
+  
+  :host ::ng-deep .p-menubar-button{
+    flex-grow:1;
+     /* margin-left: 200px; */
+}
+
+
+
+
+/* --- Logo Tripease Heading Styling --- */
+.logo-tripease-wrapper{
+  margin-left: 110px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+
+/* profile button styling */
+.profile-wrapper {
+
+  position: relative;
+
+}
+.round-btn {
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ border: none;
+ background: #2563eb;
+ color: white;
+ font-weight: 600;
+ cursor: pointer;
+ margin-top: -8px;
+ 
+}
+
+.profile-menu {
+
+  position: absolute;
+
+  top: 48px;
+
+  right: 0;
+
+  width: 200px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+  padding: 8px 0;
+
+  z-index: 100;
+
+}
+
+.menu-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 16px;
+
+  cursor: pointer;
+
+}
+
+.menu-item:hover {
+
+  background: var(--p-primary-1000);
+
+}
+
+.menu-divider {
+
+  height: 1px;
+
+  background: var(--p-surface-200);
+
+  margin: 6px 0;
+
+}
+
+.menu-item.logout {
+
+  color: #d32f2f;
+
+} 
+
+.login-signup-wrapper{
+  margin-right: 110px;
+}
+ 

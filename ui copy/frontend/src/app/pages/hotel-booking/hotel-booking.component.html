@@ -1,0 +1,93 @@
+<p-toast></p-toast>
+<div id="body" ngSkipHydration>
+  
+  <div class="header-container">
+    <h1>Reserve The Hotel</h1>
+    <p class="subtitle">Find the perfect place to stay</p>
+
+    <div class="search-box-wrapper">
+      <form [formGroup]="hotelForm" class="search-form">
+        <div class="search-field">
+          <label><i class="pi pi-map-marker"></i> Destination</label>
+          <input type="text" pInputText formControlName="destination" 
+                 placeholder="Enter city or location" (keyup.enter)="searchHotels()" />
+        </div>
+        
+        <div class="search-field">
+          <label><i class="pi pi-calendar"></i> Check-in</label>
+          <p-datepicker formControlName="checkin" placeholder="dd-mm-yyyy" 
+                        dateFormat="dd-mm-yy"></p-datepicker>
+        </div>
+        
+        <div class="search-field">
+          <label><i class="pi pi-calendar"></i> Check-out</label>
+          <p-datepicker formControlName="checkout" placeholder="dd-mm-yyyy" 
+                        dateFormat="dd-mm-yy"></p-datepicker>
+        </div>
+        
+        <div class="search-btn-wrapper">
+          <p-button label="Search Hotels" icon="pi pi-search" 
+                    type="button" styleClass="search-btn" (click)="searchHotels()">
+          </p-button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="list-container">
+    <div *ngIf="isLoading" class="loader-container">
+      <p-progressSpinner strokeWidth="4"></p-progressSpinner>
+      <p>Finding best matches...</p>
+    </div>
+
+    <div *ngIf="!isLoading && availableHotels.length > 0">
+      <h2 class="results-count">Available Hotels ({{availableHotels.length}})</h2>
+      
+      <div *ngFor="let hotel of availableHotels; trackBy: trackByHotelId" class="hotel-card">
+        <div class="card-left">
+          <img [src]="hotel.cachedImage" class="hotel-image" loading="lazy">
+          <span class="rooms-badge">{{hotel.totalRooms}} rooms left</span>
+        </div>
+
+        <div class="card-right">
+          <div class="main-info">
+            <h2 class="hotel-name">{{hotel.hotelName}}</h2>
+            <p class="location-text"><i class="pi pi-map-marker"></i> {{hotel.location}}</p>
+            
+            <div class="rating-bar">
+              <span class="stars">
+                <i *ngFor="let s of hotel.starsArray" class="pi pi-star-fill"></i>
+              </span>
+              <span class="rating-num">{{hotel.displayRating}}</span>
+              <span class="review-count">({{hotel.displayReviews}} reviews)</span>
+            </div>
+
+            <div class="amenities-row">
+              <span *ngFor="let amenity of hotel.processedAmenities" class="amenity-tag">
+                <i class="pi" [ngClass]="amenity.icon"></i>
+                {{ amenity.label }}
+              </span>
+            </div>
+
+            <div class="price-action">
+              <div class="price-side">
+                <span class="price-label">Starting from</span>
+                <h3 class="price-amount">₹{{hotel.basePrice}}<span>/night</span></h3>
+              </div>
+              <div class="action-side">
+                <button class="reserve-btn" [disabled]="!hotel.registered">
+                  {{ hotel.registered ? 'Reserve Now' : 'Currently Unavailable' }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && availableHotels.length === 0" class="loader-container">
+       <i class="pi pi-search" style="font-size: 2rem"></i>
+       <p>No hotels found in this location.</p>
+    </div>
+  </div>
+</div>
