@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 // PrimeNG Imports
@@ -10,10 +10,12 @@ import { ImageModule } from 'primeng/image';
 import { ToastModule } from 'primeng/toast';
 import { DatePickerModule } from 'primeng/datepicker'; 
 import { MessageService } from 'primeng/api'; 
-import { hotelapiservice } from '../../core/services/hotel-booking/hotelapiservice';
 import { TagModule } from 'primeng/tag';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RatingModule } from 'primeng/rating';
+
+// Service
+import { hotelapiservice } from '../../core/services/hotel-booking/hotelapiservice';
 
 @Component({
   selector: 'app-hotel-booking',
@@ -31,89 +33,132 @@ export class HotelBookingComponent implements OnInit {
   hotelForm!: FormGroup;
   availableHotels: any[] = [];
   isLoading: boolean = false;
+  isSearchResults: boolean = false; // Flag to toggle UI between landing and search results
 
   constructor(
     private fb: FormBuilder, 
     private hotelService: hotelapiservice,
     private messageService: MessageService,
     private cdr: ChangeDetectorRef,
-    private zone: NgZone // Added for performance
+    private zone: NgZone 
   ) {}
 
   ngOnInit(): void {
     this.hotelForm = this.fb.group({ 
-      destination: [''],
-      checkin: [null],
-      checkout: [null]
+      destination: ['', Validators.required],
+      checkin: [null, Validators.required],
+      checkout: [null, Validators.required]
     });
-    this.fetchHotels();
+    this.fetchInitial(); 
   }
 
-  // Pre-calculate icons during data mapping instead of in HTML loop
-  getAmenityIcon(amenity: string): string {
-    const key = amenity.trim().toLowerCase();
-    const iconMap: { [key: string]: string } = {
-      'wifi': 'pi-wifi',
-      'pool': 'pi-th-large',
-      'spa': 'pi pi-map-marker',
-      'gym': 'pi-bolt',
-      'restaurant': 'pi-shop',
-      'bar': 'pi-receipt',
-      'sea view': 'pi-image'
-    };
-    return iconMap[key] || 'pi-check-circle';
+  /**
+   * Loads the top-rated hotels. Sets isSearchResults to false.
+   */
+  fetchInitial(): void {
+    this.isLoading = true;
+    this.isSearchResults = false; 
+    this.hotelService.getInitialHotels().subscribe({
+      next: (data) => this.processAndMapData(data),
+      error: (err) => this.handleError(err)
+    });
   }
 
-  fetchHotels(location?: string): void {
-  this.isLoading = true;
-  
-  this.hotelService.getHotels(location).subscribe({
-    next: (data) => {
-      this.zone.run(() => {
-        this.availableHotels = data.map(hotel => {
-          
-          // Use the actual averageRating from backend, or default to 0
-          const actualRating = hotel.averageRating || 0;
-          const actualReviews = hotel.reviewCount || 0;
-
-          return {
-            ...hotel,
-            displayRating: actualRating > 0 ? actualRating.toFixed(1) : 'No Ratings',
-            displayReviews: actualReviews,
-            cachedImage: `https://picsum.photos/seed/${hotel.hotelId}/400/300`,
-            
-            // Generate stars based on ACTUAL rating value
-            // We use Math.round to decide how many full stars to show
-            starsArray: Array(Math.round(actualRating)).fill(0),
-            
-            processedAmenities: (hotel.amenities || []).map((a: string) => ({
-              label: a,
-              icon: this.getAmenityIcon(a)
-            }))
-          };
-        });
-        this.isLoading = false;
-        this.cdr.markForCheck();
-      });
-    },
-    error: (err) => {
-      this.isLoading = false;
-      this.messageService.add({ 
-        severity: 'error', 
-        summary: 'Error',
-        detail: 'Failed to fetch hotel data' 
-      });
-    }
-  });
-}
-
+  /**
+   * Executes search. Sets isSearchResults to true upon success.
+   */
   searchHotels(): void {
-    const location = this.hotelForm.get('destination')?.value?.trim() || '';
-    this.fetchHotels(location);
+    const { destination, checkin, checkout } = this.hotelForm.value;
+
+    if (this.hotelForm.invalid) {
+      this.messageService.add({ 
+        severity: 'warn', 
+        summary: 'Incomplete Search', 
+        detail: 'Please fill in destination and both dates.' 
+      });
+      return;
+    }
+
+    const checkInStr = this.formatDate(checkin);
+    const checkOutStr = this.formatDate(checkout);
+
+    this.isLoading = true;
+    this.availableHotels = []; 
+
+    this.hotelService.searchHotels(destination.trim(), checkInStr, checkOutStr).subscribe({
+      next: (data) => {
+        this.isSearchResults = true; 
+        if (data && data.length > 0) {
+          this.processAndMapData(data);
+        } else {
+          this.isLoading = false;
+          this.availableHotels = [];
+          this.messageService.add({ severity: 'info', summary: 'No Results', detail: `No hotels available in ${destination}.` });
+        }
+      },
+      error: (err) => this.handleError(err)
+    });
   }
 
-  // Prevents re-rendering the whole list when searching
-  trackByHotelId(index: number, hotel: any): string {
-    return hotel.hotelId;
+  /**
+   * Smoothly scrolls user back to the search form when they click 'Check Availability'
+   */
+  scrollToSearch(): void {
+    const element = document.getElementById('search-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  private formatDate(date: Date): string {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = ('0' + (d.getMonth() + 1)).slice(-2);
+    const day = ('0' + d.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
+
+  private processAndMapData(data: any[]): void {
+    this.zone.run(() => {
+      this.availableHotels = data.map(hotel => {
+        const avgRating = hotel.averageRating || 0;
+        return {
+          ...hotel,
+          displayPrice: hotel.price || hotel.basePrice,
+          displayRating: avgRating > 0 ? avgRating.toFixed(1) : 'New',
+          displayReviews: hotel.reviewCount || (hotel.ratings ? hotel.ratings.length : 0),
+          cachedImage: `https://picsum.photos/seed/${hotel.hotelName}/400/300`,
+          starsArray: Array(Math.round(avgRating || 5)).fill(0),
+          processedAmenities: (hotel.amenities || []).map((a: string) => ({
+            label: a,
+            icon: this.getAmenityIcon(a)
+          }))
+        };
+      });
+      this.isLoading = false;
+      this.cdr.detectChanges();
+    });
+  }
+
+  private handleError(err: any) {
+    this.isLoading = false;
+    this.messageService.add({ 
+      severity: 'error', 
+      summary: 'Connection Error', 
+      detail: 'Server is currently unreachable.' 
+    });
+  }
+
+  getAmenityIcon(amenity: string): string {
+    const key = amenity.toLowerCase();
+    if (key.includes('wifi')) return 'pi-wifi';
+    if (key.includes('pool')) return 'pi-th-large';
+    if (key.includes('spa')) return 'pi-heart';
+    if (key.includes('gym')) return 'pi-bolt';
+    return 'pi-check-circle';
+  }
+
+  trackByHotelName(index: number, hotel: any): string {
+    return hotel.hotelName;
   }
 }

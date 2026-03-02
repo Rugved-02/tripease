@@ -4,16 +4,30 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class hotelapiservice {
-  private baseUrl = 'http://localhost:8083/hotels';
+  // Corrected to match @RequestMapping("/hotel")
+  private baseUrl = 'http://localhost:8083/hotel'; 
 
   constructor(private http: HttpClient) {}
 
-  // Fetch all or search by location
-  getHotels(location?: string): Observable<any[]> {
-    let params = new HttpParams();
-    if (location) params = params.append('location', location);
-    // Returns the observable immediately to the component
-    return this.http.get<any[]>(this.baseUrl, { params });
+  /**
+   * Fetches Top 15 hotels for the landing page.
+   * Hits GET http://localhost:8083/hotel
+   */
+  getInitialHotels(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl);
+  }
+
+  /**
+   * Fetches hotels based on location and dates.
+   * Hits GET http://localhost:8083/hotel/search
+   */
+  searchHotels(location: string, checkIn: string, checkOut: string): Observable<any[]> {
+    const params = new HttpParams()
+      .set('location', location)
+      .set('checkIn', checkIn)
+      .set('checkOut', checkOut);
+    
+    return this.http.get<any[]>(`${this.baseUrl}/search`, { params });
   }
 
   activateHotel(id: number): Observable<string> {
