@@ -1,9 +1,12 @@
 package com.tripease.payment.service;
 
+import com.tripease.payment.client.BookingServiceClient;
 import com.tripease.payment.dto.PaymentRequestDTO;
 import com.tripease.payment.dto.PaymentResponseDTO;
+import com.tripease.payment.model.OutboxEvent;
 import com.tripease.payment.model.Payment;
 import com.tripease.payment.model.PaymentStatus;
+import com.tripease.payment.repository.OutboxRepository;
 import com.tripease.payment.repository.PaymentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Slf4j
 @Service
@@ -20,65 +23,111 @@ import java.util.Random;
 public class PaymentServiceImpl implements PaymentService{
 
     private final PaymentRepository paymentRepository;
+    private final OutboxRepository outboxRepository;
+    private final BookingServiceClient bookingServiceClient;
+
 
     @Override
     @Transactional
     public PaymentResponseDTO processPayment(PaymentRequestDTO paymentRequestDTO) {
+        // 1. Check if this exact idempotency key has been used before
+        return paymentRepository.findByIdempotencyKey(paymentRequestDTO.idempotencyKey())
+                .map(existing -> {
+                    log.info("Idempotency match found for key: {}", paymentRequestDTO.idempotencyKey());
+                    return mapToPaymentResponseDTO(existing, "Returning existing payment record.");
+                })
+                .orElseGet(() -> {
+                    // 2. If key is new, check if the Booking already has a SUCCESSFUL payment
+                    // This prevents creating a second PENDING record for the same booking
+                    Optional<Payment> lastPayment = paymentRepository.findFirstByBookingIdOrderByCreatedAtDesc(paymentRequestDTO.bookingId());
 
+                    if (lastPayment.isPresent() && lastPayment.get().getStatus() == PaymentStatus.CONFIRMED) {
+                        return mapToPaymentResponseDTO(lastPayment.get(), "Booking already confirmed via another session.");
+                    }
 
-        Optional<Payment> idempotenceKeyExists = paymentRepository.findByIdempotencyKey(paymentRequestDTO.idempotencyKey());
+                    log.info("Creating new PENDING payment for booking: {}", paymentRequestDTO.bookingId());
+                    Payment newPayment = Payment.builder()
+                            .bookingId(paymentRequestDTO.bookingId())
+                            .amount(paymentRequestDTO.amount())
+                            .idempotencyKey(paymentRequestDTO.idempotencyKey())
+                            .status(PaymentStatus.PENDING)
+                            .build();
 
-        if( idempotenceKeyExists.isPresent()){
-//            logic to return the existing record with same idempotency key in db
-//            it prevents DataIntegrityViolationException
-            Payment existingPayment = idempotenceKeyExists.get();
-
-            log.info("Idempotency Key Exists :: Existing DB Record Returned");
-
-            String msg = "Booking Already Exists with Payment Status - " + existingPayment.getStatus();
-            return mapToPaymentResponseDTO(existingPayment, msg);
-
-        }
-        else {
-//            checking if bookingId exists with CONFIRMED status
-            if(paymentRepository.existsByBookingIdAndStatus(paymentRequestDTO.bookingId(), PaymentStatus.CONFIRMED)){
-                log.info("Booking Id Exists -- Status - Confirmed :: Existing DB Record Returned");
-                return PaymentResponseDTO.builder()
-                        .displayMessage("Payment Already (CONFIRMED) for your Booking : "+paymentRequestDTO.bookingId())
-                        .build();
-            }
-//            checking if bookingId exists with PENDING status if not found with CONFIRMED
-            else if (paymentRepository.existsByBookingIdAndStatus(paymentRequestDTO.bookingId(), PaymentStatus.PENDING)) {
-                log.info("Booking Id Exists -- Status - Pending :: Existing DB Record Returned");
-                return PaymentResponseDTO.builder()
-                        .displayMessage("Payment In Process (PENDING) for your Booking : "+paymentRequestDTO.bookingId())
-                        .build();
-            }
-//            creating new record in db for if there is no CONFIRMED or PENDING status ;; or if bookingID is new
-            else {
-
-                log.info("New Booking Id or Booking Id Exists with -- Status - Failed :: New DB Record Created and Returned");
-
-
-                Payment newPayment = Payment.builder()
-                        .idempotencyKey(paymentRequestDTO.idempotencyKey())
-                        .bookingId(paymentRequestDTO.bookingId())
-                        .amount(paymentRequestDTO.amount())
-                        .status(PaymentStatus.PENDING)
-                        .build();
-
-                Payment savedPayment = paymentRepository.save(newPayment);
-
-                //        Returning response using PaymentResponseDTO
-                String msg = "New Booking Saved with Payment Status  - " + savedPayment.getStatus();
-                return mapToPaymentResponseDTO(savedPayment,msg);
-
-            }
-
-        }
-
+                    return mapToPaymentResponseDTO(paymentRepository.save(newPayment), "Payment Initialized");
+                });
     }
 
+
+
+
+
+    @Override
+    @Transactional
+    public PaymentResponseDTO payNow(String idempotencyKey) {
+        // 1. Fetch current record with a lock to prevent race conditions
+        Payment currentPayment = paymentRepository.findByIdempotencyKey(idempotencyKey)
+                .orElseThrow(() -> new RuntimeException("Payment record not found for key: " + idempotencyKey));
+
+        // 2. Guard: If THIS specific request is already finished, return it
+        if (currentPayment.getStatus() != PaymentStatus.PENDING) {
+            return mapToPaymentResponseDTO(currentPayment, "This specific request was already processed.");
+        }
+
+        // 3. CROSS-CHECK: Check for other records with the same Booking ID
+        // Logic: If another idempotency key for this booking already succeeded,
+        // we must NOT process this one.
+        List<Payment> allPaymentsForBooking = paymentRepository.findAllByBookingId(currentPayment.getBookingId());
+
+        boolean alreadySucceeded = allPaymentsForBooking.stream()
+                .anyMatch(p -> p.getStatus() == PaymentStatus.CONFIRMED);
+
+        if (alreadySucceeded) {
+                currentPayment.setStatus(PaymentStatus.FAILED);
+            paymentRepository.save(currentPayment);
+            return mapToPaymentResponseDTO(currentPayment, "Booking already paid via another request.");
+        }
+
+        // 4. Handle failed cases from other keys (Optional/Context Dependent)
+        // If other keys failed, we proceed with this one.
+
+        // 5. EXTERNAL CALL: Mock Gateway
+        PaymentStatus resultStatus = mockGatewayPaymentStatus();
+        currentPayment.setStatus(resultStatus);
+
+        // 6. ATOMIC SAVE
+        Payment savedPayment = paymentRepository.save(currentPayment);
+
+//        // 7. RELIABLE NOTIFICATION
+//        if (savedPayment.getStatus() == PaymentStatus.CONFIRMED) {
+//            OutboxEvent eventPayment = OutboxEvent.builder()
+//                    .aggregateId(savedPayment.getBookingId())
+//                    .eventType("PAYMENT_CONFIRMED")
+//                    .payload(String.format("{\"bookingId\":\"%s\"}", savedPayment.getBookingId()))
+//                    .status("PENDING")
+////                    .retryCount(0)
+//                    .build();
+//
+//            outboxRepository.save(eventPayment);
+//        }
+
+
+            OutboxEvent eventPayment = OutboxEvent.builder()
+                    .aggregateId(savedPayment.getBookingId())
+                    .eventType(savedPayment.getStatus() == PaymentStatus.CONFIRMED?"PAYMENT_CONFIRMED":"PAYMENT_FAILED")
+                    .payload(String.format("{\"bookingId\":\"%s\"}", savedPayment.getBookingId()))
+                    .status("PENDING")
+//                    .retryCount(0)
+                    .build();
+
+            outboxRepository.save(eventPayment);
+
+
+        return mapToPaymentResponseDTO(savedPayment,
+                resultStatus == PaymentStatus.CONFIRMED ? "Payment Successful!" : "Payment Failed.");
+    }
+
+
+    //    choosing random status as we are not directly using payment gateway so we will get different payment status everytime we save payment to db
     @Override
     @Transactional
     public String getLatestPaymentStatusForBookingId(String bookingId) {
@@ -90,38 +139,17 @@ public class PaymentServiceImpl implements PaymentService{
         return paymentStatus.map(payment -> payment.getStatus().name()).orElse("STATUS : NOT FOUND");
     }
 
-    public PaymentResponseDTO payNow(String idempotencyKey){
-        Payment payment = paymentRepository.findByIdempotencyKey(idempotencyKey)
-                .orElseThrow(() -> new RuntimeException("Payment record not found"));
-
-        // Guard: Only PENDING payments can be confirmed
-        if (!payment.getStatus().equals(PaymentStatus.PENDING)) {
-            return mapToPaymentResponseDTO(payment, "Payment already processed.");
-        }
-
-        // SIMULATION: In a real app, this is where you'd call the Stripe/Bank API
-        payment.setStatus(PaymentStatus.CONFIRMED);
-        Payment savedPayment = paymentRepository.save(payment);
-
-        // CRITICAL: Notify Flight Service via FeignClient or RestTemplate
-//        try {
-//            flightServiceClient.confirmBooking(payment.getBookingId());
-//            log.info("Flight Service notified for Booking: {}", payment.getBookingId());
-//        } catch (Exception e) {
-//            log.error("Failed to notify Flight Service. Need Manual Intervention or Retry Queue.");
-//            // In a pro setup, you'd use Kafka here to ensure the message eventually arrives
-//        }
-
-        return mapToPaymentResponseDTO(savedPayment, "Payment Successful! Flight Booked.");
-
-    }
 
 
-//    choosing random status as we are not directly using payment gateway so we will get different payment status everytime we save payment to db
+    private PaymentStatus mockGatewayPaymentStatus(){
 
-    private PaymentStatus getRandomPaymentStatus(){
-        PaymentStatus[] statuses = PaymentStatus.values();
-        PaymentStatus randomStatus = statuses[new Random().nextInt(statuses.length)];
+        //it maps the chance such that CONFIRMED comes 80% of the times
+
+        double chance = ThreadLocalRandom.current().nextDouble(); // Generates 0.0 to 1.0
+
+        PaymentStatus randomStatus = (chance < 0.8)
+                ? PaymentStatus.CONFIRMED
+                : PaymentStatus.FAILED;
 
         log.info("Random Payment Status : "+String.valueOf(randomStatus));
         return randomStatus;

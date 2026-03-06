@@ -1,6 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-card-payment-method',
@@ -9,6 +10,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './card-payment-method.component.css',
 })
 export class CardPaymentMethodComponent implements OnInit {
+
+  @Output() pay = new EventEmitter<any>;
 
   paymentForm: FormGroup = new FormGroup({
     cardName: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -30,10 +33,20 @@ export class CardPaymentMethodComponent implements OnInit {
 
   onSubmit(): void {
     if (this.paymentForm.valid) {
+
+      console.log("Card Payment Component:: inside onSubmit() with valid form");
+
+      this.completePayment();
       console.log('Success:', this.paymentForm.value);
     } else {
       this.paymentForm.markAllAsTouched();
     }
+  }
+
+  completePayment(){
+    console.log("Card Payment Component:: inside completePayment()");
+
+    this.pay.emit({ method: 'CARD', details: this.paymentForm.value });
   }
 }
 

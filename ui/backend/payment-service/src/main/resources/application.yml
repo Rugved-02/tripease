@@ -1,3 +1,10 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+feign:
+  circuitbreaker:
+    enabled: false  # Disabling this usually stops Feign from spawning new threads
 
 eureka:
   client:

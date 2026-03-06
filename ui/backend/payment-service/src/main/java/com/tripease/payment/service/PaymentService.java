@@ -7,4 +7,5 @@ import com.tripease.payment.model.Payment;
 public interface PaymentService {
     PaymentResponseDTO processPayment(PaymentRequestDTO paymentRequestDTO);
     String getLatestPaymentStatusForBookingId(String bookingId);
+    PaymentResponseDTO payNow(String idempotencyKey);
 }

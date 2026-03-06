@@ -10,28 +10,38 @@
         <module name="api-gateway" />
         <module name="discovery-server" />
       </profile>
-      <profile name="Annotation profile for payment-service" enabled="true">
+      <profile name="Annotation profile for itinerary-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
         </processorPath>
+        <module name="itinerary-service" />
+        <module name="booking" />
         <module name="auth-service" />
-        <module name="flightEntityTripease" />
         <module name="payment-service" />
+        <module name="flights" />
+        <module name="hotel-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="backend" target="1.5" />
+      <module name="flightEntityTripease" target="21" />
+      <module name="hotels" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="auth-service" options="-parameters" />
+      <module name="booking" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
       <module name="flightEntityTripease" options="-parameters" />
+      <module name="flights" options="-parameters" />
+      <module name="hotel-service" options="-parameters" />
+      <module name="hotels" options="-parameters" />
+      <module name="itinerary-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
     </option>
   </component>

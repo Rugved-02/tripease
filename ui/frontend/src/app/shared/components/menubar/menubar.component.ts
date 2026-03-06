@@ -5,7 +5,6 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { FloatLabel } from 'primeng/floatlabel';
-import { ButtonModule } from 'primeng/button';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
@@ -15,6 +14,7 @@ import { SelectModule } from 'primeng/select';
 import { DesignTokens } from '@primeuix/themes/types';
 import { AuthService } from '../../../core/services/auth/auth-service';
 import { LogoTextComponent } from "../logo-text/logo-text.component";
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-menubar-component',
@@ -92,6 +92,34 @@ export class MenubarComponent implements OnInit {
   isLoggedIn(){
     return this.authService.isLoggedIn();
   }
+
+  onLogout(){
+    localStorage.removeItem('token'); 
+    localStorage.removeItem('currentUser');
+    // If you use sessionStorage, use: sessionStorage.clear();
+
+    // 2. (Optional) Clear any user state in a service if you have one
+    // this.authService.currentUser.set(null);
+
+    // 3. Redirect to login page
+    this.router.navigate(['/login']);
+    
+    console.log('User logged out successfully');
+  }
+
+  redirectToDashboard(){
+    this.router.navigate(['/dashboard']);
+  }
+
+  redirectToTrips(){
+    this.router.navigate(['/itineraryPlanning']);
+  }
+
+  redirectToAnalytics(){
+    this.router.navigate(['/analytics']);
+  }
+
+
   loginButtonStyle = {
     '--p-button-primary-background': 'var(--p-primary-0)',
     '--p-button-border-radius': '10px',

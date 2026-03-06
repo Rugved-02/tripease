@@ -1,5 +1,3 @@
-
-
 <div class="container">
   <div class="inside-container">
 
@@ -11,39 +9,38 @@
       <p-button label="Create New Itinerary" icon="pi pi-plus" styleClass="black-button" (onClick)="showDialog()" />
     </div>
 
-    @for (trip of itineraries; track trip; let i = $index) {
+    @for (trip of itineraries; track trip.id; let i = $index) {
       <div class="itinerary-card">
         <div class="card-header">
           <div class="header-left">
             <h2>{{ trip.tripName }}</h2>
-            <div class="date-range"><i class="pi pi-calendar"></i> {{ trip.dateRange }}</div>
+            <div class="date-range">
+              <i class="pi pi-calendar"></i> {{ trip.startDate }} to {{ trip.endDate }}
+            </div>
           </div>
-          <div class="activity-badge">{{ trip.events.length }} Activities</div>
+          <div class="activity-badge">{{ trip.activities?.length || 0 }} Activities</div>
         </div>
 
-        <p-timeline [value]="trip.events" align="left">
-          <ng-template pTemplate="marker" let-event>
-            <span class="custom-marker" [style.backgroundColor]="event.color">
-              @switch (event.iconType) {
-                @case ('flight') {
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M22 2L11 13"></path><path d="M22 2L15 22L11 13L2 9L22 2Z"></path></svg>
-                }
-                @case ('hotel') {
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path></svg>
-                }
-                @case ('location') {
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="10" r="3"></circle><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path></svg>
-                }
+        <p-timeline [value]="trip.activities" align="left">
+
+          <ng-template #marker let-event>
+            <span class="custom-marker">
+              @switch (event.type) {
+                @case ('FLIGHT') { <i class="pi pi-send"></i> }
+                @case ('HOTEL') { <i class="pi pi-home"></i> }
+                @case ('RESTAURANT') { <i class="pi pi-map-marker"></i> }
+                @case ('WORK') { <i class="pi pi-briefcase"></i> }
+                @default { <i class="pi pi-calendar-plus"></i> }
               }
             </span>
           </ng-template>
 
-          <ng-template pTemplate="content" let-event>
+          <ng-template #content let-event>
             <div class="event-box">
               <div class="event-details">
-                <span class="event-time"><i class="pi pi-clock"></i> {{ event.time }}</span>
+                <span class="event-time"><i class="pi pi-clock"></i> {{ event.startTime | date:'shortTime' }}</span>
                 <h3>{{ event.title }}</h3>
-                <p>{{ event.subtitle }}</p>
+                <p>{{ event.location }}</p>
               </div>
               <p-button label="Edit" styleClass="p-button-text p-button-sm edit-link-btn" (onClick)="editItinerary(i)" />
             </div>
@@ -52,6 +49,11 @@
 
         <div class="card-footer">
           <button pButton label="Delete Itinerary" class="p-button-outlined p-button-secondary" (click)="deleteItinerary(i)"></button>
+           <!-- <p-button 
+              label="Delete Itinerary" 
+              styleClass="p-button-outlined p-button-secondary" 
+              (onClick)="deleteItinerary(i)">
+            </p-button> -->
           <button pButton label="Share Itinerary" class="p-button-outlined p-button-secondary" (click)="shareItinerary(i)"></button>
           <button pButton label="Download PDF" class="black-button" (click)="downloadPDF(i)"></button>
         </div>
@@ -61,38 +63,58 @@
     <p-dialog [header]="isEditing ? 'Edit Itinerary' : 'Create Complete Itinerary'" 
               [(visible)]="displayDialog" 
               [modal]="true" 
-              [style]="{width: '600px'}">
-              
+              [style]="{width: '650px'}">
+
       <form [formGroup]="tripForm" (ngSubmit)="saveFullItinerary()" class="flex flex-column gap-4">
-        <div class="flex gap-3">
-          <div class="flex-grow-1 flex flex-column gap-2">
+        <div class="flex flex-column gap-3">
+          <div class="flex flex-column gap-2">
             <label class="font-bold">Trip Name</label>
-            <input pInputText formControlName="tripName" />
+            <input pInputText formControlName="tripName" placeholder="e.g. Summer in Paris" />
           </div>
-          <div class="flex-grow-1 flex flex-column gap-2">
-            <label class="font-bold">Date Range</label>
-            <input pInputText formControlName="dateRange" />
+
+          <div class="flex gap-3">
+            <div class="flex-grow-1 flex flex-column gap-2">
+              <label class="font-bold">Start Date</label>
+              <p-datepicker formControlName="startDate" dateFormat="yy-mm-dd" [showIcon]="true" appendTo="body"></p-datepicker>
+            </div>
+            <div class="flex-grow-1 flex flex-column gap-2">
+              <label class="font-bold">End Date</label>
+              <p-datepicker formControlName="endDate" dateFormat="yy-mm-dd" [showIcon]="true" appendTo="body"></p-datepicker>
+            </div>
           </div>
         </div>
+
         <hr />
-        
+
         <div class="flex justify-content-between align-items-center">
           <h3 class="m-0">Activities</h3>
-          <p-button label="Add Another" icon="pi pi-plus" styleClass="p-button-text p-button-sm" (onClick)="addActivityRow()" />
+          <p-button label="Add Activity" icon="pi pi-plus" styleClass="p-button-text p-button-sm" (onClick)="addActivityRow()" />
         </div>
-        
-        <div formArrayName="activities" class="flex flex-column gap-3 max-h-20rem overflow-y-auto">
+
+        <div formArrayName="activities" class="flex flex-column gap-3 max-h-25rem overflow-y-auto p-1">
           @for (act of activities.controls; track $index; let idx = $index) {
-            <div [formGroupName]="idx" class="p-3 surface-ground border-round shadow-1">
+            <div [formGroupName]="idx" class="p-3 surface-ground border-round border-1 border-200 shadow-1">
               <div class="grid flex gap-2 mb-2">
-                <input pInputText formControlName="title" placeholder="Title" class="flex-grow-1" />
-                <input pInputText formControlName="time" placeholder="Time" style="width: 100px" />
-                
-                <p-select [options]="iconOptions" formControlName="iconType" optionLabel="label" optionValue="value" styleClass="w-full" [style]="{'width':'130px'}" />
-                
+                <input pInputText formControlName="title" placeholder="Activity Title" class="flex-grow-1" />
+
+                <p-select [options]="iconOptions" formControlName="type" optionLabel="label" optionValue="value" [style]="{'width':'150px'}" />
+
                 <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text" (onClick)="removeActivityRow(idx)" />
               </div>
-              <input pInputText formControlName="subtitle" placeholder="Location" class="w-full" />
+
+              <div class="flex gap-2 mb-2">
+                <div class="flex-grow-1">
+                  <label class="text-xs font-semibold block mb-1">Start Time</label>
+                  <p-datepicker formControlName="startTime" [showTime]="true" [hourFormat]="'24'" placeholder="Start" appendTo="body" styleClass="w-full"></p-datepicker>
+                </div>
+                <div class="flex-grow-1">
+                  <label class="text-xs font-semibold block mb-1">End Time</label>
+                  <p-datepicker formControlName="endTime" [showTime]="true" [hourFormat]="'24'" placeholder="End" appendTo="body" styleClass="w-full"></p-datepicker>
+                </div>
+              </div>
+
+              <input pInputText formControlName="location" placeholder="Location/Address" class="w-full mb-2" />
+              <textarea pInputTextarea formControlName="notes" placeholder="Notes (Optional)" class="w-full" rows="1"></textarea>
             </div>
           }
         </div>

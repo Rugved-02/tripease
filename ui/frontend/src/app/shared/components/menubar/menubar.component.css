@@ -40,7 +40,7 @@
 
 /* profile button styling */
 .profile-wrapper {
-
+  margin-right: 110px;
   position: relative;
 
 }
@@ -119,3 +119,8 @@
   margin-right: 110px;
 }
  
+
+.align-popover{
+  /* margin-right: 110px; */
+  padding-right: 200px;
+}

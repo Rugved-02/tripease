@@ -8,7 +8,7 @@ import {
   AbstractControl, 
   ValidationErrors 
 } from '@angular/forms';
-import { AuthService, UserCredentials } from '../../../core/services/auth/auth-service';
+import { AuthService } from '../../../core/services/auth/auth-service';
 import { Router, RouterLink } from '@angular/router';
 
 import { InputTextModule } from 'primeng/inputtext';
@@ -23,6 +23,7 @@ import { LogoTextComponent } from "../../../shared/components/logo-text/logo-tex
 
 @Component({
   selector: 'app-signup',
+  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -34,14 +35,14 @@ import { LogoTextComponent } from "../../../shared/components/logo-text/logo-tex
     CardModule,
     DividerModule,
     LogoTextComponent
-],
+  ],
   providers: [MessageService],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
-
   signupForm: FormGroup;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -68,7 +69,6 @@ export class SignupComponent {
     return this.signupForm.controls; 
   }
 
-  // 3. Navigation method (Alternative to using routerLink in HTML)
   login() {
     this.router.navigate(['/login']);
   }
@@ -85,25 +85,51 @@ export class SignupComponent {
       this.messageService.add({
         severity: 'warn',
         summary: 'Form Incomplete', 
-        detail: 'Please fill in all required fields correctly.',
+        detail: 'Please check your input fields.',
         life: 3000
       });
-    } 
-    else {
-      const formData:UserCredentials = this.signupForm.value as UserCredentials ;
-      this.authService.addUser(formData);
-     
-
-      this.messageService.add({
-        severity: 'success', 
-        summary: 'Account Created', 
-        detail: 'Welcome to TripEase! Redirecting to login...',
-        life: 2000
-      });
-
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 2000);
+      return;
     }
+
+    this.isLoading = true;
+
+    /** * MAPPING: Transform local form names to match Java DTO
+     * Angular: fullName -> Java: name
+     * Angular: phone    -> Java: mobile
+     */
+    const rawData = this.signupForm.value;
+    const registrationPayload = {
+      name: rawData.fullName,
+      email: rawData.email,
+      mobile: rawData.phone,
+      password: rawData.password
+    };
+
+    this.authService.registerUser(registrationPayload).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+        this.messageService.add({
+          severity: 'success', 
+          summary: 'Account Created', 
+          detail: 'User registered successfully! Redirecting to login...',
+          life: 2000
+        });
+
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 2000);
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.error('Registration error:', error);
+
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Registration Failed',
+          detail: error.error?.message || 'Server error. Please try again later.',
+          life: 5000
+        });
+      }
+    });
   }
 }

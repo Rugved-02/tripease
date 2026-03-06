@@ -42,22 +42,49 @@
 
           <!-- DROPDOWN -->
           <div class="profile-menu" *ngIf="showProfileMenu">
-            <div class="menu-item">
+            <div
+              class="menu-item"
+              (click)="redirectToDashboard()"
+              role="button"
+              tabindex="0"
+              (keydown.enter)="redirectToDashboard()"
+            >
               <i class="pi pi-user"></i>
-              Dashboard
+              <span>Dashboard</span>
             </div>
-            <div class="menu-item">
+
+            <div
+              class="menu-item"
+              (click)="redirectToTrips()"
+              role="button"
+              tabindex="0"
+              (keydown.enter)="redirectToTrips()"
+            >
               <i class="pi pi-calendar"></i>
-              My Trips
+              <span>My Trips</span>
             </div>
-            <div class="menu-item">
+
+            <div
+              class="menu-item"
+              (click)="redirectToAnalytics()"
+              role="button"
+              tabindex="0"
+              (keydown.enter)="redirectToAnalytics()"
+            >
               <i class="pi pi-chart-bar"></i>
-              Analytics
+              <span>Analytics</span>
             </div>
+
             <div class="menu-divider"></div>
-            <div class="menu-item logout">
+            <div
+              class="menu-item logout"
+              (click)="onLogout()"
+              role="button"
+              tabindex="0"
+              (keydown.enter)="onLogout()"
+            >
               <i class="pi pi-sign-out"></i>
-              Log out
+              <span>Log out</span>
             </div>
           </div>
         </div>

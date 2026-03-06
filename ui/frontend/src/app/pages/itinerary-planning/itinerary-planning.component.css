@@ -126,19 +126,23 @@
   width: 3px !important;
 }
 
-/* The Circle Marker */
+
 .custom-marker {
-  display: flex;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  z-index: 10;
-  position: relative;
-  /* KEY FIX: This white shadow creates the 'gap' between the line and the circle */
-  box-shadow: 0 0 0 8px #ffffff; 
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    margin-top: 35px;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: var(--p-primary-color); 
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1; 
+}
+
+.custom-marker i {
+    font-size: 2rem;
 }
 
 /* =========================================
@@ -215,6 +219,10 @@
   padding-top: 1.5rem !important;
   border-top: 1px solid #f1f5f9;
   margin-top: 0.5rem;
+
+  position: relative; 
+  z-index: 20; /* Higher than the marker's 10 */
+  pointer-events: auto;
 }
 
 /* Make buttons equal width and chunky */

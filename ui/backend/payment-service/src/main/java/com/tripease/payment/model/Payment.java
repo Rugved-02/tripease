@@ -24,6 +24,7 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "payment_id")
     private Long id;
 
     // Idempotency Key: Client-generated UUID to prevent duplicate processing
@@ -49,8 +50,8 @@ public class Payment {
 //    @Column(columnDefinition = "TEXT")
 //    private String providerResponseRaw; // Store the JSON response for debugging
 
-//    @Version
-//    private Long version; // Optimistic Locking to prevent race conditions
+    @Version
+    private Long version; // Optimistic Locking to prevent race conditions
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -58,4 +59,6 @@ public class Payment {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+
 }

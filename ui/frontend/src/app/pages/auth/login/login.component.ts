@@ -32,63 +32,75 @@ import { LogoTextComponent } from "../../../shared/components/logo-text/logo-tex
 })
 export class LoginComponent implements OnInit {
       loginForm!: FormGroup;
-      constructor(private router:Router,
+      isLoading: boolean = false;
+
+      constructor(
+        private router:Router,
         private fb:FormBuilder,
         private messageService: MessageService,
-        private authService : AuthService){}
+        private authService : AuthService
+      ){}
 
 
       ngOnInit(): void {
-    // Initialize the form with validation rules
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required,Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
+        // Initialize the form with validation rules
+        this.loginForm = this.fb.group({
+          email: ['', [Validators.required,Validators.email]],
+          password: ['', [Validators.required, Validators.minLength(6)]]
+        });
+      }
 
      isInvalid(controlName: string): boolean {
-    const control = this.loginForm.get(controlName);
-    return !!(control && control.invalid && (control.dirty || control.touched));
-    }
+      const control = this.loginForm.get(controlName);
+      return !!(control && control.invalid && (control.dirty || control.touched));
+      }
+
+
 
     onSubmit(): void {
-    if (this.loginForm.valid) {
-      console.log('Form Submitted!', this.loginForm.value);
-      // Process your login or data here
+      if (this.loginForm.valid) {
+        this.isLoading = true;
+        const { email, password } = this.loginForm.value;
 
-      const { email, password } = this.loginForm.value;
+        // Subscribe to the Observable returned by the service
+        this.authService.checkAuth(email, password).subscribe({
+          next: (isAuthenticated) => {
+            this.isLoading = false;
 
-      const isAuthenticated = this.authService.checkAuth(email, password);
-      if(isAuthenticated){
-          
-          this.messageService.add({ 
-          severity: 'success', 
-          summary: 'Success', 
-          detail: 'Login Successful!',
-          life: 4000 // Duration in milliseconds
-           });
-          
-          setTimeout(()=>{
-            this.router.navigate(['/dashboard']);
-          },2000);
+            if (isAuthenticated) {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: 'Login Successful!',
+                life: 2000
+              });
+
+              setTimeout(() => {
+                this.router.navigate(['/dashboard']);
+              }, 2000);
+            } else {
+              this.showError('Invalid email or password');
+            }
+          },
+          error: (err) => {
+            this.isLoading = false;
+            this.showError('An unexpected error occurred. Please try again later.');
+            console.error('Login error:', err);
+          }
+        });
+      } else {
+        this.loginForm.markAllAsTouched();
       }
-      else{
-        this.messageService.add({ 
-          severity: 'error', 
-          summary: 'Failed', 
-          detail: 'Login Unsuccessful!',
-          //life: 3000// milliseconds
-          sticky:true
+    }
 
-           });
-      }
-      
 
-    } 
-    else {
-      // Mark all fields as touched to trigger validation messages
-      this.loginForm.markAllAsTouched();
-       }
+    private showError(message: string): void {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Login Failed',
+        detail: message,
+        sticky: true
+      });
     }
 
     signup(){
@@ -102,4 +114,3 @@ export class LoginComponent implements OnInit {
        this.router.navigate(['/forgotPassword'])
      }
 }
-

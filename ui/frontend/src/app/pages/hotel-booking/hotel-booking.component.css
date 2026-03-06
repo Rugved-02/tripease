@@ -5,212 +5,271 @@
   font-family: 'Inter', sans-serif;
 }
 
-h1 { 
-  color: #093fed; 
-  margin: 0 0 8px 100px; 
-  font-weight: 800; 
+
+.header-container {
+  padding: 0 100px;
+  margin-bottom: 30px;
+}
+
+.header-container h1 {
+  color: #093fed;
+  font-weight: 800;
   font-size: 2.5rem;
+  margin: 0 0 8px 0;
 }
 
-h4 { 
+.subtitle {
   color: #64748b;
-  margin: 0 0 30px 100px;
   font-weight: 400;
+  margin: 0;
+  margin-top: 20px;
+}
+.search-box-wrapper {
+  background: white;
+  margin-top: 30px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* Search Card */
-.search-card { 
-  margin: 0 100px; 
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+.search-form {
+  display: flex;
+  flex-wrap: wrap; 
+  /* This creates the space between the three top fields */
+  gap: 24px; 
+  align-items: flex-start;
 }
 
-.form-row { 
-  display: flex; 
-  gap: 1.5rem; 
+.search-field {
+  /* Forces 3 columns with gap calculation (approx 33% each) */
+  flex: 1 1 calc(33.333% - 24px); 
+  display: flex;
+  flex-direction: column;
+  min-width: 250px; /* Ensures it looks good on tablet/mobile */
 }
 
-.form-group { 
-  flex: 1; 
-  display: flex; 
-  flex-direction: column; 
-}
-
-.label-with-icon { 
-  display: flex; 
-  align-items: center; 
-  gap: 0.5rem; 
-  font-weight: 600; 
-  margin-bottom: 0.5rem;
+.search-field label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem; 
   color: #334155;
 }
 
-/* Results Header */
-.available-section { 
-  margin: 50px 100px; 
+/* 1. Input Background & Color */
+:host ::ng-deep .p-inputtext, 
+:host ::ng-deep .p-datepicker input {
+  background-color: #f1f5f9 !important; 
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+  width: 100% !important;
+  color: #1e293b;
 }
 
-.results-header { 
-  font-size: 1.5rem; 
-  font-weight: 700; 
+/* 2. Placeholder: WHITE and CENTERED */
+:host ::ng-deep .p-inputtext::placeholder,
+:host ::ng-deep .p-datepicker input::placeholder {
+  color: #797777 !important; /* Pure white placeholder */
+  text-align: left !important; /* Centered text */
+  opacity: 1; /* Ensures color isn't muted by browser defaults */
+}
+
+/* 3. Search Button: New Line & Black Background */
+.search-btn-wrapper {
+  flex: 1 1 100%; /* Forces the wrapper to take the full width/new line */
+  margin-top: 10px;
+}
+
+/* Targeting the PrimeNG Button Component specifically */
+:host ::ng-deep .search-btn.p-button {
+  background-color: #000000 !important;
+  border: 1px solid #000000 !important;
+  width: 100% !important;
+  padding: 13px !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Ensure the label inside the button is also white */
+:host ::ng-deep .search-btn .p-button-label {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+.list-container {
+  margin: 50px 100px;
+}
+
+.results-count {
+  font-size: 1.5rem;
+  font-weight: 700;
   margin-bottom: 2rem;
   color: #1e293b;
 }
 
-/* Hotel Result Card */
-:host ::ng-deep .hotel-result-card.p-card {
+.hotel-card {
+  background: white;
   border-radius: 16px;
+  display: flex;
   overflow: hidden;
   margin-bottom: 24px;
   border: 1px solid #e2e8f0;
+  height: 280px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-:host ::ng-deep .hotel-result-card.p-card:hover {
+.hotel-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(0,0,0,0.1);
 }
 
-.search-card button[pButton] {
-    width: 100% !important;        /* Makes button full width of the container */
-    margin-top: 1.5rem !important; /* Adds spacing above the button */
-    display: flex !important;      /* Enables flexbox */
-    justify-content: center !important; /* Centers content horizontally */
-    align-items: center !important;     /* Centers content vertically */
+
+.card-left {
+  position: relative;
+  width: 350px;
+  min-width: 350px;
 }
 
-/* Ensures the label inside the button doesn't take up extra space */
-:host ::ng-deep .p-button .p-button-label {
-    flex: none !important; 
-    text-align: center;
-}
-
-.card-content { 
-  display: flex; 
-  height: 280px; 
-}
-
-/* Image Section */
-.image-section {
-  position: relative; 
-  width: 350px; 
-}
-
-.image-section img { 
-  width: 100%; 
-  height: 100%; 
+.hotel-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.rooms-left {
-  position: absolute; 
-  top: 15px; 
+.rooms-badge {
+  position: absolute;
+  top: 15px;
   right: 15px;
-  background: rgba(255, 255, 255, 0.9); 
+  background: rgba(255, 255, 255, 0.9);
   color: #0f0f0f;
   padding: 6px 12px;
-  border-radius: 20px; 
-  font-size: 0.75rem; 
+  border-radius: 20px;
+  font-size: 0.75rem;
   font-weight: 800;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Details Section */
-.details-section {
-  flex: 1; 
-  padding: 24px; 
-  display: flex; 
+
+.card-right {
+  flex: 1;
+  padding: 24px;
+  display: flex;
   flex-direction: column; 
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
-.hotel-title { 
-  font-size: 1.5rem; 
-  font-weight: 800; 
-  margin: 0; 
+.main-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.hotel-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
   color: #0f172a;
 }
 
-.location-text { 
-  color: #64748b; 
+.top-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.location-text {
+  color: #64748b;
   margin: 6px 0;
   font-size: 0.95rem;
 }
 
-.rating-box {
-  margin-top: 8px;
+.rating-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.stars {
+.stars i {
+  color: #f59e0b;
+  font-size: 0.85rem;
+}
+
+.rating-num {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.price-action {
+  text-align: left; 
   display: flex;
-  align-items: center;
-  margin-right: 8px;
-  font-size: 0.85rem; /* Adjust star size */
+  justify-content: space-between; 
+  align-items: flex-end;
+  border-left: none; 
+  padding-left: 0;
+  margin-top: 10px;
 }
-
-.rating-box {
+.price-label {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+.price-side {
   display: flex;
-  align-items: center;
-  margin-top: 5px;
+  flex-direction: column;
+  align-items: flex-start; 
 }
 
-.rating-score {
+.price-amount {
+  font-size: 1.8rem;
+  color: #2563eb;
+  margin: 4px 0 0 0;
+  font-weight: 800;
+}
+
+.price-amount span {
   font-size: 0.9rem;
-  color: #475569;
+  color: #64748b;
+  font-weight: 400;
+}
+
+.reserve-btn {
+  background-color: #000 !important;
+  color: white !important;
+  border: none !important;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+}
+
+.reserve-btn:disabled {
+  background-color: #cbd5e1 !important;
+  cursor: not-allowed;
 }
 
 .amenities-row { 
   display: flex;
-  gap: 15px; 
-  font-size: 0.85rem;
-  color: #64748b;
-  margin: 20px 0; 
+  gap: 12px; 
+  flex-wrap: wrap;
+  margin: 15px 0; 
 }
 
-/* Footer & Pricing */
-.footer-row { 
+.amenity-tag {
+  background: #f8fafc; 
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #475569;
   display: flex;
-  justify-content: space-between; 
-  align-items: flex-end; 
-  border-top: 1px solid #f1f5f9;
-  padding-top: 15px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e2e8f0;
+  font-weight: 500;
 }
 
-.price-value {
-  font-size: 1.8rem; 
-  color: #2563eb;
-  margin: 0; 
-  font-weight: 800;
-}
-
-.price-value span {
-  font-size: 0.9rem; 
-  color: #64748b; 
-  font-weight: 400; 
-}
-
-/* PrimeNG Overrides */
-:host ::ng-deep .p-button {
-  background-color: #000 !important;
-  border: none !important;
-  font-weight: 600 !important;
-}
-
-:host ::ng-deep .reserve-btn.p-button {
-  padding: 0.75rem 2rem !important;
-  border-radius: 8px !important;
-}
-
-:host ::ng-deep .p-datepicker { width: 100%; }
-
-/* No Results Box */
-.no-results-box {
-  text-align: center;
-  padding: 80px;
-  background: white;
-  border-radius: 16px;
-  border: 2px dashed #cbd5e1;
-}
+.amenity-tag i {
+  color: #2563eb; 
+  font-size: 0.9rem;
+} 

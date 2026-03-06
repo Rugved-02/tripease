@@ -14,8 +14,8 @@
           <i [class]="item.icon" style="font-size: 1.5rem; color: var(--p-surface-0)"></i>
         </div>
 
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.description }}</p>
+        <h3>{{(item.description === 'Total Spent')? (item.title | currency: 'INR'): item.title }}</h3>
+        <p style="font-size: small;">{{ item.description }}</p>
       </p-card>
     }
   </div>
@@ -26,10 +26,12 @@
       <h3 class="quick-actions-title">Quick Actions</h3>
       <div class="quick-actions-container">
         @for (action of quickActions(); track $index) {
+          <a [routerLink]="action.link" style="text-decoration: none; color: inherit;">
           <div class="quick-action-item">
             <i [class]="action.icon"></i>
             <span>{{ action.label }}</span>
           </div>
+        </a>
         }
       </div>
     </p-card>
@@ -38,11 +40,9 @@
     <p-card class="recent-bookings-wrapper">
       <div class="recent-bookings-header">
         <h3>Recent Bookings</h3>
-        <!-- <span class="view-all clickable">View All</span> -->
-        <button pButton type="button" label="View All" class="p-button-text p-button-sm"></button>
       </div>
       <div class="recent-bookings-list">
-        @for (booking of recentBookings(); track $index) {
+        @for (booking of recentBookingsPanel(); track $index) {
           <div class="booking-item">
             <!-- LEFT -->
             <div class="booking-left">
@@ -53,35 +53,49 @@
                 <div class="booking-title">{{ booking.title }}</div>
                 <div class="booking-date">
                   <i class="pi pi-calendar"></i>
-                  {{ booking.date }}
+                  @if(booking.resourceType === 'HOTEL'){
+                    {{ booking.startDate }} - {{ booking.endDate }}
+                  }@else{
+                    {{ booking.startDate }}
+                  }
+                  
                 </div>
               </div>
             </div>
             <!-- RIGHT -->
             <div class="booking-right">
-              <div class="booking-price">{{ booking.price }}</div>
+              <div class="booking-price">{{ booking.price | currency: 'INR'}}</div>
 
               <span
                 class="booking-status"
-                [class.confirmed]="booking.status === 'Confirmed'"
-                [class.pending]="booking.status === 'Pending'"
+                [class.confirmed]="booking.status === 'CONFIRMED'"
+                [class.pending]="booking.status === 'PENDING'"
+                [class.expired]="booking.status === 'EXPIRED'"
               >
-                <i [class]="booking.status === 'Confirmed' ? 'pi pi-check-circle' : 'pi pi-clock'">
+                <i [class]="booking.status === 'CONFIRMED' ? 'pi pi-check-circle' : 'pi pi-clock'">
                 </i>
 
                 {{ booking.status }}
               </span>
-
-              <button
-                pButton
-                type="button"
-                label="View Details"
-                class="p-button-outlined p-button-sm"
-              ></button>
             </div>
           </div>
         }
       </div>
+
+      <!-- load more -->
+      <div class="load-more-button-wrapper" *ngIf="!isLastPage()">
+    <button 
+      pButton 
+      label="Load More" 
+      icon="pi pi-plus" 
+      [loading]="isLoadingRecentBookings()"
+      (click)="loadRecentBookings(true)"
+      size="small"
+      [raised]="true">
+    </button>
+  </div>
+  
+  <p *ngIf="isLastPage() && recentBookings().length > 0" style="font-size: larger;">You've reached the end.</p>
     </p-card>
   </div>
 

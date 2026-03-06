@@ -34,7 +34,7 @@
       <div class="sub-div">
         <p-card header="">
           <div class="form-section" *ngIf="selectedMethod === 'card'">
-            <app-card-payment-method></app-card-payment-method>
+            <app-card-payment-method (pay)="executeCompletePayment($event)"></app-card-payment-method>
           </div>
 
           <div class="info-box" *ngIf="selectedMethod !== 'card'">
@@ -63,7 +63,7 @@
           <hr />
           <p class="fee fee-total">
             <span class="fee-total-type">Total</span
-            ><span class="fee-total-amount">{{ totalFee | currency : 'INR' }}</span>
+            ><span class="fee-total-amount">{{ totalAmount | currency : 'INR' }}</span>
           </p>
         </div>
 
@@ -91,5 +91,23 @@
         </div>
       </p-card>
     </div>
+  </div>
+</div>
+
+<!-- Payment Pop up Code -->
+
+<div class="overlay" *ngIf="isProcessing() || paymentStatus() !== 'IDLE'">
+  <div class="popup-card">
+    
+    <div class="spinner" *ngIf="isProcessing()"></div>
+
+    <div class="status-icon success" *ngIf="paymentStatus() === 'SUCCESS'">✔</div>
+    <div class="status-icon error" *ngIf="paymentStatus() === 'FAILED'">✘</div>
+
+    <h3>{{ statusMessage() }}</h3>
+
+    <button *ngIf="!isProcessing()" (click)="closePopup()" class="close-btn">
+      Go to Dashboard
+    </button>
   </div>
 </div>
