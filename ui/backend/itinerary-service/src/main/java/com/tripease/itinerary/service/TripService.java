@@ -40,6 +40,14 @@ public class TripService {
                 .collect(Collectors.toList());
     }
 
+    public TripResponseDTO getLatestTripByUserId(String userId) {
+        // Calling the repository to find the top 1 record ordered by creation date descending
+        Trip trip = tripRepository.findFirstByUserIdAndIsEnabledTrueOrderByCreatedAtDesc(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("No trips found for user id : " + userId));
+
+        return mapToResponseDTO(trip);
+    }
+
     /**
      * POST /trips - Create a new trip container
      * @param userId extracted from JWT token in the Controller

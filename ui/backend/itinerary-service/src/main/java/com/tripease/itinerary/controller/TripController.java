@@ -38,6 +38,16 @@ public class TripController {
         return ResponseEntity.ok(trips);
     }
 
+    @GetMapping("/my-trips/latest")
+    @Transactional(readOnly = true)
+    public ResponseEntity<TripResponseDTO> getMyLatestTrip(@RequestHeader("X-User-Id") String userId) {
+        // email will contain the value from the 'sub' claim of your JWT
+        TripResponseDTO trip = tripService.getLatestTripByUserId(userId);
+        return ResponseEntity.ok(trip);
+    }
+
+
+
     @PostMapping("/{tripId}")
     public ResponseEntity<TripResponseDTO> updateTrip(
             @PathVariable Long tripId,

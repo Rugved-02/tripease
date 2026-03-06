@@ -336,3 +336,32 @@ hr {
   border-top: 1px solid #f1f5f9;
   margin: 0.5rem 0;
 }
+
+
+/* No itineraries found block styling */
+
+.no-trips-container {
+  text-align: center;
+  padding: 3rem;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  margin-top: 2rem;
+  background-color: #fafafa; /* Optional: adds a slight background to the empty state */
+}
+
+.no-trips-icon {
+  font-size: 3rem;
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+.no-trips-title {
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+.no-trips-text {
+  color: #888;
+  max-width: 400px;
+  margin: 0 auto;
+}

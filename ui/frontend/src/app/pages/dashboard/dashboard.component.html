@@ -3,8 +3,7 @@
 
   <div class="panel-header">
     <h2 class="panel-title">Welcome Back!</h2>
-
-    </div>
+  </div>
 
   <p class="panel-title-description">Here's an overview of your travel activities</p>
   <div class="card-container">
@@ -14,8 +13,10 @@
           <i [class]="item.icon" style="font-size: 1.5rem; color: var(--p-surface-0)"></i>
         </div>
 
-        <h3>{{(item.description === 'Total Spent')? (item.title | currency: 'INR'): item.title }}</h3>
-        <p style="font-size: small;">{{ item.description }}</p>
+        <h3>
+          {{ item.description === 'Total Spent' ? (item.title | currency: 'INR') : item.title }}
+        </h3>
+        <p style="font-size: small">{{ item.description }}</p>
       </p-card>
     }
   </div>
@@ -26,12 +27,12 @@
       <h3 class="quick-actions-title">Quick Actions</h3>
       <div class="quick-actions-container">
         @for (action of quickActions(); track $index) {
-          <a [routerLink]="action.link" style="text-decoration: none; color: inherit;">
-          <div class="quick-action-item">
-            <i [class]="action.icon"></i>
-            <span>{{ action.label }}</span>
-          </div>
-        </a>
+          <a [routerLink]="action.link" style="text-decoration: none; color: inherit">
+            <div class="quick-action-item">
+              <i [class]="action.icon"></i>
+              <span>{{ action.label }}</span>
+            </div>
+          </a>
         }
       </div>
     </p-card>
@@ -43,38 +44,46 @@
       </div>
       <div class="recent-bookings-list">
         @for (booking of recentBookingsPanel(); track $index) {
-          <div class="booking-item">
-            <!-- LEFT -->
+          <div class="booking-item" (click)="onRecentBookingClick(booking.bookingDTO)">
             <div class="booking-left">
               <div class="booking-icon">
-                <i [class]="booking.icon"></i>
+                <i [class]="booking.resourceType === 'HOTEL' ? 'pi pi-building' : 'pi pi-send'"></i>
               </div>
+
               <div>
-                <div class="booking-title">{{ booking.title }}</div>
+                <div class="booking-title">
+                  @if (booking.resourceType === 'HOTEL') {
+                    {{ booking.details.hotelName }} - {{ booking.details.hotelLocation }}
+                  } @else {
+                    {{ booking.details.airline }} - {{ booking.details.flightNo }} |
+                    {{ booking.details.depPlace }} → {{ booking.details.arrPlace }}
+                  }
+                </div>
+
                 <div class="booking-date">
                   <i class="pi pi-calendar"></i>
-                  @if(booking.resourceType === 'HOTEL'){
-                    {{ booking.startDate }} - {{ booking.endDate }}
-                  }@else{
-                    {{ booking.startDate }}
+                  {{ booking.startDate | date: 'mediumDate' }}
+                  @if (booking.resourceType === 'HOTEL') {
+                    - {{ booking.endDate | date: 'mediumDate' }}
                   }
-                  
                 </div>
               </div>
             </div>
-            <!-- RIGHT -->
+
             <div class="booking-right">
-              <div class="booking-price">{{ booking.price | currency: 'INR'}}</div>
+              <div class="booking-price">{{ booking.price | currency: 'INR' }}</div>
 
               <span
                 class="booking-status"
-                [class.confirmed]="booking.status === 'CONFIRMED'"
-                [class.pending]="booking.status === 'PENDING'"
-                [class.expired]="booking.status === 'EXPIRED'"
+                [ngClass]="{
+                  confirmed: booking.status === 'CONFIRMED',
+                  pending: booking.status === 'PENDING',
+                  expired: booking.status === 'EXPIRED',
+                }"
               >
-                <i [class]="booking.status === 'CONFIRMED' ? 'pi pi-check-circle' : 'pi pi-clock'">
-                </i>
-
+                <i
+                  [class]="booking.status === 'CONFIRMED' ? 'pi pi-check-circle' : 'pi pi-clock'"
+                ></i>
                 {{ booking.status }}
               </span>
             </div>
@@ -84,18 +93,20 @@
 
       <!-- load more -->
       <div class="load-more-button-wrapper" *ngIf="!isLastPage()">
-    <button 
-      pButton 
-      label="Load More" 
-      icon="pi pi-plus" 
-      [loading]="isLoadingRecentBookings()"
-      (click)="loadRecentBookings(true)"
-      size="small"
-      [raised]="true">
-    </button>
-  </div>
-  
-  <p *ngIf="isLastPage() && recentBookings().length > 0" style="font-size: larger;">You've reached the end.</p>
+        <button
+          pButton
+          label="Load More"
+          icon="pi pi-plus"
+          [loading]="isLoadingRecentBookings()"
+          (click)="loadRecentBookings(true)"
+          size="small"
+          [raised]="true"
+        ></button>
+      </div>
+
+      <p *ngIf="isLastPage() && recentBookings().length > 0" style="font-size: larger">
+        You've reached the end.
+      </p>
     </p-card>
   </div>
 
@@ -106,8 +117,8 @@
         <i class="pi pi-info-circle"></i>
       </div>
       <div class="upcoming-trip-text">
-        <h4>{{ upcomingTrip.title }}</h4>
-        <p>{{ upcomingTrip.message }}</p>
+        <h4>{{ upcomingTrip().title }}</h4>
+        <p>{{ upcomingTrip().message }}</p>
       </div>
     </div>
     <button
@@ -115,6 +126,94 @@
       type="button"
       label="View Itinerary"
       class="p-button-secondary p-button-sm"
+      routerLink="/itineraryPlanning"
     ></button>
   </div>
 </p-panel>
+
+<!-- dialog /pop -up  code -->
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="booking-detail-card"
+  [contentStyle]="{ overflow: 'visible' }"
+  header="Booking Summary"
+>
+  @if (dialogRecentBookingData(); as data) {
+    <div class="card-content">
+      <div class="card-header-row">
+        <div class="icon-circle">
+          <i [class]="data.resourceType === 'HOTEL' ? 'pi pi-building' : 'pi pi-send'"></i>
+        </div>
+        <div class="header-text">
+          <h2 class="main-title">
+            @if (data.resourceType === 'HOTEL') {
+              {{ data.resourceDetails?.hotelName }}
+            } @else {
+              {{ data.resourceDetails?.airline }} - {{ data.resourceDetails?.flightNo }}
+            }
+          </h2>
+          <span class="sub-text">
+            {{
+              data.resourceType === 'HOTEL'
+                ? data.resourceDetails?.hotelLocation
+                : data.resourceDetails?.depPlace + ' → ' + data.resourceDetails?.arrPlace
+            }}
+          </span>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        @if (data.resourceType === 'HOTEL') {
+          <div class="info-box">
+            <span class="label">Check-In Date</span>
+            <div class="value">{{ data.startDate | date: 'mediumDate' }}</div>
+          </div>
+          <div class="info-box">
+            <span class="label">Check-Out Date</span>
+            <div class="value">{{ data.endDate | date: 'mediumDate' }}</div>
+          </div>
+        } @else {
+          <div class="info-box">
+            <span class="label">Flight Boarding Date</span>
+            <div class="value">{{ data.startDate | date: 'mediumDate' }}</div>
+          </div>
+          <div class="info-box">
+            <span class="label">Booking Type</span>
+            <div class="value">{{ data.subType }}</div>
+          </div>
+        }
+
+        <div class="info-box">
+          <span class="label">Status</span>
+          <div
+            class="status-indicator"
+            [ngClass]="{
+              'status-confirmed': data.bookingStatus === 'CONFIRMED',
+              'status-pending': data.bookingStatus === 'PENDING',
+              'status-expired':
+                data.bookingStatus === 'EXPIRED' || data.bookingStatus === 'CANCELLED',
+            }"
+          >
+            <i
+              [class]="data.bookingStatus === 'CONFIRMED' ? 'pi pi-check-circle' : 'pi pi-clock'"
+              style="margin-right: 4px"
+            ></i>
+            {{ data.bookingStatus }}
+          </div>
+        </div>
+        <div class="info-box">
+          <span class="label">Booked On</span>
+          <div class="value">{{ data.updatedAt | date: 'dd/MM/yy' }}</div>
+        </div>
+      </div>
+
+      <div class="price-footer">
+        <span class="total-label">Total Amount Paid</span>
+        <span class="total-value">{{ data.totalAmount | currency: 'INR' }}</span>
+      </div>
+    </div>
+  }
+</p-dialog>

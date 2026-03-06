@@ -12,10 +12,10 @@ import { SliceResponseRecentBookingsDTO } from './dto/SliceResponseRecentBooking
 export class DashboardService {
 
   private httpClient = inject(HttpClient);
-  private readonly API_URL = `${environment.gatewayUrl}/booking/dashboard`;
+  private readonly API_URL = `${environment.gatewayUrl}`;
 
   getUserStats(): Observable<DashboardStatsResponseDTO> {
-    return this.httpClient.get<DashboardStatsResponseDTO>(`${this.API_URL}/cardsData`);
+    return this.httpClient.get<DashboardStatsResponseDTO>(`${this.API_URL}/booking/dashboard/cardsData`);
   }
  
   getRecentBookings(page: number, size: number): Observable<SliceResponseRecentBookingsDTO<RecentBookingsResponseDTO>> {
@@ -24,7 +24,11 @@ export class DashboardService {
       .set('page', page.toString())
       .set('size', size.toString());
 
-    return this.httpClient.get<SliceResponseRecentBookingsDTO<RecentBookingsResponseDTO>>(`${this.API_URL}/recentBookings`, { params });
+    return this.httpClient.get<SliceResponseRecentBookingsDTO<RecentBookingsResponseDTO>>(`${this.API_URL}/booking/dashboard/recentBookings`, { params });
+  }
+
+  getLatestTrip():Observable<any>{
+    return this.httpClient.get(`${this.API_URL}/itinerary/trips/my-trips/latest`);
   }
 }
 

@@ -349,3 +349,124 @@ font-size: 0.7rem;
 .load-more-button-wrapper{
   margin-top: 15px;
 }
+
+
+/* booking list dialog / card styling */
+
+/* Styling the PrimeNG Dialog Container */
+::ng-deep .booking-detail-card {
+  width: 500px !important; /* Increased Width */
+  max-width: 95vw;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: none;
+}
+
+/* Ensure no scrollbar appears on the content area */
+::ng-deep .booking-detail-card .p-dialog-content {
+  padding: 1.5rem !important;
+  overflow: hidden !important; /* Removes the scrollbar */
+}
+
+.card-header-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.icon-circle {
+  background: #eff6ff;
+  color: #3b82f6;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.main-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.sub-text {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  padding: 1rem 0;
+  border-top: 1px solid #f1f5f9;
+}
+
+.info-box .label {
+  display: block;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.info-box .value {
+  font-weight: 500;
+  color: #334155;
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  width: fit-content;
+  gap: 4px;
+}
+
+
+/* Confirmed - Green */
+.status-confirmed {
+  background: #d1fae5;
+ color: #065f46;
+}
+
+/* Pending - Amber/Orange */
+.status-pending {
+  background: #fef3c7;
+ color: #92400e;
+}
+
+/* Expired/Cancelled - Red */
+.status-expired {
+  background: #fec7c7;
+ color: #da1313;
+}
+.price-footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 2px dashed #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.total-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+}
