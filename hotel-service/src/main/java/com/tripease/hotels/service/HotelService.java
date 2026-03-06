@@ -31,36 +31,40 @@ public class HotelService {
     private final InventoryManagementService inventoryManagementService;
     private final HotelPricingService hotelPricingService;
     
-    public List<HotelSearchResponseDTO> searchHotels(String location, LocalDate checkIn, LocalDate checkOut) {
-        log.info("Searching for hotels in {} from {} to {}", location, checkIn, checkOut);
-        long duration = ChronoUnit.DAYS.between(checkIn, checkOut);
 
-        // 1. Get IDs from Database - Database operations are faster than Java loops
+    public List<HotelSearchResponseDTO> searchHotels(String location, LocalDate checkIn, LocalDate checkOut) {
+        long duration = ChronoUnit.DAYS.between(checkIn, checkOut);
         List<Long> availableIds = inventoryRepository.findAvailableHotelIds(checkIn, checkOut, duration);
 
-        if (availableIds.isEmpty()) {
-            return Collections.emptyList();
-        }
+        if (availableIds.isEmpty()) return Collections.emptyList();
 
-        // 2. Filter by Location directly in the SQL query
         List<Hotel> results = hotelRepository.findAllByHotelIdInAndLocationContainingIgnoreCaseAndIsRegisteredTrue(
                 availableIds, location.trim());
 
-        return results.parallelStream() // Use parallelStream for faster concurrent pricing
+        return results.parallelStream()
                 .map(hotel -> {
+                    // 1. Calculate Price
                     BigDecimal totalStayPrice = BigDecimal.ZERO;
-                    
-                    // Potential Bottleneck: If getLivePrice hits a DB or API, this is slow
                     for (LocalDate date = checkIn; date.isBefore(checkOut); date = date.plusDays(1)) {
                         totalStayPrice = totalStayPrice.add(hotelPricingService.getLivePrice(hotel.getHotelId(), date));
                     }
+
+                    // 2. Get Real Availability
+                    Integer roomsLeft = inventoryRepository.findMinAvailableRooms(hotel.getHotelId(), checkIn, checkOut);
+
+                    // 3. Calculate Average Rating
+                    double avg = hotel.getRatings().stream()
+                            .mapToDouble(Rating::getRatingValue)
+                            .average().orElse(0.0);
 
                     return new HotelSearchResponseDTO(
                             hotel.getHotelName(),
                             hotel.getLocation(),
                             hotel.getAmenities(),
                             totalStayPrice,
-                            hotel.getRatings()
+                            hotel.getRatings(),
+                            roomsLeft != null ? roomsLeft : 0,
+                            avg
                     );
                 })
                 .toList();

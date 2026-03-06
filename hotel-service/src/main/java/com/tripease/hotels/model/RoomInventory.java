@@ -28,5 +28,6 @@ public class RoomInventory {
 
     private int availableRooms;
 
-    private double priceOnDate; // Allows for seasonal pricing
+    private double priceOnDate;
+    
 }

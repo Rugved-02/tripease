@@ -41,4 +41,11 @@ public interface RoomInventoryRepository extends JpaRepository<RoomInventory, Lo
     boolean existsByHotelIdAndInventoryDate(Long hotelId, LocalDate date);
 
     Optional<RoomInventory> findByHotelIdAndInventoryDate(Long hotelId, LocalDate stayDate);
+    
+ // ADD THIS QUERY specifically
+    @Query("SELECT MIN(r.availableRooms) FROM RoomInventory r " +
+           "WHERE r.hotelId = :hotelId " +
+           "AND r.inventoryDate >= :checkIn " +
+           "AND r.inventoryDate < :checkOut")
+    Integer findMinAvailableRooms(Long hotelId, LocalDate checkIn, LocalDate checkOut);
 }

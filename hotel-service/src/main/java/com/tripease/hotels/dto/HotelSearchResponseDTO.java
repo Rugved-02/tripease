@@ -13,5 +13,7 @@ public record HotelSearchResponseDTO(
         String location,
         List<String> amenities,
         BigDecimal price,
-        List<Rating> ratings
+        List<Rating> ratings,
+        Integer totalRooms,
+        Double averageRating
 ) {}
