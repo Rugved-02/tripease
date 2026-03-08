@@ -19,7 +19,7 @@ import { HotelBookingService } from '../../core/services/hotel-booking/hotel-boo
 import { AuthService } from '../../core/services/auth/auth-service';
 import { BookingService } from '../../core/services/booking/booking.service';
 import { PaymentService } from '../../core/services/payment/payment.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookingRequestDTO } from '../../core/services/booking/dto/BookingRequestDTO';
 
 @Component({
@@ -52,6 +52,7 @@ export class HotelBookingComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private bookingService = inject(BookingService);
   private paymentService = inject(PaymentService);
@@ -65,8 +66,32 @@ export class HotelBookingComponent implements OnInit {
       destination: ['', Validators.required],
       checkin: [null, Validators.required],
       checkout: [null, Validators.required],
+<<<<<<< HEAD
     });
     this.fetchInitial();
+=======
+    });
+    // 4. Extract Query Parameters from URL
+    this.route.queryParams.subscribe(params => {
+      if (params['city'] || params['date']) {
+        
+        // Update form values with data from Homepage
+        this.hotelForm.patchValue({
+          destination: params['city'] || '',
+          checkin: params['checkInDate'] || new Date().toISOString().split('T')[0],
+          checkout: params['checkOutDate'] || new Date().toISOString().split('T')[0]
+        });
+
+        // 5. Automatically trigger search if enough data is present
+        if (params['city'] && params['checkInDate'] && params['checkOutDate']) {
+          this.searchHotels();
+        }
+      } else {
+        // Fallback for direct navigation without params
+        this.fetchInitial();
+      }
+    });
+>>>>>>> 241605b (accessing flight ad hotel from page and some ui changes in payment and itinerary.)
   }
 
   /**

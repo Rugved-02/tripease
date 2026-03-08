@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // PrimeNG Imports
 import { MessageService } from 'primeng/api';
@@ -50,6 +50,7 @@ export class FlightBookingComponent implements OnInit {
   private messageService = inject(MessageService);
   private flightService = inject(FlightBookingService);
   private sanitizer = inject(DomSanitizer);
+  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private fb = inject(FormBuilder);
 
@@ -79,6 +80,7 @@ export class FlightBookingComponent implements OnInit {
   flightIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>`;
 
   ngOnInit() {
+    // 3. Initialize the form first
     this.searchForm = this.fb.group({
       from: ['', Validators.required],
       to: ['', Validators.required],
@@ -86,8 +88,26 @@ export class FlightBookingComponent implements OnInit {
       passengers: [this.passengerOptions[0]],
     });
 
-    // Initial load check
-    this.onSearch();
+    // 4. Extract Query Parameters from URL
+    this.route.queryParams.subscribe(params => {
+      if (params['from'] || params['to'] || params['date']) {
+        
+        // Update form values with data from Homepage
+        this.searchForm.patchValue({
+          from: params['from'] || '',
+          to: params['to'] || '',
+          departureDate: params['date'] || new Date().toISOString().split('T')[0]
+        });
+
+        // 5. Automatically trigger search if enough data is present
+        if (params['from'] && params['to']) {
+          this.onSearch();
+        }
+      } else {
+        // Fallback for direct navigation without params
+        this.onSearch();
+      }
+    });
   }
 
   getSafeIcon(): SafeHtml {

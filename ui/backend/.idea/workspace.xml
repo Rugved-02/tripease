@@ -4,27 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52d4d457-df03-4d23-9038-907bac958d8c" name="Changes" comment="integrated backend services with frontend">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="52d4d457-df03-4d23-9038-907bac958d8c" name="Changes" comment="accessing flight ad hotel from page and some ui changes in payment and itinerary.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/tripease/apigateway/filter/AuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/tripease/apigateway/filter/AuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/booking-service/src/main/java/com/tripease/booking/service/DashboardStatsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking-service/src/main/java/com/tripease/booking/service/DashboardStatsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flight-service/src/main/java/com/tripease/flight/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/flight-service/src/main/java/com/tripease/flight/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flight-service/src/main/java/com/tripease/flight/filter/InternalAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/flight-service/src/main/java/com/tripease/flight/filter/InternalAuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotel-service/src/main/java/com/tripease/hotels/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotel-service/src/main/java/com/tripease/hotels/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotel-service/src/main/java/com/tripease/hotels/filter/InternalAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotel-service/src/main/java/com/tripease/hotels/filter/InternalAuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/dashboard/dashboard.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/dashboard/dashboard.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/dashboard/dashboard.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/flight-booking/flight-booking.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/flight-booking/flight-booking.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/hotel-booking/hotel-booking.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/hotel-booking/hotel-booking.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/hotel-booking/hotel-booking.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/hotel-booking/hotel-booking.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/shared/components/menubar/menubar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/shared/components/menubar/menubar.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/shared/components/menubar/menubar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/shared/components/menubar/menubar.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +248,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772824652530</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="accessing flight ad hotel from page and some ui changes in payment and itinerary.">
+      <option name="closed" value="true" />
+      <created>1772996523478</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1772996523478</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -283,7 +274,9 @@
     <MESSAGE value="implemented api gateway, eureka server, auth service using jwt and payment service" />
     <MESSAGE value="integrated backend services" />
     <MESSAGE value="integrated backend services with frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="integrated backend services with frontend" />
+    <MESSAGE value="accessing flight ad hotel from page and some ui changes in payment nad itinerary." />
+    <MESSAGE value="accessing flight ad hotel from page and some ui changes in payment and itinerary." />
+    <option name="LAST_COMMIT_MESSAGE" value="accessing flight ad hotel from page and some ui changes in payment and itinerary." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
