@@ -26,16 +26,33 @@ public class InternalAuthFilter extends OncePerRequestFilter {
     private String internalSecret;
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+        String method = request.getMethod();
+
+        // 1. Always skip filter for /error (regardless of GET/POST/etc)
+        if (path.equals("/error")) {
+            return true;
+        }
+
+        // 2. Skip filter ONLY for GET calls on hotel search paths
+        boolean isGetCall = "GET".equalsIgnoreCase(method);
+        boolean isFlightPath = path.equals("/flight/search");
+
+        return isGetCall && isFlightPath;
+    }
+
+    @Override
 protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
     
-    // 1. MUST ADD THIS: Handle the browser preflight handshake
-    if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "X-Internal-Secret, X-User-Id, X-User-Email, Content-Type");
-        response.setStatus(HttpServletResponse.SC_OK);
-        return; // Exit here so it doesn't run the secret validation logic
-    }
+//    // 1. MUST ADD THIS: Handle the browser preflight handshake
+//    if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+//        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+//        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//        response.setHeader("Access-Control-Allow-Headers", "X-Internal-Secret, X-User-Id, X-User-Email, Content-Type");
+//        response.setStatus(HttpServletResponse.SC_OK);
+//        return; // Exit here so it doesn't run the secret validation logic
+//    }
         log.info("InternalAuthFilter invoked for URI: {}", request.getRequestURI());
         String secret = request.getHeader("X-Internal-Secret");
         String userId = request.getHeader("X-User-Id");

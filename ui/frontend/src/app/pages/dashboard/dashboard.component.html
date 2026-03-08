@@ -71,7 +71,7 @@
             </div>
 
             <div class="booking-right">
-              <div class="booking-price">{{ booking.price | currency: 'INR' }}</div>
+              <!-- <div class="booking-price">{{ booking.price | currency: 'INR' }}</div> -->
 
               <span
                 class="booking-status"
@@ -177,7 +177,7 @@
           </div>
         } @else {
           <div class="info-box">
-            <span class="label">Flight Boarding Date</span>
+            <span class="label">Boarding Date</span>
             <div class="value">{{ data.startDate | date: 'mediumDate' }}</div>
           </div>
           <div class="info-box">

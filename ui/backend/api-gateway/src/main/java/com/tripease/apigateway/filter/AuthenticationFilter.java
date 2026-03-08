@@ -9,6 +9,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
@@ -80,7 +81,20 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     }
 
     private boolean isPublic(ServerHttpRequest request) {
-        return request.getURI().getPath().contains("/auth/");
+        String path = request.getURI().getPath();
+        HttpMethod method = request.getMethod();
+
+        // Original auth logic
+        if (path.contains("/auth/")) {
+            return true;
+        }
+
+        // Strict check for GET calls on flight and hotel search
+        if (HttpMethod.GET.equals(method)) {
+            return path.contains("/flight/search") || path.contains("/hotel/search") || path.contains("/hotel");
+        }
+
+        return false;
     }
 
     private Mono<Void> unAuthorized(ServerWebExchange exchange) {

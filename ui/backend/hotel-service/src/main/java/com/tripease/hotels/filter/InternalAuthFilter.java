@@ -100,6 +100,22 @@ public class InternalAuthFilter extends OncePerRequestFilter {
     private String internalSecret;
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+        String method = request.getMethod();
+
+        // 1. Always skip filter for /error (regardless of GET/POST/etc)
+        if (path.equals("/error")) {
+            return true;
+        }
+        // 2. Skip filter ONLY for GET calls on hotel search paths
+        boolean isGetCall = "GET".equalsIgnoreCase(method);
+        boolean isHotelPath = path.equals("/hotel/search") || path.equals("/hotel");
+
+        return isGetCall && isHotelPath;
+    }
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) 
             throws ServletException, IOException {
         

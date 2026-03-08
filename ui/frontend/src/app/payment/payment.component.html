@@ -1,8 +1,7 @@
-
 <div class="page-wrapper">
   <div class="container-wrapper-heading">
     <h1>Complete Your Payment</h1>
-    <p>Secure payment for booking #{{bookingId}}</p>
+    <p>Secure payment for booking #{{ bookingId }}</p>
   </div>
 
   <div class="container-wrapper-payment">
@@ -15,17 +14,17 @@
             <!-- to display available payment methods -->
             <div class="method-list">
               @for (methodItem of paymentMethod; track $index) {
-              <div
-                class="method-card"
-                [class.active]="selectedMethod === methodItem.methodInitial"
-                (click)="selectMethod(methodItem.methodInitial)"
-              >
-                <div class="radio-indicator">
-                  <div class="dot" *ngIf="selectedMethod === methodItem.methodInitial"></div>
+                <div
+                  class="method-card"
+                  [class.active]="selectedMethod === methodItem.methodInitial"
+                  (click)="selectMethod(methodItem.methodInitial)"
+                >
+                  <div class="radio-indicator">
+                    <div class="dot" *ngIf="selectedMethod === methodItem.methodInitial"></div>
+                  </div>
+                  <i [className]="methodItem.icon" style="font-size: 1rem; margin-right: 10px"></i>
+                  <span class="method-label">{{ methodItem.methodName }}</span>
                 </div>
-                <i [className]="methodItem.icon" style="font-size: 1rem; margin-right: 10px;"></i>
-                <span class="method-label">{{ methodItem.methodName }}</span>
-              </div>
               }
             </div>
           </div>
@@ -34,7 +33,9 @@
       <div class="sub-div">
         <p-card header="">
           <div class="form-section" *ngIf="selectedMethod === 'card'">
-            <app-card-payment-method (pay)="executeCompletePayment($event)"></app-card-payment-method>
+            <app-card-payment-method
+              (pay)="executeCompletePayment($event)"
+            ></app-card-payment-method>
           </div>
 
           <div class="info-box" *ngIf="selectedMethod !== 'card'">
@@ -50,20 +51,20 @@
         <div class="total-payment">
           <p class="fee">
             <span class="fee-type">Service Fee</span
-            ><span class="fee-amount">{{ serviceFee | currency : 'INR' }}</span>
+            ><span class="fee-amount">{{ serviceFee | currency: 'INR' }}</span>
           </p>
           <p class="fee">
             <span class="fee-type">Taxes</span
-            ><span class="fee-amount">{{ taxes | currency : 'INR' }}</span>
+            ><span class="fee-amount">{{ taxes | currency: 'INR' }}</span>
           </p>
           <p class="fee">
             <span class="fee-type">Processing Fee</span
-            ><span class="fee-amount">{{ processingFee | currency : 'INR' }}</span>
+            ><span class="fee-amount">{{ processingFee | currency: 'INR' }}</span>
           </p>
           <hr />
           <p class="fee fee-total">
             <span class="fee-total-type">Total</span
-            ><span class="fee-total-amount">{{ totalAmount | currency : 'INR' }}</span>
+            ><span class="fee-total-amount">{{ totalAmount | currency: 'INR' }}</span>
           </p>
         </div>
 
@@ -97,17 +98,75 @@
 <!-- Payment Pop up Code -->
 
 <div class="overlay" *ngIf="isProcessing() || paymentStatus() !== 'IDLE'">
-  <div class="popup-card">
-    
-    <div class="spinner" *ngIf="isProcessing()"></div>
+  <div class="popup-card" [class.error-shake]="paymentStatus() === 'FAILED'">
+    <div class="payment-loader-container" *ngIf="isProcessing()">
+      <div class="spinner-wrapper">
+        <div class="spinner"></div>
+        <div class="spinner-pulse"></div>
+      </div>
 
-    <div class="status-icon success" *ngIf="paymentStatus() === 'SUCCESS'">✔</div>
-    <div class="status-icon error" *ngIf="paymentStatus() === 'FAILED'">✘</div>
+      <div class="processing-content">
+        <h3>Processing Your Payment</h3>
+        <p>Please do not refresh the page or click back.</p>
 
-    <h3>{{ statusMessage() }}</h3>
+        <div class="secure-badge">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"
+            />
+          </svg>
+          Secure Encryption Active
+        </div>
+      </div>
+    </div>
 
-    <button *ngIf="!isProcessing()" (click)="closePopup()" class="close-btn">
-      Go to Dashboard
-    </button>
+    <ng-container *ngIf="paymentStatus() === 'SUCCESS'">
+      <div class="status-icon success">
+        <svg class="checkmark" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+          <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+      </div>
+
+      <h2 class="success-title">Payment Confirmed!</h2>
+
+      <div class="booking-summary">
+        <div class="summary-item">
+          <span class="label">Booking ID</span>
+          <span class="value">#{{ bookingId }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="label">Amount Paid</span>
+          <span class="value">{{ totalAmount | currency: 'INR' }}</span>
+        </div>
+      </div>
+
+      <p class="timer-text">
+        Redirecting to booking details in <strong>{{ countdown() }}s</strong>...
+      </p>
+
+      <div class="button-group">
+        <button (click)="navigateToBookings()" class="primary-btn">View Booking Details</button>
+        <button (click)="closePopup()" class="secondary-btn">Go to Dashboard</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="paymentStatus() === 'FAILED'">
+      <div class="status-icon error">
+        <div class="error-cross">✕</div>
+      </div>
+      <h3>{{ statusMessage() }}</h3>
+
+      <div class="button-group">
+        <button (click)="paymentStatus.set('IDLE')" class="primary-btn retry">Try Again</button>
+        <button (click)="closePopup()" class="secondary-btn">Cancel</button>
+      </div>
+    </ng-container>
   </div>
 </div>

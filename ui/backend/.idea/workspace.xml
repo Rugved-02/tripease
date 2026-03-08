@@ -4,18 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52d4d457-df03-4d23-9038-907bac958d8c" name="Changes" comment="integrated backend services">
+    <list default="true" id="52d4d457-df03-4d23-9038-907bac958d8c" name="Changes" comment="integrated backend services with frontend">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itinerary-service/src/main/java/com/tripease/itinerary/controller/TripController.java" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary-service/src/main/java/com/tripease/itinerary/controller/TripController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itinerary-service/src/main/java/com/tripease/itinerary/model/Trip.java" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary-service/src/main/java/com/tripease/itinerary/model/Trip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itinerary-service/src/main/java/com/tripease/itinerary/repository/TripRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary-service/src/main/java/com/tripease/itinerary/repository/TripRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itinerary-service/src/main/java/com/tripease/itinerary/service/TripService.java" beforeDir="false" afterPath="$PROJECT_DIR$/itinerary-service/src/main/java/com/tripease/itinerary/service/TripService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/core/services/dashboard/dashboard.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/core/services/dashboard/dashboard.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/tripease/apigateway/filter/AuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/tripease/apigateway/filter/AuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/booking-service/src/main/java/com/tripease/booking/service/DashboardStatsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/booking-service/src/main/java/com/tripease/booking/service/DashboardStatsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flight-service/src/main/java/com/tripease/flight/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/flight-service/src/main/java/com/tripease/flight/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flight-service/src/main/java/com/tripease/flight/filter/InternalAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/flight-service/src/main/java/com/tripease/flight/filter/InternalAuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotel-service/src/main/java/com/tripease/hotels/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotel-service/src/main/java/com/tripease/hotels/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotel-service/src/main/java/com/tripease/hotels/filter/InternalAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotel-service/src/main/java/com/tripease/hotels/filter/InternalAuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/dashboard/dashboard.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/dashboard/dashboard.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/dashboard/dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/dashboard/dashboard.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/dashboard/dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/itinerary-planning/itinerary-planning.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/itinerary-planning/itinerary-planning.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/itinerary-planning/itinerary-planning.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/itinerary-planning/itinerary-planning.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/flight-booking/flight-booking.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/flight-booking/flight-booking.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/hotel-booking/hotel-booking.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/hotel-booking/hotel-booking.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/hotel-booking/hotel-booking.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/hotel-booking/hotel-booking.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/payment/payment.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/shared/components/menubar/menubar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/shared/components/menubar/menubar.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/shared/components/menubar/menubar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/shared/components/menubar/menubar.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,33 +90,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ApiGatewayApplication.executor": "Run",
-    "Application.AuthServiceApplication.executor": "Run",
-    "Application.BookingServiceApplication.executor": "Run",
-    "Application.DiscoveryServerApplication.executor": "Run",
-    "Application.FlightEntityTripeaseApplication.executor": "Run",
-    "Application.FlightsApplication.executor": "Run",
-    "Application.HotelsApplication.executor": "Run",
-    "Application.ItineraryServiceApplication.executor": "Run",
-    "Application.PaymentServiceApplication.executor": "Run",
-    "Application.com.tripease.auth.AuthServiceApplication.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature-backend",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/2463662/OneDrive - Cognizant/Documents/tripease/ui/backend/payment-service/src/main/java/com/tripease/payment/dto",
-    "project.structure.last.edited": "Global Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "com.github.copilot.settings.ApplicationConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AuthServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BookingServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DiscoveryServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FlightEntityTripeaseApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FlightsApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HotelsApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ItineraryServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.PaymentServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.com.tripease.auth.AuthServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature-backend&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/2463662/OneDrive - Cognizant/Documents/tripease/ui/backend/payment-service/src/main/java/com/tripease/payment/dto&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.ApplicationConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\2463662\OneDrive - Cognizant\Documents\tripease\ui\backend\payment-service\src\main\java\com\tripease\payment\dto" />
@@ -124,7 +133,20 @@
       <recent name="com.cts.tripease.interceptor" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ItineraryServiceApplication">
+  <component name="RunManager" selected="Application.ApiGatewayApplication">
+    <configuration name="ApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.tripease.apigateway.ApiGatewayApplication" />
+      <module name="api-gateway" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tripease.apigateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BookingServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tripease.booking.BookingServiceApplication" />
       <module name="booking" />
@@ -164,19 +186,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ItineraryServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.tripease.itinerary.ItineraryServiceApplication" />
-      <module name="itinerary-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.tripease.itinerary.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PaymentServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tripease.payment.PaymentServiceApplication" />
       <module name="payment-service" />
@@ -192,11 +201,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ItineraryServiceApplication" />
-        <item itemvalue="Application.BookingServiceApplication" />
-        <item itemvalue="Application.HotelsApplication" />
-        <item itemvalue="Application.PaymentServiceApplication" />
+        <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.FlightsApplication" />
+        <item itemvalue="Application.HotelsApplication" />
+        <item itemvalue="Application.BookingServiceApplication" />
+        <item itemvalue="Application.PaymentServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -240,7 +249,23 @@
       <option name="project" value="LOCAL" />
       <updated>1772798641749</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="integrated backend services with frontend">
+      <option name="closed" value="true" />
+      <created>1772824528695</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1772824528695</updated>
+    </task>
+    <task id="LOCAL-00006" summary="integrated backend services with frontend">
+      <option name="closed" value="true" />
+      <created>1772824652530</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1772824652530</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -257,7 +282,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="implemented api gateway, eureka server, auth service using jwt and payment service" />
     <MESSAGE value="integrated backend services" />
-    <option name="LAST_COMMIT_MESSAGE" value="integrated backend services" />
+    <MESSAGE value="integrated backend services with frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="integrated backend services with frontend" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

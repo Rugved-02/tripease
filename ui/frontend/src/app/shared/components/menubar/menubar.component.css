@@ -38,82 +38,101 @@
 }
 
 
-/* profile button styling */
+/* Container & Trigger */
 .profile-wrapper {
   margin-right: 110px;
   position: relative;
-
 }
+
 .round-btn {
- width: 40px;
- height: 40px;
- border-radius: 50%;
- border: none;
- background: #2563eb;
- color: white;
- font-weight: 600;
- cursor: pointer;
- margin-top: -8px;
- 
-}
-
-.profile-menu {
-
-  position: absolute;
-
-  top: 48px;
-
-  right: 0;
-
-  width: 200px;
-
-  background: white;
-
-  border-radius: 12px;
-
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-
-  padding: 8px 0;
-
-  z-index: 100;
-
-}
-
-.menu-item {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  padding: 10px 16px;
-
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.round-btn:hover {
+  background: #1d4ed8;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+/* The Dropdown Card */
+.profile-menu {
+  position: absolute;
+  top: calc(100% + 12px); /* Dynamic spacing */
+  right: 0;
+  width: 220px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  padding: 6px;
+  z-index: 100;
+  /* Smooth Fade-in Scale animation */
+  animation: menuAppear 0.2s ease-out;
+}
+
+@keyframes menuAppear {
+  from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Individual Items */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px; /* Rounded items feel more modern */
+  cursor: pointer;
+  color: #475569; /* Slate-600 */
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.menu-item i {
+  font-size: 1.1rem;
+  color: #94a3b8; /* Lighter icons */
 }
 
 .menu-item:hover {
-
-  background: var(--p-primary-1000);
-
+  background: #f1f5f9;
+  color: #1e293b;
 }
 
+.menu-item:hover i {
+  color: #2563eb; /* Icons pop on hover */
+}
+
+/* Divider */
 .menu-divider {
-
   height: 1px;
-
-  background: var(--p-surface-200);
-
-  margin: 6px 0;
-
+  background: #e2e8f0;
+  margin: 6px;
 }
 
+/* Special Treatment for Logout */
 .menu-item.logout {
+  color: #dc2626;
+}
 
-  color: #d32f2f;
+.menu-item.logout:hover {
+  background: #fef2f2;
+  color: #b91c1c;
+}
 
-} 
+.menu-item.logout:hover i {
+  color: #dc2626;
+}
 
 .login-signup-wrapper{
   margin-right: 110px;

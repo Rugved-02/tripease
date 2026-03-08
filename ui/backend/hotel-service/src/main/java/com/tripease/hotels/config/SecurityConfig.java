@@ -57,6 +57,7 @@ package com.tripease.hotels.config;
 import com.tripease.hotels.filter.InternalAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -86,7 +87,7 @@ public class SecurityConfig {
                 // 4. Configure Authorization
                 .authorizeHttpRequests(auth -> auth
                         // Allow anyone to see hotel lists and search
-                        .requestMatchers("/hotel/**").permitAll() 
+                        .requestMatchers(HttpMethod.GET,"/hotel","/hotel/search").permitAll()
                         .requestMatchers("/error").permitAll()
                         // Any other endpoint (like admin/booking) requires the Filter to set Auth
                         .anyRequest().authenticated()

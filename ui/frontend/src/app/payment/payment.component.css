@@ -1,32 +1,36 @@
 /* 1. The Wrapper */
-.page-wrapper{
-    display: grid;
-    /* grid-template-columns: 1fr; */
-    /* grid-template-rows: 1fr 1fr; */
-    /* height: fit-content; */
-    padding: 0px 12%;
-    background: var(--p-slate-100);
+.page-wrapper {
+  display: grid;
+  /* grid-template-columns: 1fr; */
+  /* grid-template-rows: 1fr 1fr; */
+  /* height: fit-content; */
+  padding: 0px 12%;
+  background: var(--p-slate-100);
 }
-.container-wrapper-heading{
-    /* background-color: gray; */
-    height: fit-content;
-    padding: 20px;
+
+.container-wrapper-heading {
+  /* background-color: gray; */
+  height: fit-content;
+  padding: 20px;
 }
-.container-wrapper-heading h1{
-    color: var(--p-primary-600);
-    margin: 0px;
+
+.container-wrapper-heading h1 {
+  color: var(--p-primary-600);
+  margin: 0px;
 }
-.container-wrapper-heading p{
-    margin: 5px;
+
+.container-wrapper-heading p {
+  margin: 5px;
 }
+
 .container-wrapper-payment {
   display: grid;
   /* Divide into 2 parts (columns) */
-  grid-template-columns: 65% 1fr; 
+  grid-template-columns: 65% 1fr;
   gap: 20px;
   padding: 20px;
   /* Ensure it starts at the top of the page */
-  min-height: 100vh; 
+  min-height: 100vh;
   /* background-color: var(--p-slate-100); */
   /* padding: 12%; */
   /* background-color: blue; */
@@ -53,8 +57,10 @@
   /* border: 1px solid #999; */
   /* This will match the height of container-one automatically */
   position: sticky;
-  top: 90px; /* Sticks to the top of the browser as you scroll */
-  align-self: start; /* Prevents it from stretching so it can stick */
+  top: 90px;
+  /* Sticks to the top of the browser as you scroll */
+  align-self: start;
+  /* Prevents it from stretching so it can stick */
 }
 
 /* .p-card{
@@ -63,9 +69,9 @@
 
 /* ORDER SUMMARY CARD STYLING */
 
-.order-summary-card h3{
-    color: var(--p-primary-1000);
-    margin: 0px 0px 30px 0px;
+.order-summary-card h3 {
+  color: var(--p-primary-1000);
+  margin: 0px 0px 30px 0px;
 }
 
 /* fees amount container styling */
@@ -74,59 +80,67 @@
   display: flex;
   justify-content: space-between;
   color: var(--p-primary-1000);
-          /* Ensures the container takes up the full width available */
+  /* Ensures the container takes up the full width available */
 }
-.fee-type{
-    color: var(--p-primary-1100);
-    font-size: small;
+
+.fee-type {
+  color: var(--p-primary-1100);
+  font-size: small;
 }
-.fee-amount{
-    /* color: var(--p-primary-1000); */
-    font-size: small;
-    font-weight: 500;
+
+.fee-amount {
+  /* color: var(--p-primary-1000); */
+  font-size: small;
+  font-weight: 500;
 }
-.fee-total{
-    margin: 40px 0px 0px 0px;
+
+.fee-total {
+  margin: 40px 0px 0px 0px;
 }
-.fee-total-type{
-    /* color: var(--p-primary-1000); */
-    font-size: 1.1rem;
-    font-weight: 700;
+
+.fee-total-type {
+  /* color: var(--p-primary-1000); */
+  font-size: 1.1rem;
+  font-weight: 700;
 }
-.fee-total-amount{
-    color: var(--p-primary-600);
-    font-size: 1.3rem;
-    font-weight: 700;
+
+.fee-total-amount {
+  color: var(--p-primary-600);
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 
 /* platfporm advantage features */
 
-.platform-advantage{
-    margin: 40px 0px;
+.platform-advantage {
+  margin: 40px 0px;
 }
-.feature-advantage{
-    color: var(--p-green-500);
-    font-size: 0.8rem;
+
+.feature-advantage {
+  color: var(--p-green-500);
+  font-size: 0.8rem;
 }
 
 
 /* secure payment badge */
 
-.secure-payment-badge{
-    display: grid;
-    grid-template-columns: 30px 1fr;
-    padding: 10px;
-    background: var(--p-primary-50);
-    border-radius: 12px;
+.secure-payment-badge {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  padding: 10px;
+  background: var(--p-primary-50);
+  border-radius: 12px;
 }
-.secure-payment-badge i{
-    text-align: center;
-    padding-top: 3px;
+
+.secure-payment-badge i {
+  text-align: center;
+  padding-top: 3px;
 }
-.secure-payment-badge p{
-    margin: 0px;
-    font-size: small;
+
+.secure-payment-badge p {
+  margin: 0px;
+  font-size: small;
 }
 
 
@@ -138,7 +152,8 @@
   /* max-width: 600px;
   margin: 2rem auto;
   font-family: 'Segoe UI', sans-serif; */
-  color: var(--p-primary-1000); /* Dark text */
+  color: var(--p-primary-1000);
+  /* Dark text */
 }
 
 /* Typography */
@@ -177,7 +192,8 @@
 
 /* Active State Styles */
 .method-card.active {
-  border-color: #3b82f6; /* Accent Blue */
+  border-color: #3b82f6;
+  /* Accent Blue */
   box-shadow: 0 0 0 1px #3b82f6 inset;
   background-color: white;
 }
@@ -213,6 +229,7 @@
   font-weight: 600;
   font-size: small;
 }
+
 /* payment method data display for wallet and bank */
 /* Info Box for non-card methods */
 .info-box {
@@ -226,41 +243,368 @@
 
 
 /* payment pop up styling */
-
-/* Full-screen dim background */
+/* Glassmorphism Overlay */
 .overlay {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex; justify-content: center; align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  /* Darker, modern slate */
+  backdrop-filter: blur(8px);
+  /* Blurs the background content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 9999;
+  transition: all 0.3s ease-in-out;
 }
 
-/* The Modal Box */
+/* Enhanced Modal Card */
 .popup-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 20px;
   text-align: center;
-  min-width: 300px;
+  min-width: 340px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Spinner Animation */
+/* Modern Spinner - Gradient effect */
+/* Container to dim the background slightly */
+.payment-loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.spinner-wrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1.5rem;
+}
+
 .spinner {
-  width: 50px; height: 50px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  margin: 0 auto 1rem;
-  animation: spin 1s linear infinite;
+  /* This creates a "fading" border look */
+  border: 4px solid rgba(59, 130, 246, 0.1);
+  border-top: 4px solid #3b82f6;
+  animation: spin 1s cubic-bezier(0.76, 0.35, 0.2, 0.7) infinite;
+}
+
+/* A soft inner pulse to show "activity" */
+.spinner-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.processing-content h3 {
+  color: #1e293b;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.processing-content p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.secure-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1.5rem;
+  padding: 6px 12px;
+  background: #f0fdf4;
+  color: #166534;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.status-icon { font-size: 3rem; margin-bottom: 1rem; }
-.success { color: #2ecc71; }
-.error { color: #e74c3c; }
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+/* Animated Icons */
+.status-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  display: block;
+  animation: scaleIn 0.3s ease-out;
+}
+
+.success {
+  color: #10b981;
+}
+
+.error {
+  color: #ef4444;
+}
+
+/* Typography */
+h3 {
+  color: #1e293b;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+/* High-Standard Action Button */
+.close-btn {
+  background: #1e293b;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  width: 100%;
+}
+
+.close-btn:hover {
+  background: #334155;
+  transform: translateY(-1px);
+}
+
+.close-btn:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+
+/* Error Shake Animation */
+.error-shake {
+  animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes shake {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+/* Success SVG Animation */
+.checkmark {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #10b981;
+  stroke-miterlimit: 10;
+  margin: 0 auto 1.5rem;
+  box-shadow: inset 0px 0px 0px #10b981;
+  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #10b981;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+
+  0%,
+  100% {
+    transform: none;
+  }
+
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 40px #fff;
+  }
+}
+
+
+/* Success Specifics */
+.success-title {
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.booking-summary {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.summary-item:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.value {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.timer-text {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-bottom: 1.5rem;
+}
+
+/* New Button Layout */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.primary-btn {
+  background: #1e293b;
+  /* Matches your dashboard feel */
+  color: white;
+  border: none;
+  padding: 0.85rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.primary-btn.retry {
+  background: #ef4444;
+}
+
+.secondary-btn {
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  padding: 0.85rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.secondary-btn:hover {
+  background: #edeff1;
+}

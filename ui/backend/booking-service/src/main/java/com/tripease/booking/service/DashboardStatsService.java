@@ -68,7 +68,7 @@ public class DashboardStatsService {
                 BookingStatus.EXPIRED
         );
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("updatedAt").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
         Slice<Booking> bookingSlice = bookingRepository.findByUserIdAndStatusIn(userId, allowedStatuses, pageable);
 //        // 1. Get the 5 bookings
 //        List<Booking> bookings = bookingRepository.findTop5ByUserIdAndStatusInOrderByUpdatedAtDesc(

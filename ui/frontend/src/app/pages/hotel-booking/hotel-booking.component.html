@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+<p-toast position="bottom-right"></p-toast>
 <div id="body" ngSkipHydration>
   
   <div class="header-container" id="search-section">
@@ -79,7 +79,7 @@
                 <h3 class="price-amount">{{hotel.displayPrice | currency :'INR'}}<span>/night</span></h3>
               </div>
               <div class="action-side">
-                <button *ngIf="!isSearchResults()" class="reserve-btn" (click)="scrollToSearch()">
+                <button *ngIf="!isSearchResults()" class="reserve-btn" (click)="scrollToSearch(hotel.location)">
                    Check Availability
                 </button>
 

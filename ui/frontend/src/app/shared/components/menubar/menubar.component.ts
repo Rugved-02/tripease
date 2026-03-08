@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnInit } from '@angular/core';
 import { PrimeIcons, MenuItem } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 import { CardModule } from 'primeng/card';
@@ -40,6 +40,8 @@ import { ButtonModule } from 'primeng/button';
 export class MenubarComponent implements OnInit {
 
   private authService = inject(AuthService);
+  private eRef = inject(ElementRef);
+
   showProfileMenu:boolean = false;
   
   items: MenuItem[] | undefined;
@@ -89,6 +91,14 @@ export class MenubarComponent implements OnInit {
     this.showProfileMenu = !this.showProfileMenu;
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event: Event) {
+    // Check if the click was outside the component's element
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.showProfileMenu = false;
+    }
+  }
+
   isLoggedIn(){
     return this.authService.isLoggedIn();
   }
@@ -102,20 +112,24 @@ export class MenubarComponent implements OnInit {
     // this.authService.currentUser.set(null);
 
     // 3. Redirect to login page
+    
     this.router.navigate(['/login']);
     
     console.log('User logged out successfully');
   }
 
   redirectToDashboard(){
+    this.showProfileMenu = false;
     this.router.navigate(['/dashboard']);
   }
 
   redirectToTrips(){
+    this.showProfileMenu = false;
     this.router.navigate(['/itineraryPlanning']);
   }
 
   redirectToAnalytics(){
+    this.showProfileMenu = false;
     this.router.navigate(['/analytics']);
   }
 

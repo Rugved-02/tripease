@@ -109,10 +109,16 @@
  border-radius: 10px;
  border: 0.8px solid lightgrey !important;
  cursor: pointer;
- transition: background 0.2s ease;
+ transition: all 0.2s ease-in-out;
 }
 .quick-action-item:hover {
- background: var(--p-surface-100);
+  /* background: var(--p-surface-50);
+  border-color: #cbd5e1;          */
+  border-color: var(--p-primary-color); /* Your theme's primary color */
+  background: #f2f3f4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transform: translateY(-2px);
 }
 .quick-action-item i {
  font-size: 1.1rem;
@@ -172,8 +178,18 @@
  padding: 16px;
  border-radius: 12px;
  border: 1px solid lightgray; 
- transition: background 0.1s ease;
+ /* transition: background 0.1s ease; */
+ transition: all 0.2s ease-in-out;
 }
+
+.booking-item:hover {
+  background: var(--p-surface-50);
+  border-color: #cbd5e1;        
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transform: translateY(-2px);    /* Lifts the item slightly */
+}
+
 /* LEFT */
 .booking-left {
  display: flex;
@@ -352,121 +368,185 @@ font-size: 0.7rem;
 
 
 /* booking list dialog / card styling */
-
-/* Styling the PrimeNG Dialog Container */
+/* --- PrimeNG Dialog Container --- */
 ::ng-deep .booking-detail-card {
-  width: 500px !important; /* Increased Width */
+  width: 500px !important;
   max-width: 95vw;
-  border-radius: 12px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  border: none;
+  border-radius: 20px !important;
+  /* Layered Apple-style shadow */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  overflow: hidden;
 }
 
-/* Ensure no scrollbar appears on the content area */
-::ng-deep .booking-detail-card .p-dialog-content {
+/* --- Dialog Header & "Booking Summary" Text --- */
+::ng-deep .booking-detail-card .p-dialog-header {
+  background: #ffffff !important;
   padding: 1.5rem !important;
-  overflow: hidden !important; /* Removes the scrollbar */
+  border-bottom: 1px solid #f1f5f9 !important;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
 }
 
+::ng-deep .booking-detail-card .p-dialog-header-title {
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+  color: #1e293b !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+/* --- Close / Cancel Button Styling --- */
+::ng-deep .booking-detail-card .p-dialog-header-close {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 10px !important;
+  background: #f1f5f9 !important;
+  color: #64748b !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+::ng-deep .booking-detail-card .p-dialog-header-close:hover {
+  background: #fee2e2 !important; /* Soft red background */
+  color: #ef4444 !important;      /* Apple-style red icon */
+  transform: rotate(90deg);       /* Playful rotation */
+}
+
+::ng-deep .booking-detail-card .p-dialog-header-close:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px rgba(239, 68, 68, 0.2) !important;
+  outline: none !important;
+}
+
+/* --- Dialog Content Area --- */
+::ng-deep .booking-detail-card .p-dialog-content {
+  padding: 2rem !important;
+  overflow: visible !important;
+  background: #ffffff;
+}
+
+/* --- Card Header Section (Icon & Title) --- */
 .card-header-row {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 .icon-circle {
-  background: #eff6ff;
-  color: #3b82f6;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  color: #2563eb;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px; /* Squircle */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  transition: transform 0.2s ease;
+}
+
+.card-header-row:hover .icon-circle {
+  transform: scale(1.05) rotate(-3deg);
 }
 
 .main-title {
   margin: 0;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1e293b;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
 }
 
 .sub-text {
   color: #64748b;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 450;
 }
 
+/* --- Info Grid & Boxes --- */
 .info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-  padding: 1rem 0;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
   border-top: 1px solid #f1f5f9;
+}
+
+.info-box {
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.info-box:hover {
+  background: #f8fafc;
 }
 
 .info-box .label {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #94a3b8;
   text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 4px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
 }
 
 .info-box .value {
-  font-weight: 500;
+  font-weight: 600;
   color: #334155;
+  font-size: 1rem;
 }
 
+/* --- Status Badges --- */
 .status-indicator {
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
-  border-radius: 20px;
+  padding: 6px 12px;
+  border-radius: 8px;
   font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  width: fit-content;
-  gap: 4px;
+  font-weight: 600;
+  gap: 6px;
 }
 
-
-/* Confirmed - Green */
 .status-confirmed {
-  background: #d1fae5;
- color: #065f46;
+  background: #ecfdf5;
+  color: #059669;
+  box-shadow: 0 2px 10px -2px rgba(16, 185, 129, 0.2);
 }
 
-/* Pending - Amber/Orange */
 .status-pending {
-  background: #fef3c7;
- color: #92400e;
+  background: #fffbeb;
+  color: #d97706;
+  box-shadow: 0 2px 10px -2px rgba(245, 158, 11, 0.2);
 }
 
-/* Expired/Cancelled - Red */
 .status-expired {
-  background: #fec7c7;
- color: #da1313;
+  background: #fef2f2;
+  color: #dc2626;
+  box-shadow: 0 2px 10px -2px rgba(239, 68, 68, 0.2);
 }
+
+/* --- Price Footer --- */
 .price-footer {
   margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 2px dashed #f1f5f9;
+  padding: 1.25rem;
+  background: #f8fafc; /* Shaded background for the price area */
+  border-radius: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .total-label {
-  color: #64748b;
-  font-weight: 500;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .total-value {
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-size: 1.75rem;
+  font-weight: 900;
   color: #0f172a;
+  letter-spacing: -0.03em;
 }

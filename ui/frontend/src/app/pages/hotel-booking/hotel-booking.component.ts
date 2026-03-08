@@ -8,8 +8,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ImageModule } from 'primeng/image';
 import { ToastModule } from 'primeng/toast';
-import { DatePickerModule } from 'primeng/datepicker'; 
-import { MessageService } from 'primeng/api'; 
+import { DatePickerModule } from 'primeng/datepicker';
+import { MessageService } from 'primeng/api';
 import { TagModule } from 'primeng/tag';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RatingModule } from 'primeng/rating';
@@ -29,10 +29,18 @@ import { BookingRequestDTO } from '../../core/services/booking/dto/BookingReques
   styleUrl: './hotel-booking.component.css',
   providers: [MessageService],
   imports: [
-    CommonModule, ReactiveFormsModule, CardModule, ButtonModule, 
-    InputTextModule, ImageModule, ToastModule, DatePickerModule,
-    ProgressSpinnerModule, RatingModule, TagModule
-  ]
+    CommonModule,
+    ReactiveFormsModule,
+    CardModule,
+    ButtonModule,
+    InputTextModule,
+    ImageModule,
+    ToastModule,
+    DatePickerModule,
+    ProgressSpinnerModule,
+    RatingModule,
+    TagModule,
+  ],
 })
 export class HotelBookingComponent implements OnInit {
   hotelForm!: FormGroup;
@@ -50,17 +58,15 @@ export class HotelBookingComponent implements OnInit {
   private hotelBookingService = inject(HotelBookingService);
   private messageService = inject(MessageService);
 
-
-  constructor(
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.hotelForm = this.fb.group({ 
+    this.hotelForm = this.fb.group({
       destination: ['', Validators.required],
       checkin: [null, Validators.required],
-      checkout: [null, Validators.required]
+      checkout: [null, Validators.required],
     });
-    this.fetchInitial(); 
+    this.fetchInitial();
   }
 
   /**
@@ -68,11 +74,11 @@ export class HotelBookingComponent implements OnInit {
    */
   fetchInitial(): void {
     this.isLoading.set(true);
-    this.isSearchResults.set(false); 
+    this.isSearchResults.set(false);
 
     this.hotelBookingService.getInitialHotels().subscribe({
       next: (data: any[]) => this.processAndMapData(data),
-      error: (err: any) => console.log(err)
+      error: (err: any) => console.log(err),
     });
   }
 
@@ -81,10 +87,10 @@ export class HotelBookingComponent implements OnInit {
    */
   searchHotels(): void {
     if (this.hotelForm.invalid) {
-      this.messageService.add({ 
-        severity: 'warn', 
-        summary: 'Incomplete Search', 
-        detail: 'Please fill in destination and both dates.' 
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Incomplete Search',
+        detail: 'Please fill in destination and both dates.',
       });
       return;
     }
@@ -94,31 +100,35 @@ export class HotelBookingComponent implements OnInit {
     const checkOutStr = this.formatDate(checkout);
 
     this.isLoading.set(true);
-    this.availableHotels.set([]); 
+    this.availableHotels.set([]);
 
     this.hotelBookingService.searchHotels(destination.trim(), checkInStr, checkOutStr).subscribe({
       next: (data: any) => {
-        this.isSearchResults.set(true); 
+        this.isSearchResults.set(true);
         if (data && data.length > 0) {
           this.processAndMapData(data);
         } else {
           this.isLoading.set(false);
           this.availableHotels.set([]);
-          this.messageService.add({ 
-            severity: 'info', 
-            summary: 'No Results', 
-            detail: `No hotels available in ${destination}.` 
+          this.messageService.add({
+            severity: 'info',
+            summary: 'No Results',
+            detail: `No hotels available in ${destination}.`,
           });
         }
       },
-      error: (err: any) => this.handleError(err)
+      error: (err: any) => this.handleError(err),
     });
   }
 
   /**
    * Smoothly scrolls user back to the search form
    */
-  scrollToSearch(): void {
+  scrollToSearch(location: string): void {
+    // 1. Fill the destination field automatically
+    this.hotelForm.patchValue({
+      destination: location,
+    });
     const element = document.getElementById('search-section');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -135,14 +145,14 @@ export class HotelBookingComponent implements OnInit {
   }
 
   private processAndMapData(data: any[]): void {
-    const mapped = data.map(hotel => {
+    const mapped = data.map((hotel) => {
       const avgRating = hotel.averageRating || 0;
 
       const index = Math.floor(Math.random() * 8);
-      const stableNum = index + 1
+      const stableNum = index + 1;
       const localImagePath = `assets/hotels/hotel-${stableNum}.jpg`;
 
-      console.log("Hotel Name"+hotel.hotelName);
+      console.log('Hotel Name' + hotel.hotelName);
       return {
         ...hotel,
         displayPrice: hotel.price || hotel.basePrice,
@@ -152,8 +162,8 @@ export class HotelBookingComponent implements OnInit {
         starsArray: Array(Math.round(avgRating || 5)).fill(0),
         processedAmenities: (hotel.amenities || []).map((a: string) => ({
           label: a,
-          icon: this.getAmenityIcon(a)
-        }))
+          icon: this.getAmenityIcon(a),
+        })),
       };
     });
 
@@ -163,10 +173,10 @@ export class HotelBookingComponent implements OnInit {
 
   private handleError(err: any) {
     this.isLoading.set(false);
-    this.messageService.add({ 
-      severity: 'error', 
-      summary: 'Connection Error', 
-      detail: 'Server is currently unreachable.' 
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Connection Error',
+      detail: 'Server is currently unreachable.',
     });
   }
 
@@ -183,32 +193,42 @@ export class HotelBookingComponent implements OnInit {
     return hotel.hotelName;
   }
 
-    /**
-     * Booking logic
-     */
-    onBook(hotel: any) {
-  
-      if (!this.authService.isLoggedIn()) {
+  /**
+   * Booking logic
+   */
+  onBook(hotel: any) {
+    if (!this.authService.isLoggedIn()) {
       // Redirect to login if not authenticated
       this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
       return;
     }
 
     const { checkin, checkout } = this.hotelForm.value;
-  
+
     const bookingRequestDTO: BookingRequestDTO = {
-        resourceId: hotel.hotelId,
-        resourceType: "HOTEL", // e.g., 'FLIGHT'
-        subType: null,     // e.g., representation for flights only 'ECONOMY'
-        startDate: this.formatDate(checkin),
-        endDate: this.formatDate(checkout),
-        quantity: 1,
-        totalAmount: hotel.price
-      };
-  
-      this.bookingService.createBooking(bookingRequestDTO).subscribe({
-      next: (res) => this.paymentService.preparePaymentEntry(res.bookingReference, res.totalAmount),
-      error: (err) => console.error(err)
+      resourceId: hotel.hotelId,
+      resourceType: 'HOTEL', // e.g., 'FLIGHT'
+      subType: null, // e.g., representation for flights only 'ECONOMY'
+      startDate: this.formatDate(checkin),
+      endDate: this.formatDate(checkout),
+      quantity: 1,
+      totalAmount: hotel.price,
+    };
+
+    this.bookingService.createBooking(bookingRequestDTO).subscribe({
+      next: (res) => {
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Success',
+          detail: 'Hotel added to booking',
+          life: 2000,
+        });
+
+        setTimeout(() => {
+          this.paymentService.preparePaymentEntry(res.bookingReference, res.totalAmount);
+        }, 2000);
+      },
+      error: (err) => console.error(err),
     });
-}
+  }
 }
