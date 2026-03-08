@@ -66,10 +66,7 @@ export class HotelBookingComponent implements OnInit {
       destination: ['', Validators.required],
       checkin: [null, Validators.required],
       checkout: [null, Validators.required],
-<<<<<<< HEAD
-    });
-    this.fetchInitial();
-=======
+
     });
     // 4. Extract Query Parameters from URL
     this.route.queryParams.subscribe(params => {
@@ -91,7 +88,6 @@ export class HotelBookingComponent implements OnInit {
         this.fetchInitial();
       }
     });
->>>>>>> 241605b (accessing flight ad hotel from page and some ui changes in payment and itinerary.)
   }
 
   /**

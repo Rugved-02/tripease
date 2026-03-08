@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52d4d457-df03-4d23-9038-907bac958d8c" name="Changes" comment="accessing flight ad hotel from page and some ui changes in payment and itinerary.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/flight-booking/flight-booking.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/flight-booking/flight-booking.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/pages/hotel-booking/hotel-booking.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/pages/hotel-booking/hotel-booking.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="52d4d457-df03-4d23-9038-907bac958d8c" name="Changes" comment="accessing flight ad hotel from page and some ui changes in payment and itinerary." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,6 +38,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -256,7 +253,23 @@
       <option name="project" value="LOCAL" />
       <updated>1772996523478</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="accessing flight ad hotel from page and some ui changes in payment and itinerary.">
+      <option name="closed" value="true" />
+      <created>1772999219060</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1772999219060</updated>
+    </task>
+    <task id="LOCAL-00009" summary="accessing flight ad hotel from page and some ui changes in payment and itinerary.">
+      <option name="closed" value="true" />
+      <created>1772999270217</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1772999270217</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
