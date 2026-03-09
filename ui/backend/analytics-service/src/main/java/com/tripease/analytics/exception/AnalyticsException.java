@@ -1,0 +1,14 @@
+package com.tripease.analytics.exception;
+
+import org.springframework.http.HttpStatus;
+import lombok.Getter;
+
+@Getter
+public class AnalyticsException extends RuntimeException {
+    private final HttpStatus status;
+
+    public AnalyticsException(String message, HttpStatus status) {
+        super(message);
+        this.status = status;
+    }
+}

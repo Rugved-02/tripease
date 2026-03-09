@@ -1,0 +1,214 @@
+/* Container Adjustments for a Rectangular Feel */
+::ng-deep .booking-card.p-card {
+  max-width: 950px; 
+  margin: 2rem auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important;
+  border: none;
+  background: #ffffff;
+}
+
+/* --- HEADER SECTION --- */
+.card-header-banner {
+  height: 110px;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pins left-group and right-group to edges */
+  position: relative;
+  color: white;
+}
+
+.bg-hotel { background: #1e293b; }
+.bg-flight { background: #4338ca; }
+
+/* Left-aligned group: Icon and Label */
+.header-content { 
+  display: flex; 
+  align-items: center; 
+  gap: 20px; 
+  z-index: 2;
+  margin-right: auto; 
+}
+
+.icon-wrapper svg {
+  width: 42px;
+  height: 42px;
+  opacity: 0.9;
+}
+
+.category-label {
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  font-weight: 700;
+  opacity: 0.8;
+  display: block;
+}
+
+/* Perfectly Centered Status Pill */
+.status-pill {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); 
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  display: inline-block;
+  white-space: nowrap;
+  z-index: 3;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Right-aligned group: Price */
+.price-display { 
+  text-align: right; 
+  z-index: 2; 
+  margin-left: auto;
+}
+.price-display label { font-size: 0.7rem; opacity: 0.8; text-transform: uppercase; }
+.amount { font-size: 1.8rem; font-weight: 800; }
+
+/* --- CONTENT SECTION --- */
+.content-wrapper { padding: 2rem 3rem; }
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px; 
+  gap: 2rem;
+  align-items: center;
+}
+
+h1 { 
+  font-size: 1.75rem; 
+  color: #0f172a; 
+  margin: 0 0 5px 0; 
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.meta-info-row {
+  display: flex;
+  gap: 40px;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.info-item label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.val-primary { font-size: 1.1rem; font-weight: 700; color: #334155; }
+.val-secondary { font-size: 0.9rem; color: #64748b; display: flex; align-items: center; gap: 6px; }
+
+/* Schedule Ticket Area */
+.schedule-card {
+  background: #f8fafc;
+  padding: 1.25rem;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.date-row { display: flex; align-items: center; justify-content: space-between; }
+.date-box { text-align: center; }
+.date-box .month { font-size: 0.7rem; font-weight: 800; color: #6366f1; text-transform: uppercase; display: block; }
+.date-box .day { font-size: 1.5rem; font-weight: 800; color: #1e293b; }
+
+.duration-connector { flex: 1; display: flex; align-items: center; padding: 0 15px; color: #cbd5e1; }
+.line { height: 1px; flex: 1; background: #cbd5e1; }
+
+.ref-box {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #cbd5e1;
+}
+
+.ref-box code {
+  display: block;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  color: #1e293b;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Ticket Cut-out Divider */
+.divider-container { position: relative; margin: 0; display: flex; align-items: center; }
+.dashed-line { border: none; border-top: 2px dashed #e2e8f0; width: 100%; margin: 0; }
+.cut-out { width: 24px; height: 24px; background: #f1f5f9; border-radius: 50%; position: absolute; z-index: 2; }
+.left { left: -12px; }
+.right { right: -12px; }
+
+/* --- FOOTER SECTION --- */
+.actions-container {
+  padding: 1.5rem 3rem;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Improved Dashboard Button */
+.btn-secondary {
+  background: transparent;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1.5px solid #e2e8f0;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #f8fafc;
+  color: #1e293b;
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary:hover i {
+  transform: translateX(-3px); /* Interactive nudge */
+}
+
+/* Improved Print Button */
+.btn-primary {
+  background: #1e293b;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #334155;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+}
+
+@media print {
+  .actions-container, .banner-overlay { display: none !important; }
+  ::ng-deep .booking-card.p-card { box-shadow: none !important; border: 1px solid #eee; }
+}
