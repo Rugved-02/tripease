@@ -1,11 +1,58 @@
-/* =========================================
+/* ==========================================================================
+   THEME VARIABLES
+   Centralized colors, spacing, and shadows for the entire application
+   ========================================================================== */
+:host {
+  /* Brand Colors (Indigo) */
+  --color-brand: #4338ca;
+  --color-brand-light: #e0e7ff;
+  --color-brand-focus: rgba(67, 56, 202, 0.12);
+
+  /* Typography Colors (Slate) */
+  --color-text-main: #0f172a;  /* Slate 900 */
+  --color-text-sub: #334155;   /* Slate 700 */
+  --color-text-muted: #64748b; /* Slate 500 */
+
+  /* Surface & Backgrounds */
+  --color-bg-page: #f8fafc;    /* Slate 50 */
+  --color-surface: #ffffff;
+  --color-surface-hover: #f8fafc;
+
+  /* Borders */
+  --color-border-light: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-hover: #cbd5e1;
+
+  /* Status Colors */
+  --color-danger: #ef4444;
+  --color-danger-light: #fef2f2;
+
+  /* Border Radii */
+  --radius-xl: 20px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 99px;
+
+  /* Layered Shadows */
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+  --shadow-focus: 0 0 0 3px var(--color-brand-focus);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+
+  /* Animations */
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
    1. GLOBAL LAYOUT & PAGE HEADER
-   ========================================= */
+   ========================================================================== */
 .container {
   width: 100%;
   padding: 3rem 2rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f8fafc; /* Slate-50 background */
+  background-color: var(--color-bg-page);
   min-height: 100vh;
   box-sizing: border-box;
 }
@@ -24,7 +71,7 @@
 }
 
 .page-header h1 {
-  color: #4338ca !important; /* Indigo-700 (TripEase Blue) */
+  color: var(--color-brand) !important;
   font-size: 2.5rem !important;
   font-weight: 700 !important;
   margin: 0 0 1rem 0 !important;
@@ -32,51 +79,51 @@
 }
 
 .page-header p {
-  color: #64748b !important; /* Slate-500 */
+  color: var(--color-text-muted) !important;
   font-size: 1.1rem !important;
   margin: 0 !important;
   font-weight: 500;
 }
 
-/* =========================================
+/* ==========================================================================
    2. BUTTONS & BADGES
-   ========================================= */
+   ========================================================================== */
 .black-button {
-  background-color: #0f172a !important; /* Slate-900 */
-  color: #ffffff !important;
-  border: 1px solid #0f172a !important;
-  border-radius: 10px !important;
-  padding: 0.8rem 1.5rem !important;
-  font-weight: 700 !important;
+  background: var(--color-text-main) !important;
+  color: var(--color-surface) !important;
+  border: none !important;
+  padding: 0.85rem 2rem !important;
+  border-radius: var(--radius-sm) !important;
+  font-weight: 600 !important;
   font-size: 0.95rem !important;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
 }
 
 .black-button:hover {
-  background-color: #1e293b !important;
+  background: #1e293b !important; /* Slightly lighter slate for hover */
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 .activity-badge {
-  background-color: #e0e7ff; /* Indigo-100 */
-  color: #4338ca;            /* Indigo-700 */
+  background-color: var(--color-brand-light);
+  color: var(--color-brand);
   padding: 0.4rem 1rem;
-  border-radius: 99px;       /* Pill shape */
+  border-radius: var(--radius-pill);
   font-size: 0.85rem;
   font-weight: 700;
 }
 
-/* =========================================
+/* ==========================================================================
    3. ITINERARY CARD
-   ========================================= */
+   ========================================================================== */
 .itinerary-card {
-  background: white;
-  border-radius: 20px; /* Smooth large radius */
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
   padding: 3rem;
-  border: 1px solid #f1f5f9;
+  border: 1px solid var(--color-border-light);
   margin-bottom: 3rem;
 }
 
@@ -90,13 +137,13 @@
 .card-header h2 {
   margin: 0;
   font-size: 1.8rem;
-  color: #0f172a;
+  color: var(--color-text-main);
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 .date-range {
-  color: #64748b;
+  color: var(--color-text-muted);
   margin-top: 0.5rem;
   font-size: 1rem;
   font-weight: 500;
@@ -105,65 +152,90 @@
   gap: 0.5rem;
 }
 
-/* =========================================
-   4. TIMELINE CUSTOMIZATION (Exact Look)
-   ========================================= */
-/* Hide the left side of the timeline to make it single-column */
+/* Card Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid var(--color-border-light);
+  margin-top: 0.5rem;
+  position: relative; 
+  z-index: 20;
+  pointer-events: auto;
+}
+
+.card-footer button {
+  flex: 1; 
+  padding: 1rem 0 !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.p-button-outlined.p-button-secondary {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-sub) !important;
+  transition: var(--transition-smooth);
+}
+
+.p-button-outlined.p-button-secondary:hover {
+  background: var(--color-surface-hover) !important;
+  border-color: var(--color-border-hover) !important;
+}
+
+/* ==========================================================================
+   4. TIMELINE CUSTOMIZATION & EVENT BOXES
+   ========================================================================== */
 ::ng-deep .p-timeline-event-opposite {
   display: none !important;
 }
 
-/* Adjust content spacing */
 ::ng-deep .p-timeline-event-content {
   padding-bottom: 2rem !important;
   padding-left: 1.5rem !important;
   width: 100%;
 }
 
-/* The vertical connecting line */
 ::ng-deep .p-timeline-event-connector {
-  background-color: #e2e8f0 !important;
+  background-color: var(--color-border) !important;
   width: 3px !important;
 }
 
-
 .custom-marker {
-    display: flex;
-    width: 3rem;
-    height: 3rem;
-    margin-top: 35px;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    background-color: var(--p-primary-color); 
-    border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    z-index: 1; 
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  margin-top: 35px;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-surface);
+  background-color: var(--color-brand); 
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1; 
 }
 
 .custom-marker i {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
-/* =========================================
-   5. EVENT BOX (The Activity Card)
-   ========================================= */
 .event-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #f1f5f9;
-  border-radius: 16px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
   padding: 1.75rem 2rem !important;
-  background: #ffffff;
+  background: var(--color-surface);
   width: 100%;
-  transition: all 0.2s ease;
+  transition: var(--transition-smooth);
 }
 
-/* Hover effect to make it pop like the screenshot */
 .event-box:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-sm);
   transform: translateY(-1px);
 }
 
@@ -173,7 +245,7 @@
 }
 
 .event-time {
-  color: #64748b; /* Muted slate */
+  color: var(--color-text-muted);
   font-size: 0.9rem;
   font-weight: 600;
   display: flex;
@@ -185,23 +257,23 @@
 .event-details h3 {
   margin: 0.25rem 0;
   font-size: 1.35rem !important;
-  color: #0f172a;
-  font-weight: 700 !important; /* Extra Bold matches screenshot */
+  color: var(--color-text-main);
+  font-weight: 700 !important;
 }
 
 .event-details p {
   margin: 0;
-  color: #64748b;
+  color: var(--color-text-muted);
   font-size: 1rem;
 }
 
-/* The 'Edit' Text Link */
 .edit-link-btn {
-  color: #0f172a !important;
+  color: var(--color-text-main) !important;
   font-weight: 700 !important;
   text-decoration: none;
   font-size: 0.95rem !important;
   padding: 0.5rem !important;
+  transition: var(--transition-smooth);
 }
 
 .edit-link-btn:hover {
@@ -209,159 +281,267 @@
   text-decoration: underline !important;
 }
 
-/* =========================================
-   6. CARD FOOTER
-   ========================================= */
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding-top: 1.5rem !important;
-  border-top: 1px solid #f1f5f9;
-  margin-top: 0.5rem;
-
-  position: relative; 
-  z-index: 20; /* Higher than the marker's 10 */
-  pointer-events: auto;
-}
-
-/* Make buttons equal width and chunky */
-.card-footer button {
-  flex: 1; 
-  padding: 1rem 0 !important;
-  font-size: 1rem !important;
-  font-weight: 600 !important;
-  border-radius: 10px !important;
-}
-
-/* White Buttons (View Details, Share) */
-.p-button-outlined.p-button-secondary {
-  background-color: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
-  color: #334155 !important;
-}
-
-.p-button-outlined.p-button-secondary:hover {
-  background-color: #f8fafc !important;
-  border-color: #cbd5e1 !important;
-}
-
-/* =========================================
-   7. DIALOG STYLES
-   ========================================= */
-/* ::ng-deep .p-dialog .p-dialog-header {
-  border-bottom: 1px solid #f1f5f9;
-  padding: 1.5rem;
-}
-
-::ng-deep .p-dialog .p-dialog-content {
-  padding: 2rem;
-}
-
+/* ==========================================================================
+   5. DIALOG & FORMS (Refactored Light Mode)
+   ========================================================================== */
 ::ng-deep .p-dialog {
-  border-radius: 16px !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-} */
-
-
-/* Color & Variable Definitions */
-/* Container & Layout */
-/* Dialog Layout */
-::ng-deep .p-dialog {
-  border-radius: 12px !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: var(--shadow-lg) !important;
+  overflow: hidden;
 }
 
 ::ng-deep .p-dialog .p-dialog-header {
-  border-bottom: 1px solid #f1f5f9;
-  padding: 1.5rem;
+  background: var(--color-surface) !important;
+  border-bottom: 1px solid var(--color-border-light) !important;
+  padding: 1.75rem 2rem !important;
+}
+
+::ng-deep .p-dialog .p-dialog-title {
+  color: var(--color-text-main) !important;
+  font-weight: 700;
+  font-size: 1.25rem !important;
+  letter-spacing: -0.02em;
 }
 
 ::ng-deep .p-dialog .p-dialog-content {
-  padding: 1.5rem 2rem !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f4f7f9 100%) !important;
+  padding: 2.5rem 2rem !important;
+  color: var(--color-text-sub) !important;
 }
 
-/* Input Field Refinement */
-::ng-deep .p-inputtext {
+::ng-deep .p-dialog label {
+  color: var(--color-text-muted) !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+  margin-bottom: 0.4rem !important;
+  display: block;
+}
+
+::ng-deep .p-inputtext,
+::ng-deep .p-datepicker input,
+::ng-deep .p-select {
   width: 100%;
-  padding: 0.75rem 1rem !important;
-  border: 1px solid #d1d5db !important;
-  border-radius: 8px !important;
+  padding: 0.85rem 1.25rem !important;
+  border: 1px solid var(--color-border-hover) !important;
+  border-radius: var(--radius-sm) !important;
   font-size: 0.95rem;
-  color: #1f2937;
-  background: #ffffff;
+  color: var(--color-text-main) !important;
+  background: var(--color-surface) !important;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-inner);
 }
 
-/* Specific Input Widths */
+::ng-deep .p-inputtext:focus,
+::ng-deep .p-datepicker input:focus,
+::ng-deep .p-select:focus-within {
+  border-color: var(--color-brand) !important;
+  background: var(--color-surface) !important;
+  outline: none;
+  box-shadow: var(--shadow-focus) !important;
+}
+
 input[formControlName="time"] {
   width: 100px !important;
   text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
-/* Activity Row Styling */
+/* Repeated Activity Container */
 .surface-ground {
-  background-color: #f8fafc !important;
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 10px !important;
-  padding: 1.25rem !important;
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 2rem !important;
+  margin-bottom: 1.5rem !important;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
 }
 
-/* Primary "Save/Update" Button */
-.black-button {
-  background: #000000 !important;
-  color: #ffffff !important;
-  border: none !important;
-  padding: 0.75rem 1.5rem !important;
-  border-radius: 8px !important;
-  font-weight: 600 !important;
-  font-size: 0.9rem;
+.surface-ground:hover {
+  border-color: var(--color-border-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-/* Text Buttons (Add Another / Cancel) */
-::ng-deep .p-button-text {
-  color: #4b5563 !important;
-  font-weight: 500 !important;
+.surface-ground .flex.align-items-center.gap-3 {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 1.25rem !important;
+  width: 100% !important;
 }
 
-/* Trash/Danger Button */
-::ng-deep .p-button-danger.p-button-text {
-  color: #dc2626 !important;
+.surface-ground input.flex-grow-1,
+.surface-ground p-select.flex-grow-1 {
+  flex: 1 1 0% !important; 
+  min-width: 0 !important;
+  height: 3.4rem;
 }
 
-/* Form Spacing */
-.gap-4 { gap: 1.5rem !important; }
-.gap-2 { gap: 0.5rem !important; }
+::ng-deep .surface-ground p-select .p-select {
+  width: 100% !important; 
+}
+
+.surface-ground p-button.flex-shrink-0 {
+  flex: 0 0 auto !important;
+}
 
 hr {
   border: 0;
-  border-top: 1px solid #f1f5f9;
-  margin: 0.5rem 0;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0 !important;
+}
+
+/* Secondary Dialog Text Buttons */
+::ng-deep .p-button-text {
+  color: var(--color-text-muted) !important;
+  font-weight: 600 !important;
+  padding: 0.85rem 1.5rem !important;
+  border-radius: var(--radius-sm) !important;
+  transition: var(--transition-smooth);
+}
+
+::ng-deep .p-button-text:hover {
+  background: var(--color-border-light) !important;
+  color: var(--color-text-main) !important;
+}
+
+/* Danger Dialog Text Buttons */
+::ng-deep .p-button-danger.p-button-text {
+  color: var(--color-danger) !important;
+}
+
+::ng-deep .p-button-danger.p-button-text:hover {
+  background: var(--color-danger-light) !important;
+}
+
+/* ==========================================================================
+   6. UTILITY CLASSES (Flex gaps & margins)
+   ========================================================================== */
+.gap-4 { gap: 2rem !important; }
+.gap-2 { gap: 1rem !important; }
+.flex.gap-3 { gap: 1.25rem !important; }
+.flex.flex-column.gap-2 { gap: 0.35rem !important; }
+.mb-2 { margin-bottom: 1.25rem !important; }
+
+
+/* ==========================================================================
+   7. FORM ROW SPLIT (Forces 50/50 side-by-side for Dates & Times)
+   ========================================================================== */
+.form-row-split {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important; /* STRICTLY forces side-by-side */
+  gap: 1.25rem !important;
+  width: 100%;
+}
+
+/* Force the two columns to take exactly 50% width */
+.form-row-split > div {
+  flex: 1 1 50% !important;
+  min-width: 0 !important; /* CRUCIAL: Stops inputs from stretching the container */
+}
+
+/* Safeties for PrimeNG Datepickers inside the split row */
+::ng-deep .form-row-split p-datepicker,
+::ng-deep .form-row-split .p-datepicker {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important; /* Prevents the calendar icon from dropping below */
+  width: 100% !important;
+}
+
+::ng-deep .form-row-split .p-datepicker input {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  border-top-right-radius: 1 !important;
+  border-bottom-right-radius: 1 !important;
+}
+
+::ng-deep .form-row-split .p-datepicker .p-datepicker-trigger {
+  flex-shrink: 0 !important; /* Protects the icon button from getting squished */
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 
 
-/* No itineraries found block styling */
-
+  /* containeer styling if no trips found */
 .no-trips-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 3rem;
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  margin-top: 2rem;
-  background-color: #fafafa; /* Optional: adds a slight background to the empty state */
+  padding: 4rem 2rem;
+  margin: 1.5rem;
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  border: 2px dashed #e2e8f0;
+  border-radius: 24px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add a subtle hover effect to make the dashed container feel interactive */
+.no-trips-container:hover {
+  border-color: #cbd5e1;
+  background: #f1f5f9;
+  transform: translateY(-2px);
 }
 
 .no-trips-icon {
-  font-size: 3rem;
-  color: #999;
-  margin-bottom: 1rem;
+  font-size: 3.5rem !important; /* Forces size on PrimeNG icon */
+  color: #6366f1; /* Indigo-500 */
+  background: #eef2ff;
+  padding: 1.5rem;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Decorative pulse effect behind the icon */
+.no-trips-icon::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #6366f1;
+  opacity: 0.3;
+  animation: ripple 2s infinite;
 }
 
 .no-trips-title {
-  color: #666;
-  margin: 0.5rem 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.02em;
 }
 
 .no-trips-text {
-  color: #888;
-  max-width: 400px;
-  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #64748b;
+  max-width: 320px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Keyframe for the soft ripple animation */
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
 }

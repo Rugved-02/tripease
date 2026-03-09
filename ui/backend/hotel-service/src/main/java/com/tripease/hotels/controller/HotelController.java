@@ -51,6 +51,13 @@ public class HotelController {
         return ResponseEntity.ok(hotels);
     }
 
+    @GetMapping("{hotelId}")
+    public ResponseEntity<HotelRecentBookingResponseDTO> getHotelById(@PathVariable Long hotelId){
+
+        HotelRecentBookingResponseDTO hotel = hotelRepository.findHotelById(hotelId);
+        return ResponseEntity.ok(hotel);
+    }
+
    
 
 

@@ -5,11 +5,7 @@ import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.tripease.auth.dto.ForgotPasswordDTO.ForgotPasswordRequest;
 import com.tripease.auth.dto.ForgotPasswordDTO.ResetPasswordRequest;
@@ -35,27 +31,6 @@ public class UserController {
 	private final UserService service;
 	private final ForgotPasswordService mailService;
 
-    @PostMapping("register/direct")
-    public ResponseEntity<UserResponseDTO> saveUserDirectly(@RequestBody UserRegistrationRequestDTO dto) {
-        // 1. Extract the encoded string from the wrapper
-
-        // 2. Call the service method that handles the decoding AND the saving
-        // This allows your service to manage the @Transactional boundary
-
-        User user = new User();
-        user.setName(dto.getName());
-        user.setEmail(dto.getEmail());
-        user.setMobile(dto.getMobile());
-        user.setPassword(dto.getPassword());
-
-        User savedUser = service.saveUser(user);
-
-        // 3. Map back to Response DTO
-        UserResponseDTO response = mapToUserResponse(savedUser);
-
-        log.info("User registered successfully: {}", savedUser.getEmail());
-        return ResponseEntity.ok(response);
-    }
 
     @PostMapping("register")
     public ResponseEntity<UserResponseDTO> saveUser(@RequestBody Map<String, String> payload) {
@@ -102,9 +77,14 @@ public class UserController {
 		log.info("Fetching profile details for authenticated user: {}", email);
 		User user=service.getUser(email);
 		return ResponseEntity.ok(mapToUserResponse(user));
-	
 	}
-	
+
+    @GetMapping("user/profile")
+    ResponseEntity<UserResponseDTO> getUserProfile(@RequestHeader("X-User-Id") String userId){
+        log.info("Fetching profile details for authenticated user: {}", userId);
+        User user=service.getUserProfile(userId);
+        return ResponseEntity.ok(mapToUserResponse(user));
+    }
 	@PostMapping("users/me")
 	ResponseEntity<UserResponseDTO> updateUser(@RequestBody UpdateUserDTO user, @AuthenticationPrincipal String email){
 		log.info("Received update request for user profile: {}", email);

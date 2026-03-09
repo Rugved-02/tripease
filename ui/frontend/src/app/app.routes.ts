@@ -19,6 +19,7 @@ import { ItineraryPlanningComponent } from './pages/itinerary-planning/itinerary
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from './core/guards/auth/auth-guard';
 import { LogoTextComponent } from './shared/components/logo-text/logo-text.component';
+import { BookingDetailsComponent } from './pages/booking-details/booking-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -64,6 +65,11 @@ export const routes: Routes = [
         component: PaymentComponent,
         canActivate:[authGuard]
       },
+      {
+        path: 'bookingDetails/:bookingId',
+        component: BookingDetailsComponent,
+        // canActivate:[authGuard]
+      }
     ],
   },
 ];

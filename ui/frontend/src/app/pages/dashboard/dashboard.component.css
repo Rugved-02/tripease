@@ -6,6 +6,14 @@
   padding: 0px 70px 50px;
 }
 
+/* .panel-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ margin-top: -40px;
+ margin-right: -50px;
+} 
+
 .panel-title {
  text-align: left;
  font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif;
@@ -13,6 +21,71 @@
  font-weight: 700;
  color: var(--p-blue-700);
  margin-bottom: 6px;
+} */
+
+
+.panel-header {
+  display: flex;
+  align-items: flex-end; /* Aligns text to the bottom of the header area */
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding: 10px 0px;
+  border-bottom: 1px solid #f1f5f9; /* Subtle separator */
+}
+
+.greeting-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.panel-title {
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  font-size: 2.2rem; /* Slightly scaled down for better balance */
+  font-weight: 800;
+  color: #0f172a; /* Deep Slate/Near Black */
+  margin: 0;
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 50px;
+}
+
+.user-name {
+  color: var(--p-blue-700);
+  background: linear-gradient(to right, var(--gradient-blue), #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.wave-emoji {
+  font-size: 1.8rem;
+  animation: wave-animation 2.5s infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+.panel-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #64748b; /* Slate-500 */
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Optional: Gentle Waving Animation */
+@keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+   10% { transform: rotate(14.0deg) }
+   20% { transform: rotate(-8.0deg) }
+   30% { transform: rotate(14.0deg) }
+   40% { transform: rotate(-4.0deg) }
+   50% { transform: rotate(10.0deg) }
+   60% { transform: rotate( 0.0deg) }
+  100% { transform: rotate( 0.0deg) }
 }
 
 .panel-title-description {
@@ -259,16 +332,114 @@ min-width: 70px;
   border: lightgray;
 } */
 
+/* --- EMPTY STATE SECTION --- */
+.empty-state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1.5rem;
+  background: #fbfcfe;
+  border: 2px dashed #e2e8f0;
+  border-radius: 16px;
+  margin: 0.5rem;
+}
 
+.empty-visual {
+  position: relative;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+/* REVOLVING CIRCLE STYLE */
+.circle-bg {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  /* Creates a partial ring: 2px solid with a transparent section */
+  border: 2px solid #6366f1;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  background: #eef2ff; /* Light inner fill */
+  animation: revolve 3s linear infinite;
+}
+
+.empty-visual i {
+  font-size: 2rem;
+  color: #6366f1;
+  z-index: 1;
+}
+
+/* ROTATION ANIMATION */
+@keyframes revolve {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- TEXT & CONTENT --- */
+.empty-content h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.empty-content p {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: center;
+  max-width: 250px;
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+}
+
+/* --- EMPTY STATE BUTTONS --- */
+.empty-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.action-pill {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.action-pill.hotel { background: #1e293b; }
+.action-pill.flight { background: #4338ca; }
+
+.action-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  filter: brightness(1.1);
+}
+
+.btn-svg-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
 /* STOP HOVER ON RECENT BOOKINGS OUTER CARD */
-.recent-bookings-wrapper:hover,
+/* .recent-bookings-wrapper:hover,
 .recent-bookings-wrapper:focus,
 .recent-bookings-wrapper:focus-within {
  box-shadow: none !important;
  transform: none !important;
  outline: none !important;
-}
+} */
 
 
 
@@ -351,13 +522,7 @@ font-size: 0.7rem;
 }
 
 
-.panel-header {
- display: flex;
- align-items: center;
- justify-content: space-between;
- margin-top: -40px;
- margin-right: -50px;
-} 
+
 
 
 /* COMMENT */

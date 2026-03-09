@@ -29,21 +29,11 @@
           <ng-template #marker let-event>
             <span class="custom-marker">
               @switch (event.type) {
-                @case ('FLIGHT') {
-                  <i class="pi pi-send"></i>
-                }
-                @case ('HOTEL') {
-                  <i class="pi pi-home"></i>
-                }
-                @case ('RESTAURANT') {
-                  <i class="pi pi-map-marker"></i>
-                }
-                @case ('WORK') {
-                  <i class="pi pi-briefcase"></i>
-                }
-                @default {
-                  <i class="pi pi-calendar-plus"></i>
-                }
+                @case ('FLIGHT') { <i class="pi pi-send"></i> }
+                @case ('HOTEL') { <i class="pi pi-home"></i> }
+                @case ('RESTAURANT') { <i class="pi pi-map-marker"></i> }
+                @case ('WORK') { <i class="pi pi-briefcase"></i> }
+                @default { <i class="pi pi-calendar-plus"></i> }
               }
             </span>
           </ng-template>
@@ -51,9 +41,9 @@
           <ng-template #content let-event>
             <div class="event-box">
               <div class="event-details">
-                <span class="event-time"
-                  ><i class="pi pi-clock"></i> {{ event.startTime | date: 'shortTime' }}</span
-                >
+                <span class="event-time">
+                  <i class="pi pi-clock"></i> {{ event.startTime | date: 'shortTime' }}
+                </span>
                 <h3>{{ event.title }}</h3>
                 <p>{{ event.location }}</p>
               </div>
@@ -67,29 +57,9 @@
         </p-timeline>
 
         <div class="card-footer">
-          <button
-            pButton
-            label="Delete Itinerary"
-            class="p-button-outlined p-button-secondary"
-            (click)="deleteItinerary(i)"
-          ></button>
-          <!-- <p-button 
-              label="Delete Itinerary" 
-              styleClass="p-button-outlined p-button-secondary" 
-              (onClick)="deleteItinerary(i)">
-            </p-button> -->
-          <button
-            pButton
-            label="Share Itinerary"
-            class="p-button-outlined p-button-secondary"
-            (click)="shareItinerary(i)"
-          ></button>
-          <button
-            pButton
-            label="Download PDF"
-            class="black-button"
-            (click)="downloadPDF(i)"
-          ></button>
+          <button pButton label="Delete Itinerary" class="p-button-outlined p-button-secondary" (click)="deleteItinerary(i)"></button>
+          <!-- <button pButton label="Share Itinerary" class="p-button-outlined p-button-secondary" (click)="shareItinerary(i)"></button> -->
+          <button pButton label="Download PDF" class="black-button" (click)="downloadPDF(i)"></button>
         </div>
       </div>
     } @empty {
@@ -97,8 +67,7 @@
         <i class="pi pi-map no-trips-icon"></i>
         <h3 class="no-trips-title">No itineraries found</h3>
         <p class="no-trips-text">
-          You haven't created any travel plans yet. Click the button above to start your first
-          journey!
+          You haven't created any travel plans yet. Click the button above to start your first journey!
         </p>
       </div>
     }
@@ -110,38 +79,43 @@
       [style]="{ width: '650px' }"
     >
       <form [formGroup]="tripForm" (ngSubmit)="saveFullItinerary()" class="flex flex-column gap-4">
+
         <div class="flex flex-column gap-3">
           <div class="flex flex-column gap-2">
-            <label class="font-bold">Trip Name</label>
+            <label>Trip Name</label>
             <input pInputText formControlName="tripName" placeholder="e.g. Summer in Paris" />
           </div>
 
-          <div class="flex gap-3">
+          <!-- <div class="flex gap-3">
             <div class="flex-grow-1 flex flex-column gap-2">
-              <label class="font-bold">Start Date</label>
-              <p-datepicker
-                formControlName="startDate"
-                dateFormat="yy-mm-dd"
-                [showIcon]="true"
-                appendTo="body"
-              ></p-datepicker>
+              <label>Start Date</label>
+              <p-datepicker formControlName="startDate" dateFormat="yy-mm-dd" [showIcon]="true" appendTo="body"></p-datepicker>
             </div>
             <div class="flex-grow-1 flex flex-column gap-2">
-              <label class="font-bold">End Date</label>
-              <p-datepicker
-                formControlName="endDate"
-                dateFormat="yy-mm-dd"
-                [showIcon]="true"
-                appendTo="body"
-              ></p-datepicker>
+              <label>End Date</label>
+              <p-datepicker formControlName="endDate" dateFormat="yy-mm-dd" [showIcon]="true" appendTo="body"></p-datepicker>
             </div>
-          </div>
+          </div> -->
+
+
+            <div class="form-row-split">
+              <div class="flex flex-column gap-2">
+                <label>Start Date</label>
+                <p-datepicker formControlName="startDate" dateFormat="yy-mm-dd" [showIcon]="true" appendTo="body"></p-datepicker>
+              </div>
+              <div class="flex flex-column gap-2">
+                <label>End Date</label>
+                <p-datepicker formControlName="endDate" dateFormat="yy-mm-dd" [showIcon]="true" appendTo="body"></p-datepicker>
+              </div>
+            </div>
+
+
         </div>
 
         <hr />
 
         <div class="flex justify-content-between align-items-center">
-          <h3 class="m-0">Activities</h3>
+          <h3 class="m-0 text-xl font-bold">Activities</h3>
           <p-button
             label="Add Activity"
             icon="pi pi-plus"
@@ -150,81 +124,47 @@
           />
         </div>
 
-        <div
-          formArrayName="activities"
-          class="flex flex-column gap-3 max-h-25rem overflow-y-auto p-1"
-        >
+        <div formArrayName="activities" class="flex flex-column gap-3 max-h-25rem overflow-y-auto p-1">
           @for (act of activities.controls; track $index; let idx = $index) {
-            <div
-              [formGroupName]="idx"
-              class="p-3 surface-ground border-round border-1 border-200 shadow-1"
-            >
-              <div class="grid flex gap-2 mb-2">
-                <input
-                  pInputText
-                  formControlName="title"
-                  placeholder="Activity Title"
-                  class="flex-grow-1"
-                />
 
-                <p-select
-                  [options]="iconOptions"
-                  formControlName="type"
-                  optionLabel="label"
-                  optionValue="value"
-                  [style]="{ width: '150px' }"
-                />
+            <div [formGroupName]="idx" class="surface-ground">
 
-                <p-button
-                  icon="pi pi-trash"
-                  styleClass="p-button-danger p-button-text"
-                  (onClick)="removeActivityRow(idx)"
-                />
+              <div class="flex align-items-center gap-3 mb-3 w-full">
+                <input pInputText formControlName="title" placeholder="Activity Title" class="flex-grow-1" />
+                <p-select [options]="iconOptions" formControlName="type" optionLabel="label" optionValue="value" class="flex-grow-1"></p-select>
               </div>
 
-              <div class="flex gap-2 mb-2">
-                <div class="flex-grow-1">
-                  <label class="text-xs font-semibold block mb-1">Start Time</label>
-                  <p-datepicker
-                    formControlName="startTime"
-                    [showTime]="true"
-                    [hourFormat]="'24'"
-                    placeholder="Start"
-                    appendTo="body"
-                    styleClass="w-full"
-                  ></p-datepicker>
+                 <div class="form-row-split mb-3">
+                  <div class="flex flex-column gap-2">
+                    <label>Start Time</label>
+                    <p-datepicker formControlName="startTime" [showTime]="true" [timeOnly]="true" hourFormat="24" placeholder="Start" appendTo="body"></p-datepicker>
+                  </div>
+                  <div class="flex flex-column gap-2">
+                    <label>End Time</label>
+                    <p-datepicker formControlName="endTime" [showTime]="true" [timeOnly]="true" hourFormat="24" placeholder="End" appendTo="body"></p-datepicker>
+                  </div>
                 </div>
-                <div class="flex-grow-1">
-                  <label class="text-xs font-semibold block mb-1">End Time</label>
-                  <p-datepicker
-                    formControlName="endTime"
-                    [showTime]="true"
-                    [hourFormat]="'24'"
-                    placeholder="End"
-                    appendTo="body"
-                    styleClass="w-full"
-                  ></p-datepicker>
+
+
+              <div class="flex flex-column gap-2 mb-3">
+                <label>Location</label>
+                <input pInputText formControlName="location" placeholder="Location/Address" />
+              </div>
+              <div class="form-row-split mb-3">
+                <div class="flex flex-column gap-2">
+                  <label>Notes</label>
+                  <textarea pInputTextarea formControlName="notes" placeholder="Notes (Optional)" rows="1"></textarea>
+                </div>
+                <div class="flex flex-column gap-2">
+                  <label>Delete Activity</label>
+                  <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-text flex-shrink-0" (onClick)="removeActivityRow(idx)" />
                 </div>
               </div>
-
-              <input
-                pInputText
-                formControlName="location"
-                placeholder="Location/Address"
-                class="w-full mb-2"
-              />
-              <textarea
-                pInputTextarea
-                formControlName="notes"
-                placeholder="Notes (Optional)"
-                class="w-full"
-                rows="1"
-              ></textarea>
             </div>
           }
         </div>
 
-        <div class="flex justify-content-end gap-2 mt-4">
+        <div class="flex justify-content-end gap-2 mt-2">
           <p-button label="Cancel" styleClass="p-button-text" (onClick)="displayDialog = false" />
           <p-button
             type="submit"
@@ -233,7 +173,9 @@
             [disabled]="tripForm.invalid"
           />
         </div>
+
       </form>
     </p-dialog>
   </div>
 </div>
+ 

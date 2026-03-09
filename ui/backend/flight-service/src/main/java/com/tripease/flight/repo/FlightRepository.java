@@ -60,4 +60,8 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
             "FROM Flight f WHERE f.id IN :ids")
     List<FlightRecentBookingResponseDTO> findFlightsByIds(@Param("ids") List<Long> ids);
 
+    @Query("SELECT new com.tripease.flight.dto.FlightRecentBookingResponseDTO(f.flightId, f.flightNo, f.airline, f.depPlace, f.arrPlace) " +
+            "FROM Flight f WHERE f.id  = :id")
+    FlightRecentBookingResponseDTO findFlightById(@Param("id") Long id);
+
 }

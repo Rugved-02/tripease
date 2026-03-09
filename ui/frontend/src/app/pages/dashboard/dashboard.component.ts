@@ -10,12 +10,15 @@ import { DashboardService } from '../../core/services/dashboard/dashboard.servic
 import { sign } from 'crypto';
 import { RecentBookingsResponseDTO } from '../../core/services/dashboard/dto/RecentBookingsResponseDTO';
 import { DashboardStatsResponseDTO } from '../../core/services/dashboard/dto/DashboardStatsResponseDTO';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BehaviorSubject, Observable, scan, switchMap, tap } from 'rxjs';
 import { SliceResponseRecentBookingsDTO } from '../../core/services/dashboard/dto/SliceResponseRecentBookingsDTO';
 import { DrawerModule } from 'primeng/drawer';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { response } from 'express';
+import { error } from 'console';
+import { UserResponseDTO } from '../../core/services/dashboard/dto/UserResponseDTO';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,10 +37,11 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
+
+  private router = inject(Router);
   visible = false;
 
   stats = signal<DashboardStatsResponseDTO | null>(null);
-  // recentBookings = signal<RecentBookingsResponseDTO[]>([]);
   isLoading = true;
   errorMessage = '';
 
@@ -73,11 +77,23 @@ export class DashboardComponent implements OnInit {
     // );
 
     this.visible = false;
-
+    this.loadUserProfileDetails();
     this.loadDashboardStats();
     this.loadRecentBookings();
     this.loadLatestTrip();
   }
+
+  userProfileDetails = signal<UserResponseDTO | null>(null);
+  
+    loadUserProfileDetails(): void {
+      this.dashboardService.getLoggedInUserDetails().subscribe({
+        next: (response)=> {
+          this.userProfileDetails.set(response);
+          console.log(response);
+        },
+        error: (err) => console.log(err)
+      })
+    }
 
   loadDashboardStats(): void {
     this.dashboardService.getUserStats().subscribe({
@@ -259,6 +275,15 @@ export class DashboardComponent implements OnInit {
     this.dialogRecentBookingData.set(bookingDTO);
     // this.dashboardService;
     this.visible = true;
+  }
+
+  navigateTo(type: string){
+    if(type === 'hotel'){
+      this.router.navigate(['/bookHotel']);
+    }
+    else{
+      this.router.navigate(['/bookFlight']);
+    }
   }
 }
 

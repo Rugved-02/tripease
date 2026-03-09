@@ -51,4 +51,24 @@ public class FlightController {
         List<FlightRecentBookingResponseDTO> hotels = flightRepository.findFlightsByIds(flightIds);
         return ResponseEntity.ok(hotels);
     }
+
+    @GetMapping("{flightId}")
+    public ResponseEntity<FlightRecentBookingResponseDTO> getFlightById(@PathVariable Long flightId){
+
+        FlightRecentBookingResponseDTO hotels = flightRepository.findFlightById(flightId);
+        return ResponseEntity.ok(hotels);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<FlightSearchResponseDTO>> getTopFlightOfferings() {
+        List<FlightSearchResponseDTO> response = searchService.getTop10FlightOfferings();
+
+        if (response.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(response);
+    }
+
+
 }

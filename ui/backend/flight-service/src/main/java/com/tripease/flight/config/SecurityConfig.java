@@ -30,7 +30,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                     .securityContext(context -> context.requireExplicitSave(false))
 
                     .authorizeHttpRequests(auth -> auth
-                            .requestMatchers(HttpMethod.GET,"/flight/search").permitAll()
+                            .requestMatchers(HttpMethod.GET,"/flight","/flight/search").permitAll()
                             .requestMatchers("/error").permitAll()
                             .anyRequest().authenticated()
                     )

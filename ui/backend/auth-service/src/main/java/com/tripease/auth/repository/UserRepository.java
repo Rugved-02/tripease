@@ -11,5 +11,9 @@ import com.tripease.auth.model.User;
 public interface UserRepository extends JpaRepository<User, String> {
 	Optional<User> findByEmail(String email);
 
+    Optional<User> findByUserId(String userId);
+
 	boolean existsByEmail(String email);
+
+    long count();
 }

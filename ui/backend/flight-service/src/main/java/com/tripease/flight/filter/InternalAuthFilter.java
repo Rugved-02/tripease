@@ -37,8 +37,7 @@ public class InternalAuthFilter extends OncePerRequestFilter {
 
         // 2. Skip filter ONLY for GET calls on hotel search paths
         boolean isGetCall = "GET".equalsIgnoreCase(method);
-        boolean isFlightPath = path.equals("/flight/search");
-
+        boolean isFlightPath = path.equals("/flight/search") || path.equals("/flight");
         return isGetCall && isFlightPath;
     }
 

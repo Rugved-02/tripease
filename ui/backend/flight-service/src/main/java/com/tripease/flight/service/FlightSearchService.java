@@ -6,11 +6,13 @@ import com.tripease.flight.model.FlightInventory;
 import com.tripease.flight.model.FlightSeat;
 import com.tripease.flight.repo.FlightRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +51,30 @@ public class FlightSearchService {
                     .price(finalPrice)
                     .build();
         }).collect(Collectors.toList());
+    }
+
+    public List<FlightSearchResponseDTO> getTop10FlightOfferings() {
+        return flightRepository.findAll(PageRequest.of(0, 10))
+                .getContent()
+                .stream()
+                .flatMap(flight -> flight.getSeats().stream()
+                        .map(seat -> FlightSearchResponseDTO.builder()
+                                .flightId(flight.getFlightId())
+                                .flightNo(flight.getFlightNo())
+                                .airline(flight.getAirline())
+                                .depPlace(flight.getDepPlace())
+                                .arrPlace(flight.getArrPlace())
+                                .depTime(flight.getDepTime())
+                                .arrTime(flight.getArrTime())
+                                // Direct mapping from the FlightSeat entity
+                                .classType(seat.getClassType())
+                                .availableSeats(seat.getTotalCapacity())
+                                .price(seat.getBasePrice())
+                                .build()
+                        )
+                )
+                .limit(10) // Ensures we only return 10 total rows/offerings
+                .collect(Collectors.toList());
     }
 
     private BigDecimal calculatePrice(BigDecimal base, int available, int total, LocalDate travelDate) {

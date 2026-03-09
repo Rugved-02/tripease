@@ -126,6 +126,18 @@ public class UserServiceImpl implements UserService{
                 .map(User::getUserId)
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
     }
+
+    @Override
+    public User getUserProfile(String userId) {
+        // TODO Auto-generated method stub
+        log.debug("Fetching profile details for user: {}", userId);
+
+        return repo.findByUserId(userId)
+                .orElseThrow(() ->{
+                    log.error("Profile fetch failed: User {} not found", userId);
+                    return new UserNotFoundException("User not found with ID: " + userId);
+                });
+    }
 	
 	
 	

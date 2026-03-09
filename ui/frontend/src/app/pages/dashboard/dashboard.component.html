@@ -1,8 +1,17 @@
 <p-panel header="">
   <!-- <h2 class="panel-title">Welcome Back!</h2> -->
 
+  <!-- <div class="panel-header">
+    <h2 class="panel-title">Welcome Back! {{userProfileDetails()?.name}}</h2>
+  </div> -->
+
   <div class="panel-header">
-    <h2 class="panel-title">Welcome Back!</h2>
+  <div class="greeting-wrapper">
+    <h2 class="panel-title">
+      Welcome Back, <span class="user-name">{{userProfileDetails()?.name}}</span> 
+      <span class="wave-emoji">👋</span>
+    </h2>
+  </div>
   </div>
 
   <p class="panel-title-description">Here's an overview of your travel activities</p>
@@ -89,6 +98,40 @@
             </div>
           </div>
         }
+        @empty {
+      <div class="empty-state-container">
+        <div class="empty-visual">
+          <div class="circle-bg"></div>
+          <i class="pi pi-map"></i>
+        </div>
+        <div class="empty-content">
+          <h4>No Bookings Found</h4>
+          <p>Your travel timeline is looking a bit lonely. Let's fix that!</p>
+          <div class="empty-actions">
+  <button class="action-pill hotel" (click)="navigateTo('hotel')">
+    <i class="pi pi-building"></i> 
+    Book Hotel
+  </button>
+
+  <button class="action-pill flight" (click)="navigateTo('flight')">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="btn-svg-icon"
+    >
+      <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path>
+    </svg>
+    Book Flight
+  </button>
+</div>
+        </div>
+      </div>
+    }
       </div>
 
       <!-- load more -->

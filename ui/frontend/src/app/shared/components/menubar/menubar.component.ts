@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnInit, signal } from '@angular/core';
 import { PrimeIcons, MenuItem } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 import { CardModule } from 'primeng/card';
@@ -15,6 +15,8 @@ import { DesignTokens } from '@primeuix/themes/types';
 import { AuthService } from '../../../core/services/auth/auth-service';
 import { LogoTextComponent } from "../logo-text/logo-text.component";
 import { ButtonModule } from 'primeng/button';
+import { DashboardService } from '../../../core/services/dashboard/dashboard.service';
+import { UserResponseDTO } from '../../../core/services/dashboard/dto/UserResponseDTO';
 
 @Component({
   selector: 'app-menubar-component',
@@ -40,6 +42,7 @@ import { ButtonModule } from 'primeng/button';
 export class MenubarComponent implements OnInit {
 
   private authService = inject(AuthService);
+  private dashboardService = inject(DashboardService);
   private eRef = inject(ElementRef);
 
   showProfileMenu:boolean = false;
@@ -78,7 +81,22 @@ export class MenubarComponent implements OnInit {
         routerLink: ['/analytics'],
       },
     ];
+
+    this.loadUserProfileDetails();
   }
+
+  userProfileDetails = signal<UserResponseDTO | null>(null);
+
+  loadUserProfileDetails(): void {
+    this.dashboardService.getLoggedInUserDetails().subscribe({
+      next: (response)=> {
+        this.userProfileDetails.set(response);
+        console.log(response);
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
   directLogin() {
     this.router.navigate(['/login']);
   }

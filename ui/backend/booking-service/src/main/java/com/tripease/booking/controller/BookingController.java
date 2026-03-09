@@ -81,9 +81,9 @@ public class BookingController {
 //    Retrieve a booking by its Public UUID
 
     @GetMapping("/{refId}")
-    public ResponseEntity<BookingResponseDTO> getBooking(@PathVariable String refId) {
-        log.info("BookingCOntroller :: getBooking()  called");
-        return ResponseEntity.ok(bookingService.getBookingByRef(refId));
+    public ResponseEntity<RecentBookingsResponseDTO> getBooking(@PathVariable String refId) {
+        log.info("BookingController :: getBooking()  called");
+        return ResponseEntity.ok(dashboardStatsService.getRecentBookingById(refId));
     }
 
     @GetMapping("dashboard/cardsData")

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, computed, WritableSignal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -15,10 +15,10 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
+import { ProgressSpinner } from 'primeng/progressspinner';
 
 // Service & Types
 import { FlightBookingService } from '../../core/services/flight-booking/flight-booking.service';
-import { ProgressSpinner } from 'primeng/progressspinner';
 import { AuthService } from '../../core/services/auth/auth-service';
 import { BookingRequestDTO } from '../../core/services/booking/dto/BookingRequestDTO';
 import { FlightDTO } from '../../core/services/flight-booking/dto/FlightDTO';
@@ -43,7 +43,6 @@ import { PaymentService } from '../../core/services/payment/payment.service';
   providers: [MessageService],
 })
 export class FlightBookingComponent implements OnInit {
-  // --- Services ---
   private authService = inject(AuthService);
   private bookingService = inject(BookingService);
   private paymentService = inject(PaymentService);
@@ -55,15 +54,15 @@ export class FlightBookingComponent implements OnInit {
   private fb = inject(FormBuilder);
 
   // --- Signals State Management ---
-  private allFlights = signal<FlightDTO[]>([]); // Source of truth from API
+  private allFlights = signal<FlightDTO[]>([]);
   isLoading = signal<boolean>(false);
   selectedFilter = signal<string>('All');
+  isInitialLoad = signal<boolean>(true); // NEW: Track if showing top 10 vs search results
 
-  // --- Computed Signal (Auto-filters whenever allFlights or selectedFilter changes) ---
+  // --- Computed Signal ---
   filteredFlights = computed(() => {
     const flights = this.allFlights();
     const filter = this.selectedFilter();
-
     if (filter === 'All') return flights;
     return flights.filter((f) => f.class?.toLowerCase() === filter.toLowerCase());
   });
@@ -80,7 +79,6 @@ export class FlightBookingComponent implements OnInit {
   flightIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>`;
 
   ngOnInit() {
-    // 3. Initialize the form first
     this.searchForm = this.fb.group({
       from: ['', Validators.required],
       to: ['', Validators.required],
@@ -88,25 +86,95 @@ export class FlightBookingComponent implements OnInit {
       passengers: [this.passengerOptions[0]],
     });
 
-    // 4. Extract Query Parameters from URL
     this.route.queryParams.subscribe(params => {
       if (params['from'] || params['to'] || params['date']) {
-        
-        // Update form values with data from Homepage
+        this.isInitialLoad.set(false);
         this.searchForm.patchValue({
           from: params['from'] || '',
           to: params['to'] || '',
           departureDate: params['date'] || new Date().toISOString().split('T')[0]
         });
 
-        // 5. Automatically trigger search if enough data is present
         if (params['from'] && params['to']) {
           this.onSearch();
         }
       } else {
-        // Fallback for direct navigation without params
-        this.onSearch();
+        // Fetch top 10 flights if no search params exist
+        this.fetchFeaturedFlights();
       }
+    });
+  }
+
+  fetchFeaturedFlights() {
+    this.isLoading.set(true);
+    this.isInitialLoad.set(true);
+    // Calling the new CSR architecture endpoint
+    this.flightService.getInitialFlights().subscribe({
+      next: (data) => {
+        this.mapAndSetFlights(data);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.isLoading.set(false);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load flights' });
+      }
+    });
+  }
+
+  private mapAndSetFlights(data: any[]) {
+    const mapped = data.map((item) => ({
+      id: item.flightId,
+      airline: item.airline || 'N/A',
+      flightNo: item.flightNo || 'N/A',
+      class: item.classType || 'Economy',
+      depTime: item.depTime || '--:--',
+      depCity: item.depPlace || 'N/A',
+      arrTime: item.arrTime || '--:--',
+      arrCity: item.arrPlace || 'N/A',
+      duration: 'Direct',
+      price: item.price || 0,
+      seats: item.availableSeats ?? 0,
+    }));
+    this.allFlights.set(mapped);
+  }
+
+  onSearch() {
+    const { from, to, departureDate, passengers } = this.searchForm.value;
+    if (!from?.trim() || !to?.trim()) return;
+
+    this.isLoading.set(true);
+    this.isInitialLoad.set(false);
+
+    this.flightService
+      .getFlights(from.trim(), to.trim(), departureDate, passengers?.value ?? 1)
+      .subscribe({
+        next: (data: any[]) => {
+          this.mapAndSetFlights(data);
+          this.isLoading.set(false);
+          if (data.length === 0) {
+            this.messageService.add({ severity: 'info', summary: 'No Flights', detail: 'Try different criteria' });
+          }
+        },
+        error: () => {
+          this.isLoading.set(false);
+          this.allFlights.set([]);
+        },
+      });
+  }
+
+  // --- UX: PRE-POPULATE AND SLIDE ---
+  onCheckAvailability(flight: any) {
+    // 1. Pre-populate the form with the specific flight's route
+    this.searchForm.patchValue({
+      from: flight.depCity,
+      to: flight.arrCity
+    });
+
+    // 2. Smoothly slide/scroll up to the search box
+    // We target the top of the page where the form is located
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
   }
 
@@ -114,120 +182,32 @@ export class FlightBookingComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(this.flightIconSvg);
   }
 
-  /**
-   * Triggers the search and updates the 'allFlights' signal
-   */
-  onSearch() {
-    const { from, to, departureDate, passengers } = this.searchForm.value;
-    const fromTrimmed = from?.trim();
-    const toTrimmed = to?.trim();
-
-    if (!fromTrimmed || !toTrimmed) {
-      this.allFlights.set([]);
-      return;
-    }
-
-    this.isLoading.set(true);
-
-    this.flightService
-      .getFlights(fromTrimmed, toTrimmed, departureDate, passengers?.value ?? 1)
-      .subscribe({
-        next: (data: any[]) => {
-          if (!data || data.length === 0) {
-            this.allFlights.set([]);
-            this.messageService.add({
-              severity: 'info',
-              summary: 'No Flights',
-              detail: 'Try different cities or dates',
-            });
-          } else {
-            // Map backend DTO to Frontend Flight interface
-            const mapped = data.map((item) => ({
-              id: item.flightId,
-              airline: item.airline || 'N/A',
-              flightNo: item.flightNo || 'N/A',
-              class: item.classType || 'Economy',
-              depTime: item.depTime || '--:--',
-              depCity: item.depPlace || fromTrimmed,
-              arrTime: item.arrTime || '--:--',
-              arrCity: item.arrPlace || toTrimmed,
-              duration: 'Direct',
-              price: item.price || 0,
-              seats: item.availableSeats ?? 0,
-            }));
-            this.allFlights.set(mapped);
-          }
-          this.isLoading.set(false);
-        },
-        error: (err) => {
-          this.isLoading.set(false);
-          this.allFlights.set([]);
-          this.messageService.add({
-            severity: err.status === 404 ? 'warn' : 'error',
-            summary: 'Search Failed',
-            detail: 'Unable to fetch flights. Please check your connection.',
-          });
-        },
-      });
-  }
-
-  /**
-   * Updates the filter signal (which triggers the computed filteredFlights)
-   */
   filterByClass(flightClass: string) {
     this.selectedFilter.set(flightClass);
   }
 
-  /**
-   * Booking logic
-   */
   onBook(flight: any) {
     if (!this.authService.isLoggedIn()) {
-      // Redirect to login if not authenticated
       this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
       return;
     }
-
-    const date = this.searchForm.get('departureDate')?.value;
-    const qty = this.searchForm.get('passengers')?.value?.value ?? 1;
-
     const bookingRequestDTO: BookingRequestDTO = {
       resourceId: flight.id,
-      resourceType: 'FLIGHT', // e.g., 'FLIGHT'
-      subType: flight.class, // e.g., 'ECONOMY'
-      startDate: date,
+      resourceType: 'FLIGHT',
+      subType: flight.class,
+      startDate: this.searchForm.get('departureDate')?.value,
       endDate: null,
-      quantity: qty,
+      quantity: this.searchForm.get('passengers')?.value?.value ?? 1,
       totalAmount: flight.price,
     };
 
     this.bookingService.createBooking(bookingRequestDTO).subscribe({
       next: (res) => {
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Success',
-          detail: 'Flight added to booking',
-          life: 2000,
-        });
-
-        setTimeout(() => {
-          this.paymentService.preparePaymentEntry(res.bookingReference, res.totalAmount);
-        }, 2000);
+        this.messageService.add({ severity: 'info', summary: 'Success', detail: 'Flight added to booking' });
+        setTimeout(() => this.paymentService.preparePaymentEntry(res.bookingReference, res.totalAmount), 2000);
       },
       error: (err) => console.error(err),
     });
-
-    // this.flightService.reserveSeats(flight.id, flight.class, date, qty).subscribe({
-    //   next: (res) => {
-    //     this.messageService.add({ severity: 'success', summary: 'Reserved', detail: res });
-    //     this.router.navigate(['/payment'], {
-    //       queryParams: { id: flight.flightNo, price: flight.price },
-    //     });
-    //   },
-    //   error: () => {
-    //     this.messageService.add({ severity: 'error', summary: 'Booking Failed', detail: 'Seats might not be available' });
-    //   }
-    // });
   }
 
   trackByFlightNo(index: number, flight: FlightDTO): string {

@@ -2,6 +2,7 @@ package com.tripease.booking.repository;
 
 import com.tripease.booking.model.Booking;
 import com.tripease.booking.model.BookingStatus;
+import com.tripease.booking.model.ResourceType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -53,4 +54,19 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             List<BookingStatus> statuses,
             Pageable pageable
     );
+
+
+//    for booking analytics controller
+
+    // For Total Revenue calculation
+    @Query("SELECT b.totalAmount FROM Booking b WHERE b.status = 'CONFIRMED'")
+    List<BigDecimal> findConfirmedPrices();
+
+    // For Flight/Hotel count
+    Long countByResourceType(ResourceType resourceType);
+
+    // For Customer Retention: Counts users who have more than 1 booking
+    @Query(value = "SELECT COUNT(*) FROM (SELECT user_id FROM bookings GROUP BY user_id HAVING COUNT(user_id) > 1) AS repeat_customers",
+            nativeQuery = true)
+    Long countReturningUsers();
 }

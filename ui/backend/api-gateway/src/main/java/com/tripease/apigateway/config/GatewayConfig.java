@@ -35,6 +35,9 @@ public class GatewayConfig {
                 .route("itinerary-service-route", r -> r.path("/itinerary/**")
                         .uri("lb://itinerary-service"))
 
+                .route("analytics-service-route", r -> r.path("/analytics/**")
+                        .uri("lb://analytics-service"))
+
 
 
                 // 2. Path Rewrite (Removes /api prefix before hitting the service)

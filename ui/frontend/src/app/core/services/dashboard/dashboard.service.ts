@@ -30,6 +30,10 @@ export class DashboardService {
   getLatestTrip():Observable<any>{
     return this.httpClient.get(`${this.API_URL}/itinerary/trips/my-trips/latest`);
   }
+
+  getLoggedInUserDetails():Observable<any>{
+    return this.httpClient.get(`${this.API_URL}/auth/user/profile`);
+  }
 }
 
 

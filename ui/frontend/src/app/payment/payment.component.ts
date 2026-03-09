@@ -138,7 +138,7 @@ navigateToBookings() {
   this.stopTimer();
   this.paymentStatus.set('IDLE');
   this.isProcessing.set(false);
-  this.router.navigate(['/bookingInformation', this.bookingId]);
+  this.router.navigate(['/bookingDetails', this.bookingId]);
 }
 
   closePopup() {

@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,4 +23,7 @@ public interface HotelServiceClient {
 
     @GetMapping("/findAll/ids")
     public ResponseEntity<List<HotelRecentBookingResponseDTO>> getHotelsByIds(@RequestParam List<Long> hotelIds);
+
+    @GetMapping("{hotelId}")
+    public ResponseEntity<HotelRecentBookingResponseDTO> getHotelById(@PathVariable Long hotelId);
 }

@@ -1,5 +1,6 @@
 package com.tripease.auth.config;
 
+import com.tripease.auth.filter.InternalAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
+    private final InternalAuthFilter internalAuthFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -47,13 +49,13 @@ public class SecurityConfig {
                         // Allow Preflight OPTIONS requests
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
                         // Public Auth Endpoints
-                        .requestMatchers("/auth/login", "/auth/register/direct", "/auth/register", "/auth/forgotPassword", "/auth/reset-password").permitAll()
+                        .requestMatchers("/auth/login", "/auth/register", "/auth/forgotPassword", "/auth/reset-password").permitAll()
                         // Everything else requires a token
                         .anyRequest().authenticated()
                 )
 
                 // 5. Add JWT Filter
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(internalAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

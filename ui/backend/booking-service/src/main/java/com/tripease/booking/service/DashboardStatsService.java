@@ -6,6 +6,7 @@ import com.tripease.booking.dto.DashboardStatsResponseDTO;
 import com.tripease.booking.dto.RecentBookingsResponseDTO;
 import com.tripease.booking.dto.ResourceDetailsDTO;
 import com.tripease.booking.dto.flight.FlightRecentBookingResponseDTO;
+import com.tripease.booking.dto.hotel.HotelRecentBookingResponseDTO;
 import com.tripease.booking.model.Booking;
 import com.tripease.booking.model.BookingStatus;
 import com.tripease.booking.model.ResourceType;
@@ -120,5 +121,48 @@ public class DashboardStatsService {
         }).toList();
 
         return new SliceImpl<>(result, pageable, bookingSlice.hasNext());
+    }
+
+    public RecentBookingsResponseDTO getRecentBookingById(String bookingId) {
+        // 1. Search if the booking exists
+        Booking booking = bookingRepository.findByBookingReference(bookingId).get();
+
+        ResourceDetailsDTO details = null;
+
+        // 2. Check ResourceType and call appropriate Feign client
+        if (booking.getResourceType() == ResourceType.FLIGHT) {
+            // Fetch single flight details and map to ResourceDetailsDTO
+            FlightRecentBookingResponseDTO flightData = flightServiceClient.getFlightById(booking.getResourceId()).getBody();
+            if (flightData != null) {
+                details = ResourceDetailsDTO.builder()
+                        .flightNo(flightData.flightNo())
+                        .airline(flightData.airline())
+                        .depPlace(flightData.depPlace())
+                        .arrPlace(flightData.arrPlace())
+                        .build();
+            }
+        } else if (booking.getResourceType() == ResourceType.HOTEL) {
+            // Fetch single hotel details and map to ResourceDetailsDTO
+            HotelRecentBookingResponseDTO hotelData = hotelServiceClient.getHotelById(booking.getResourceId()).getBody();
+            if (hotelData != null) {
+                details = ResourceDetailsDTO.builder()
+                        .hotelName(hotelData.hotelName())
+                        .hotelLocation(hotelData.location())
+                        .build();
+            }
+        }
+
+        // 3. Map and return the final DTO
+        return RecentBookingsResponseDTO.builder()
+                .resourceType(booking.getResourceType())
+                .subType(booking.getSubType())
+                .bookingStatus(booking.getStatus())
+                .startDate(booking.getStartDate())
+                .endDate(booking.getEndDate())
+                .totalAmount(booking.getTotalAmount())
+                .createdAt(booking.getCreatedAt())
+                .updatedAt(booking.getUpdatedAt())
+                .resourceDetails(details)
+                .build();
     }
 }

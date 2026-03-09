@@ -38,10 +38,19 @@
     <ng-template #end>
       @if (isLoggedIn()) {
         <div class="profile-wrapper">
-          <button class="round-btn" (click)="toggleProfileMenu()">P</button>
+          <button class="round-btn" (click)="toggleProfileMenu()">
+            {{ userProfileDetails()?.name?.charAt(0) || 'U' }}
+          </button>
 
           <!-- DROPDOWN -->
           <div class="profile-menu" *ngIf="showProfileMenu">
+            @if (userProfileDetails()) {
+              <div class="user-info-section">
+                <div class="user-name">{{ userProfileDetails()?.name }}</div>
+                <div class="user-email">{{ userProfileDetails()?.email }}</div>
+              </div>
+              <div class="menu-divider"></div>
+            }
             <div
               class="menu-item"
               (click)="redirectToDashboard()"

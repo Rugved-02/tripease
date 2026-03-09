@@ -18,6 +18,10 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
             "FROM Hotel h WHERE h.id IN :ids")
     List<HotelRecentBookingResponseDTO> findHotelsByIds(@Param("ids") List<Long> ids);
 
+    @Query("SELECT new com.tripease.hotels.dto.HotelRecentBookingResponseDTO(h.hotelId, h.hotelName, h.location) " +
+            "FROM Hotel h WHERE h.id = :id")
+    HotelRecentBookingResponseDTO findHotelById(@Param("id") Long id);
+
     List<Hotel> findByLocationIgnoreCaseAndIsRegisteredTrue(String location);
     
     List<Hotel> findAllByHotelIdInAndIsRegisteredTrue(List<Long> hotelIds);

@@ -85,13 +85,13 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
         HttpMethod method = request.getMethod();
 
         // Original auth logic
-        if (path.contains("/auth/")) {
+        if (path.contains("/auth/register") || path.contains("/auth/login")) {
             return true;
         }
 
         // Strict check for GET calls on flight and hotel search
         if (HttpMethod.GET.equals(method)) {
-            return path.contains("/flight/search") || path.contains("/hotel/search") || path.contains("/hotel");
+            return path.contains("/flight/search") || path.contains("/flight") || path.contains("/hotel/search") || path.contains("/hotel");
         }
 
         return false;
