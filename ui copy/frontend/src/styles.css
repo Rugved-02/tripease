@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+/* .main-html-tag{
+  background-color: var(--p-surface-0);
+} */
+
+:root {
+  --gradient-blue: #1c5dea;
+  --gradient-purple: #9333EA;
+      --p-password-icon-color: var(--p-primary-1000);
+}
+
+ body{
+  margin: 0px;
+ }
+
+ 

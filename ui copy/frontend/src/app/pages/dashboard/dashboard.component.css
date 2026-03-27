@@ -1,0 +1,338 @@
+.p-panel{
+  overflow: visible !important;
+  background-color: whitesmoke;
+  border-radius: 0px;
+  border: 0px;
+  padding: 0px 70px 50px;
+}
+
+.panel-title {
+ text-align: left;
+ font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif;
+ font-size: 2.4rem;
+ font-weight: 700;
+ color: var(--p-blue-700);
+ margin-bottom: 6px;
+}
+
+.panel-title-description {
+ text-align: left;
+ font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif;
+ margin-bottom: 30px;
+ font-size: 1.05rem;
+ color: gray;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 30px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.p-card {
+  /* padding: 40px; */
+  /* width: 100%; */
+  /* border: 0px solid #f1f5f9; */
+  font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.p-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.card-icon {
+  /* font-size: 4rem; */
+  margin-bottom: 20px;
+  border-radius: 15px;
+  padding: 12px;
+  max-width: 50px;
+}
+
+.p-card h3 {
+  margin-bottom: 15px;
+  font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color:black;
+}
+
+/* QUICK ACTIONS */
+
+/* QUICK ACTIONS WRAPPER CARD */
+.quick-actions-wrapper  {
+ margin-top: 40px;
+ /* padding: 25px; */
+ padding-top: 8px;
+ border-radius: 12px;
+ color: black;
+}
+
+:host ::ng-deep .quick-actions-wrapper .p-card-body {
+  padding-top: 15px !important;
+  
+}
+
+/* TITLE */
+.quick-actions-title {
+ color: black;
+ font-size: 2rem;
+ font-weight: 500;
+ margin-top: 0;
+ margin-bottom: 20px;
+ padding-bottom: 0;
+
+}
+/* BUTTON CONTAINER */
+.quick-actions-container {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 16px;
+}
+/* INDIVIDUAL ACTION BUTTON */
+.quick-action-item {
+  color: black;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ height: 100px;
+ gap: 10px;
+ padding: 16px;
+ border-radius: 10px;
+ border: 0.8px solid lightgrey !important;
+ cursor: pointer;
+ transition: background 0.2s ease;
+}
+.quick-action-item:hover {
+ background: var(--p-surface-100);
+}
+.quick-action-item i {
+ font-size: 1.1rem;
+ color: var(--p-primary-600);
+}
+.quick-action-item span {
+  color:black;
+ font-size: 0.95rem;
+ font-weight: 500;
+}
+
+/* DISABLE HOVER EFFECT ON QUICK ACTIONS OUTER CARD */
+.quick-actions-wrapper:hover {
+ box-shadow: none !important;
+ transform: none !important;
+}
+
+
+
+/* RECENT BOOKINGS */
+.recent-bookings-wrapper {
+ margin-top: 40px;
+ padding: 25px;
+ border-radius: 12px;
+}
+.recent-bookings-header {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin-bottom: 20px;
+}
+.recent-bookings-header h3 {
+  color: black;
+ font-size: 1.5rem;
+ margin-top: 0px;
+ font-weight: 700;
+}
+.view-all {
+  color: black;
+ font-size: 0.9rem;
+ cursor: pointer;
+}
+/* LIST */
+.recent-bookings-list {
+  color: black;
+   font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif;
+ display: flex;
+ flex-direction: column;
+ gap: 16px;
+}
+/* ROW */
+.booking-item {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ background: var(--p-surface-0);   /* white */
+ padding: 16px;
+ border-radius: 12px;
+ border: 1px solid lightgray; 
+ transition: background 0.1s ease;
+}
+/* LEFT */
+.booking-left {
+ display: flex;
+ align-items: center;
+ gap: 14px;
+}
+.booking-icon {
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ background: var(--p-primary-100);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+.booking-icon i {
+ color: var(--p-primary-600);
+}
+.booking-title {
+  font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif;
+ font-weight: 500;
+ font-size: 0.9rem;
+}
+.booking-date {
+ font-size: 0.75rem;
+ color: var(--p-text-secondary);
+}
+/* RIGHT */
+.booking-right {
+ display: flex;
+ align-items: center;
+ gap: 14px;
+}
+.booking-price {
+ font-weight: 600;
+ font-size: 0.9rem;
+}
+/* STATUS */
+.booking-status {
+ padding: 4px 10px;
+ border-radius: 20px;
+ font-size: 0.75rem;
+ font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.booking-status.confirmed {
+ background: #d1fae5;
+ color: #065f46;
+}
+.booking-status.pending {
+ background: #fef3c7;
+ color: #92400e;
+}
+/* .p-button-outlined {
+  color: black;
+  font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif; ;
+  font-size: 0.7rem;
+  border: lightgray;
+} */
+
+
+
+/* STOP HOVER ON RECENT BOOKINGS OUTER CARD */
+.recent-bookings-wrapper:hover,
+.recent-bookings-wrapper:focus,
+.recent-bookings-wrapper:focus-within {
+ box-shadow: none !important;
+ transform: none !important;
+ outline: none !important;
+}
+
+
+
+
+/* UPCOMING TRIP REMINDER */
+.upcoming-trip-card {
+ margin-top: 40px;
+ padding: 20px 24px;
+ border-radius: 12px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ background: linear-gradient(
+   90deg,
+   var(--p-blue-700),
+   var(--p-blue-600)
+ );
+ color: var(--p-surface-0);
+}
+/* LEFT SECTION */
+.upcoming-trip-left {
+ display: flex;
+ align-items: center;
+ gap: 16px;
+}
+.upcoming-trip-icon {
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ background: rgba(255, 255, 255, 0.2);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+.upcoming-trip-icon i {
+ font-size: 1.2rem;
+}
+/* TEXT */
+.upcoming-trip-text h4 {
+font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif;
+ margin: 0 0 4px 0;
+ font-weight: 600;
+}
+.upcoming-trip-text p {
+font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif;
+ margin: 0;
+ font-size: 0.9rem;
+ opacity: 0.95;
+}
+/* BUTTON OVERRIDE */
+.upcoming-trip-card .p-button {
+font-family: 'Inter', sans-serif;font-family: 'Inter', sans-serif;
+font-size: 0.7rem;
+ background: var(--p-surface-0);
+ color: black;
+ border: none;
+}
+.upcoming-trip-card .p-button:hover {
+ background: var(--p-surface-100);
+}
+
+.upcoming-trip-card {
+ margin-top: 30px;   /* space from Recent Bookings */
+ padding: 28px 24px;
+}
+
+
+
+.round-btn {
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ border: none;
+ background: #2563eb;
+ color: white;
+ font-weight: 600;
+ cursor: pointer;
+ margin-top: -8px;
+ 
+}
+
+
+.panel-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ margin-top: -40px;
+ margin-right: -50px;
+} 
+
+
+/* COMMENT */

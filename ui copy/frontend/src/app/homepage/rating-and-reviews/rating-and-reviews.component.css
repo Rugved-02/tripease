@@ -1,0 +1,48 @@
+.card-content-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* gap: 30px; */
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .card-content-wrapper {
+    /* Force 2 cards per row (2x2 layout) */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* When the screen is 600px or smaller */
+@media (max-width: 600px) {
+  .card-content-wrapper {
+    /* Force 1 card per row */
+    grid-template-columns: 1fr;
+  }
+}
+
+.p-card{
+  border-radius: 0px;
+  padding: 0px 10%;
+}
+
+
+.review-container {
+  padding: 1.5rem;
+  justify-items: center;
+  background: var(--p-primary-0);
+}.review-container h2{
+  color: var(--p-primary-1000);
+  margin: 15px 0px 3px 0px;
+}.review-container p{
+  color: var(--p-primary-1100);
+  margin: 0px;
+}
+
+.icon-container {
+  background: var(--p-primary-200);
+  width: fit-content;
+  padding: 15px;
+  border-radius: 50%;
+  line-height: 0;
+}
+

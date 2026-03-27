@@ -1,0 +1,52 @@
+
+.logo-text-wrapper{
+    display:grid;
+    grid-template-columns: max-content 1fr;
+    max-width: fit-content;
+}
+
+.air-icon-wrapper{
+  max-width: fit-content;
+  line-height: 0;
+}
+.air-icon {
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+  border-radius: 30%;
+  margin-right: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  color: var(--p-primary-0); 
+  background: linear-gradient(90deg, var(--p-blue-600) 0%, var(--p-indigo-600) 100%);
+}
+
+.air-icon:hover {
+  background: linear-gradient(90deg, var(--p-blue-600) 0%, var(--p-indigo-600) 100%); /* Refined hover */
+  transform: translateY(-1px);
+}
+
+.tripease-heading p {
+    font-size: inherit;
+    line-height: 1; /* Reset from 0rem to 1 so text isn't cut off */
+    font-weight: inherit;
+    background-image: linear-gradient(to right, var(--p-blue-600), var(--p-indigo-600));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    transform: scaleY(1.0);
+    transform-origin: center;
+    vertical-align: middle;
+    margin: 0; /* Let the container handle margins */
+}
+
+/* Add margin to the container instead of the p tag for cleaner spacing */
+.tripease-heading {
+    margin-left: 0.5rem;
+    margin-right: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+

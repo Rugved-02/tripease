@@ -1,0 +1,278 @@
+/* Main Background Gradient */
+/* .page-wrapper {
+  background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+} */
+
+/* Tab Container */
+.tabs-header {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+
+/* Tab States */
+.tab-active {
+  background-color: #0c0c0e;
+  color: white;
+}
+
+.tab-inactive {
+  background-color: white;
+  color: #0c0c0e;
+  border: 1px solid #e5e7eb;
+}
+
+.tab-inactive:hover {
+  background-color: var(--p-slate-200);
+}
+
+.tab-item-icon {
+  color: inherit;
+
+  /* Matches the SVG height to the surrounding text size */
+  height: 1rem;
+  width: auto;
+
+  /* Aligns the icon vertically with the text baseline */
+  vertical-align: middle;
+
+  /* Optional: adds a little space between icon and text */
+  margin-right: 8px;
+}
+
+/* Main Content Card */
+.search-card {
+  background-color: white;
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Layout */
+.input-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .input-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Input Fields */
+.field-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-input {
+  background-color: #f3f4f6 !important;
+  border: none !important;
+  padding: 14px !important;
+  border-radius: 10px !important;
+  width: 100%;
+}
+
+/* Search Button */
+.search-btn {
+  width: 100%;
+  background-color: #0c0c0e !important;
+  color: white !important;
+  padding: 16px !important;
+  border-radius: 12px !important;
+  border: none !important;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pi-send {
+  transform: rotate(-45deg);
+}
+
+
+
+
+/* .p-tabs{
+    margin: 20px;
+}
+.p-tab{
+    
+    border-radius: 20px;
+    margin: 20px 10px 10px;
+    width: 48.2%;
+    padding: 10px;
+    text-align: center;
+    background: var(--p-primary-300);
+    color: var(--p-primary-900);
+}
+
+.p-tab-active {
+    background: var(--p-primary-700);
+    color: var(--p-surface-100);
+} */
+
+
+.content-area {
+  padding-top: 20px;
+}
+
+/* Container for the 3 inputs */
+.input-row {
+  display: flex;
+  flex-direction: row;
+  /* Side by side */
+  flex-wrap: wrap;
+  /* Wrap to next line if screen is narrow */
+  gap: 1.5rem;
+  /* Space between the inputs */
+  width: 100%;
+}
+
+/* Individual field logic */
+.input-field {
+  flex: 1 1 30%;
+  /* Grow/Shrink, with a 250px base width */
+  /* min-width: 0; */
+  max-width: 31%;
+  /*Prevents flex items from overflowing */
+}
+
+/* Ensure the button stays full width and below */
+button[pButton] {
+  width: 100% !important;
+  /* display: flex; */
+  justify-content: center;
+  margin-top: 1rem;
+  background: var(--p-primary-1000);
+  color: var(--p-primary-0);
+}
+
+button[pButton]:hover {
+  background: color-mix(in srgb, var(--p-primary-1000), transparent 15%);
+  color: var(--p-primary-0);
+}
+
+/* Responsive: If the screen is very small, stack them tightly */
+@media (max-width: 640px) {
+  .input-row {
+    gap: 1rem;
+  }
+
+  .input-field {
+    flex: 1 1 100%;
+    /* Forces fields to take full width on mobile */
+  }
+}
+
+/* new tab sleect button styling */
+.tab-container {
+  width: 73%;
+  /* max-width: ; */
+  justify-self: center;
+  padding: 22px;
+  background: var(--p-slate-100);
+  border-radius: 15px;
+}
+
+/* search flight and hotels button in form */
+i[style-input-label-icon] {
+  font-size: 1rem;
+  padding: 0px 5px 5px 5px;
+  color: var(--p-primary-1000);
+}
+
+i[style-search-button-icon] {
+  font-size: 0.8rem;
+  padding-right: 15px;
+}
+
+input[style-input-field] {
+  border-color: var(--p-slate-100);
+  background-color: var(--p-slate-200);
+  /* border: 1px solid var(--p-slate-100); */
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--p-primary-1000);
+  font-size: small;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+input[style-input-field]::placeholder {
+  color: color-mix(in srgb, var(--p-primary-1000), transparent 50%);
+  /* font-size: smaller; */
+}
+input[style-input-field]:hover {
+  border: none;
+}
+input[style-input-field]:focus {
+  border: 1px solid var(--p-slate-400);
+  box-shadow: 0 0 0 3px var(--p-slate-300);
+}
+
+
+
+label[style-input-label-text] {
+  color: var(--p-primary-1000);
+}
+
+/* 1. Style the Input Box */
+:host ::ng-deep .style-date-picker .p-inputtext {
+  transition: box-shadow 0.2s;
+  border-color: var(--p-primary-1100);
+  background-color: var(--p-slate-200);
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--p-primary-1000);
+  font-size: small;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+:host ::ng-deep .style-date-picker .p-inputtext::placeholder {
+  color: color-mix(in srgb, var(--p-primary-1000), transparent 50%);
+  font-size: smaller;
+
+}
+
+:host ::ng-deep .style-date-picker .p-inputtext:focus {
+  border: 1px solid var(--p-slate-400);
+  box-shadow: 0 0 0 3px var(--p-slate-300);
+
+
+}

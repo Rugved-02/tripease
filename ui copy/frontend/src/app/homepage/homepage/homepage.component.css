@@ -1,0 +1,55 @@
+
+ /* Container styling */
+.hero-content {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+/* Heading Styling: Large, Bold, and Gradient */
+.hero-title {
+  font-size: clamp(2rem, 5.5vw, 5rem); /* Responsive size */
+  font-weight: 700;
+  margin: 1rem 0;
+  color: var(--p-primary-0);
+  min-height: 1.5em;
+  align-content: center;
+  line-height: normal;
+}
+
+/* Subtitle Styling: Muted and readable */
+.hero-subtitle {
+  font-size: clamp(1rem, 1.7vw, 2rem);
+  color: var(--p-slate-200); /* Slate gray */
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* --- Animations --- */
+
+.animate-fade-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-up-delay {
+  opacity: 0; /* Start hidden */
+  animation: fadeInUp 0.8s ease-out 0.3s forwards; /* 0.3s delay */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.p-card{
+  border-radius: 0px;
+  padding-bottom: 50px;
+  height: 95vh;
+  background: linear-gradient(to bottom right, var(--gradient-blue) 0%, var(--gradient-purple) 100%);
+}

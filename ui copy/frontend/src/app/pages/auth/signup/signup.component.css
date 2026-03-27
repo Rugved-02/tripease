@@ -1,0 +1,204 @@
+/* Container Page */
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0px;
+  /* margin: 20px; */
+  background: linear-gradient(to bottom right, var(--gradient-blue) 0%, var(--gradient-purple) 100%);
+   }
+
+/* Main Card */
+.register-card {
+  background: #ffffff; 
+  width: 430px;
+  /* padding: 30px; */
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  /* margin: 20px 0; */
+}
+
+/* Header & Typography */
+
+ .logo-text-wrapper{
+  justify-self: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+ }
+h2 {
+  text-align: center;
+  color: var(--p-primary-1000) /* Slightly darker for headings */
+} 
+.subtitle {
+  color: var(--p-primary-1100);
+  /* margin-bottom: 20px; */
+  text-align: center;
+  font-size: 16px;
+}
+.p-button{
+  background-color: black;
+}
+
+
+/* Form Elements */
+label {
+  display: block;
+    font-weight: 500;
+    color: var(--p-primary-1000);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+#label-icon {
+
+  font-size: 0.8rem;
+  padding: 0px 5px 5px 5px;
+  color: var(--p-primary-1000);
+
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3px;
+
+  width: 100%;
+}
+
+/* Input Styles */
+.custom-input, ::ng-deep .p-inputtext {
+  border-color: var(--p-slate-100);
+  background-color: var(--p-slate-100);
+  border: 1px solid var(--p-slate-100);
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--p-primary-1000);
+  font-size: small;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-input::placeholder, ::ng-deep .p-inputtext::placeholder {
+  color: color-mix(in srgb, var(--p-primary-1000), transparent 50%);
+  /* font-size: smaller; */
+}
+.custom-input:hover, ::ng-deep .p-inputtext:enabled:hover {
+  border: 1px solid var(--p-slate-100);
+}
+.custom-input:focus, ::ng-deep .p-inputtext:enabled:focus {
+  border: 1px solid var(--p-slate-400);
+  box-shadow: 0 0 0 3px var(--p-slate-300);
+}
+
+
+/* Password Reveal Icon Fix */
+
+/* styling the password show icon in password field */
+::ng-deep .p-password-toggle-mask-icon{
+        --p-password-icon-color: var(--p-slate-600);
+}
+
+
+/* Error Handling */
+.error-container {
+  min-height: 20px;
+  margin-top: 2px;
+  padding-left: 4px;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/*  Primary Create Account Button */
+::ng-deep .signin-btn.p-button {
+    margin-top: 10px;
+    background: black;
+    border: none !important;
+    width: 100%;
+    height: 35px;
+    border-radius: 10px !important;
+    padding: 0.85rem !important;
+    font-weight: 600 !important;
+    color: var(--p-primary-50) !important;
+}
+
+
+/* Social Buttons Row */
+.social {
+  display: flex;
+  gap: 12px;
+}
+
+.auth-link { 
+  flex: 1; 
+  text-decoration: none; 
+}
+
+.social .p-button {
+  width: 100% !important;
+  justify-content: center;
+  border-radius: 10px;
+  background: #fff !important;
+  color: #374151 !important;
+  border: 1px solid #d1d5db !important;
+}
+
+/* Social Hover: Syncs with Primary 500 */
+.social .p-button:hover {
+  border-color: var(--p-primary-500) !important;
+  color: var(--p-primary-500) !important;
+  background: var(--p-primary-50) !important; /* Uses the lightest blue from your theme */
+}
+
+/* Checkbox Alignment */
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+  background: var(--p-primary-500) !important;
+  border-color: var(--p-primary-500) !important;
+}
+
+.flex-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.terms-label {
+  font-size: 14px;
+  line-height: 1;
+  margin: 0;
+  cursor: pointer;
+}
+
+.termsAndCond-link{
+  color: var(--gradient-blue);
+  text-decoration: none;
+}
+.termsAndCond-link:hover{
+  text-decoration: underline;
+}
+
+/* Divider Styling */
+:host ::ng-deep .p-divider {
+    --p-divider-border-color: #d1d5db;
+    --p-divider-content-color: #6b7280;
+    --p-divider-content-background: #ffffff;
+    margin: 15px 0 !important;
+}
+
+/* login-card-footer Sign In Link */
+
+.login-card-footer{
+  text-align: center;
+}
+.text-muted{
+  color: var(--p-primary-1100);
+}
+::ng-deep .login-link-btn{
+  font-size: 1rem;
+  color: var(--gradient-blue);
+}
