@@ -1,0 +1,67 @@
+@import "primeicons/primeicons.css";
+
+.sticky-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: var(--p-menubar-background);
+}
+
+
+:host ::ng-deep .p-menubar-root-list {
+    /* Takes up all available middle space */
+    flex-grow: 1;           
+    /* Centers the [model]="items" */
+    justify-content: center; 
+}
+
+.p-menubar-button{
+    flex-grow:1;
+}
+
+
+/* --- Your Existing Styling (Kept & Refined) --- */
+
+.air-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 30%;
+  margin-right: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  color: #ffffff; 
+  background: linear-gradient(90deg, var(--p-violet-800) 0%, var(--p-blue-700) 100%);
+}
+
+.air-icon:hover {
+  background: linear-gradient(90deg, #062485 0%, #062485 100%); /* Refined hover */
+  transform: translateY(-1px);
+}
+
+.tripease-heading p {
+    font-size: 1.4rem;
+    line-height: 1; /* Reset from 0rem to 1 so text isn't cut off */
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--p-blue-800), var(--p-violet-700));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    transform: scaleY(1.0);
+    transform-origin: center;
+    vertical-align: middle;
+    margin: 0; /* Let the container handle margins */
+}
+
+/* Add margin to the container instead of the p tag for cleaner spacing */
+.tripease-heading {
+    margin-left: 0.5rem;
+    margin-right: 1.5rem;
+    display: flex;
+    align-items: center;
+}

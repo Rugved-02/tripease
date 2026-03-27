@@ -1,0 +1,193 @@
+/* Container Page */
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* Syncs with Primary 500 to 700 from your app.config.ts */
+  background: linear-gradient(135deg, var(--p-primary-500) 0%, var(--p-primary-700) 100%);
+}
+
+/* Main Card */
+.register-card {
+  background: #ffffff; 
+  width: 430px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+}
+
+/* Header & Typography */
+.logo {
+  font-weight: bold;
+  color: var(--p-primary-500); /* Uses Primary 500 */
+  font-size: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+h2 {
+  margin-left: 60px;
+  color: var(--p-primary-600); /* Slightly darker for headings */
+}
+
+/* Form Elements */
+label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+  display: block;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+/* Input Styles */
+.p-inputtext,
+:host ::ng-deep .p-password input {
+  width: 100% !important;
+  padding: 12px 14px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.p-inputtext:focus,
+:host ::ng-deep .p-password input:focus {
+  border-color: var(--p-primary-500) !important;
+  box-shadow: 0 0 0 2px var(--p-primary-100) !important; /* Glow matches theme */
+  outline: none;
+}
+
+/* Password Reveal Icon Fix */
+:host ::ng-deep .p-password {
+  width: 100% !important;
+}
+
+:host ::ng-deep .p-password-reveal-icon,
+:host ::ng-deep .p-password-hide-icon {
+  position: absolute !important;
+  top: 50% !important;
+  right: 14px !important;
+  transform: translateY(-50%) !important;
+  z-index: 10;
+}
+
+/* Error Handling */
+.error-container {
+  min-height: 20px;
+  margin-top: 2px;
+  padding-left: 4px;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Primary Submit Button */
+/* Note: The background is already defined in your app.config.ts for 'primary' buttons */
+.p-button.submit-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.p-button.submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(33, 33, 214, 0.3);
+}
+
+/* Social Buttons Row */
+.social {
+  display: flex;
+  gap: 12px;
+}
+
+.auth-link { 
+  flex: 1; 
+  text-decoration: none; 
+}
+
+.social .p-button {
+  width: 100% !important;
+  justify-content: center;
+  border-radius: 10px;
+  background: #fff !important;
+  color: #374151 !important;
+  border: 1px solid #d1d5db !important;
+}
+
+/* Social Hover: Syncs with Primary 500 */
+.social .p-button:hover {
+  border-color: var(--p-primary-500) !important;
+  color: var(--p-primary-500) !important;
+  background: var(--p-primary-50) !important; /* Uses the lightest blue from your theme */
+}
+
+/* Checkbox Alignment */
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+  background: var(--p-primary-500) !important;
+  border-color: var(--p-primary-500) !important;
+}
+
+.flex-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.terms-label {
+  font-size: 14px;
+  line-height: 1;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Divider Styling */
+:host ::ng-deep .p-divider {
+    --p-divider-border-color: #d1d5db;
+    --p-divider-content-color: #6b7280;
+    --p-divider-content-background: #ffffff;
+    margin: 15px 0 !important;
+}
+
+/* Sign In Link */
+.signin {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.signin a {
+  color: var(--p-primary-500);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signin a:hover {
+  text-decoration: underline;
+}
