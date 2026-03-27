@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "FlightsApplication",
+            "request": "launch",
+            "mainClass": "com.cts.tripease.FlightsApplication",
+            "projectName": "flights",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=49686 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=flights"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-TripeaseApplication<tripease>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cts.tripease.TripeaseApplication",
+            "projectName": "tripease",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaServerApplication<eurekaServer>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.eurekaServer.EurekaServerApplication",
+            "projectName": "eurekaServer",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
