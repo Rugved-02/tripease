@@ -1,0 +1,164 @@
+<p-panel header="">
+  
+
+    <!-- <h2 class="panel-title">Welcome Back!</h2> -->
+
+  <div class="panel-header">
+<h2 class="panel-title">Welcome Back!</h2>
+
+
+ <div class="profile-wrapper">
+<button class="round-btn" (click)="toggleProfileMenu()">P</button> 
+
+<!-- DROPDOWN -->
+ <div class="profile-menu" *ngIf="showProfileMenu">
+<div class="menu-item">
+<i class="pi pi-user"></i>
+       Dashboard
+</div>
+<div class="menu-item">
+<i class="pi pi-calendar"></i>
+       My Trips
+</div>
+<div class="menu-item">
+<i class="pi pi-chart-bar"></i>
+       Analytics
+</div>
+<div class="menu-divider"></div>
+<div class="menu-item logout">
+<i class="pi pi-sign-out"></i>
+       Log out
+</div>
+</div>
+</div>
+</div>
+
+    <p class="panel-title-description">Here's an overview of your travel activities</p>
+  <div class="card-container">
+    @for (item of dataFeaturesPanel(); track $index) {
+      <p-card>
+      <div class="card-icon" [style.background-color]="item.dynamicColor">
+        <i [class]="item.icon" style="font-size: 1.5rem;color: var(--p-surface-0)"></i></div>
+      
+      <h3>{{item.title}}</h3>
+      <p>{{item.description}}</p>
+    </p-card>
+    }
+  </div>
+
+  <div>
+<!-- QUICK ACTIONS (WRAPPED IN ONE CARD) -->
+<p-card class="quick-actions-wrapper">
+<h3 class="quick-actions-title">Quick Actions</h3>
+<div class="quick-actions-container">
+   @for (action of quickActions(); track $index) {
+    <div class="quick-action-item">
+    <i [class]="action.icon"></i>
+    <span>{{ action.label }}</span>
+    </div>
+     }
+</div>
+</p-card>
+
+
+
+<!-- RECENT BOOKINGS -->
+<p-card class="recent-bookings-wrapper">
+<div class="recent-bookings-header">
+<h3>Recent Bookings</h3>
+<!-- <span class="view-all clickable">View All</span> -->
+ <button
+ pButton
+ type="button"
+ label="View All"
+ class="p-button-text p-button-sm">
+</button>
+</div>
+<div class="recent-bookings-list">
+   @for (booking of recentBookings(); track $index) {
+<div class="booking-item">
+<!-- LEFT -->
+<div class="booking-left">
+<div class="booking-icon">
+<i [class]="booking.icon"></i>
+</div>
+<div>
+<div class="booking-title">{{ booking.title }}</div>
+<div class="booking-date">
+<i class="pi pi-calendar"></i>
+             {{ booking.date }}
+</div>
+</div>
+</div>
+<!-- RIGHT -->
+<div class="booking-right">
+<div class="booking-price">{{ booking.price }}</div>
+
+<span
+
+  class="booking-status"
+
+  [class.confirmed]="booking.status === 'Confirmed'"
+
+  [class.pending]="booking.status === 'Pending'">
+<i
+
+    [class]="booking.status === 'Confirmed'
+
+      ? 'pi pi-check-circle'
+
+      : 'pi pi-clock'">
+</i>
+
+  {{ booking.status }}
+</span>
+ 
+ 
+<button pButton
+                 type="button"
+                 label="View Details"
+                 class="p-button-outlined p-button-sm">
+</button>
+</div>
+</div>
+   }
+</div>
+</p-card>
+
+  </div>
+
+
+  <!-- UPCOMING TRIP REMINDER -->
+<div class="upcoming-trip-card">
+<div class="upcoming-trip-left">
+<div class="upcoming-trip-icon">
+<i class="pi pi-info-circle"></i>
+</div>
+<div class="upcoming-trip-text">
+<h4>{{ upcomingTrip.title }}</h4>
+<p>{{ upcomingTrip.message }}</p>
+</div>
+</div>
+<button
+
+    pButton
+
+    type="button"
+
+    label="View Itinerary"
+
+    class="p-button-secondary p-button-sm">
+</button>
+</div>
+ 
+
+
+  
+  
+</p-panel>
+
+
+
+
+
+<!-- COMMENT -->
